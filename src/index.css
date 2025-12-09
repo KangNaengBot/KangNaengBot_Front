@@ -1,0 +1,248 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global styles - 디자이너 시안 기반 */
+:root {
+  --color-primary: #4e92ff;
+  --color-primary-light: #69a2ff;
+
+  /* 버튼 활성화 상태 */
+  --btn-active-bg: radial-gradient(
+    63.37% 63.37% at 50% 50%,
+    #4e92ff 0%,
+    rgba(78, 146, 255, 0.5) 100%
+  );
+  --btn-active-shadow: 0px 0px 40px 0px rgba(105, 162, 255, 0.24);
+
+  /* 버튼 비활성화 상태 */
+  --btn-inactive-shadow: 0px 0px 24px 0px rgba(105, 162, 255, 0.3);
+
+  --shadow-brand: 0 4px 40px 0 rgba(105, 162, 255, 0.24);
+  --shadow-input: 0 2px 20px 0 rgba(105, 162, 255, 0.16);
+
+  font-family: "Pretendard", "Noto Sans KR", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  line-height: 1.6;
+  font-weight: 400;
+  color: #1f2933;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 배경 - 기본 흰색 */
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #ffffff;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* 큰 원모양 안개 배경 객체 */
+body::before {
+  content: "";
+  position: fixed;
+  width: 1300px;
+  height: 1300px;
+  top: -110px;
+  left: -278px;
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    rgba(124, 206, 255, 0.35) 0%,
+    rgba(124, 174, 255, 0) 100%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+#root {
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(78, 146, 255, 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(78, 146, 255, 0.5);
+}
+
+/* Custom component classes */
+@layer components {
+  /* 전송 버튼 - 활성화 상태 */
+  .btn-send {
+    @apply w-11 h-11 rounded-full flex items-center justify-center;
+    @apply transition-all duration-200;
+    @apply hover:scale-105 active:scale-95;
+    background: radial-gradient(
+      63.37% 63.37% at 50% 50%,
+      #4e92ff 0%,
+      rgba(78, 146, 255, 0.5) 100%
+    );
+    box-shadow: 0px 0px 40px 0px rgba(105, 162, 255, 0.24);
+  }
+
+  /* 전송 버튼 - 비활성화 상태 */
+  .btn-send:disabled,
+  .btn-send.inactive {
+    background: radial-gradient(
+      63.37% 63.37% at 50% 50%,
+      #4e92ff 0%,
+      rgba(78, 146, 255, 0.5) 100%
+    );
+    box-shadow: 0px 0px 24px 0px rgba(105, 162, 255, 0.3);
+    opacity: 0.6;
+  }
+
+  /* 입력창 스타일 - 글래스모피즘 */
+  .input-chat {
+    @apply w-full px-5 py-3 rounded-full;
+    @apply focus:outline-none;
+    @apply placeholder:text-gray-400 text-gray-800;
+    @apply transition-all duration-200;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.5) 0%,
+      rgba(232, 246, 255, 0.5) 100%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(32px);
+    box-shadow: 0px 0px 40px 0px rgba(105, 162, 255, 0.24);
+  }
+
+  /* 추천 질문 칩 스타일 - 글래스모피즘 */
+  .chip-suggestion {
+    @apply px-4 py-2.5 rounded-full text-sm text-gray-700;
+    @apply hover:text-primary-600;
+    @apply transition-all duration-200 cursor-pointer;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.5) 0%,
+      rgba(232, 246, 255, 0.5) 100%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(32px);
+    box-shadow: 0px 0px 40px 0px rgba(105, 162, 255, 0.24);
+  }
+  .chip-suggestion:hover {
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.7) 0%,
+      rgba(232, 246, 255, 0.7) 100%
+    );
+    box-shadow: 0px 0px 48px 0px rgba(105, 162, 255, 0.35);
+    border-color: rgba(78, 146, 255, 0.3);
+  }
+
+  /* 채팅 버블 스타일 */
+  .bubble-user {
+    @apply bg-gray-800 text-white rounded-2xl rounded-br-md px-4 py-3;
+  }
+
+  .bubble-ai {
+    @apply bg-white rounded-2xl rounded-bl-md px-4 py-3 text-gray-800;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  /* 사이드바 토글 버튼 */
+  .sidebar-toggle {
+    @apply fixed z-30 p-2 rounded-lg transition-all duration-200;
+    @apply text-gray-400 hover:text-gray-600;
+    @apply hover:bg-white/50;
+  }
+
+  /* 글래스 효과 */
+  .glass {
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.5) 0%,
+      rgba(232, 246, 255, 0.5) 100%
+    );
+    backdrop-filter: blur(32px);
+  }
+
+  /* 사이드바 글래스 스타일 */
+  .glass-sidebar {
+    background: #ffffff4d;
+    backdrop-filter: blur(20px);
+  }
+
+  /* 입력창 컨테이너 글래스 스타일 */
+  .glass-input-container {
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.5) 0%,
+      rgba(232, 246, 255, 0.5) 100%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(32px);
+    box-shadow: 0px 0px 40px 0px rgba(105, 162, 255, 0.24);
+  }
+
+  /* 유저 프로필 버튼 글래스 스타일 */
+  .glass-profile {
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.5) 0%,
+      rgba(232, 246, 255, 0.5) 100%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(32px);
+    box-shadow: 0px 0px 40px 0px rgba(105, 162, 255, 0.24);
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-400 to-primary-600;
+  }
+
+  .shadow-brand {
+    box-shadow: var(--shadow-brand);
+  }
+
+  .shadow-input {
+    box-shadow: var(--shadow-input);
+  }
+}
+
+/* Select 드롭다운 스타일 개선 */
+select {
+  background-image: none;
+}
+
+select option {
+  padding: 12px 16px;
+  background: #f8fafc;
+  color: #1f2937;
+}
+
+select option:hover,
+select option:focus,
+select option:checked {
+  background: linear-gradient(180deg, #e8f4ff 0%, #dbeafe 100%);
+  color: #1e40af;
+}
+
+/* WebKit 브라우저용 select 스타일 */
+@supports (-webkit-appearance: none) {
+  select:focus {
+    outline: none;
+  }
+}
