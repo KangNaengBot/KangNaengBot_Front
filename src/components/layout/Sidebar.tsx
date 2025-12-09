@@ -106,10 +106,10 @@ export const Sidebar = () => {
           ${
             isMobile
               ? isSidebarOpen
-                ? "w-[80%] max-w-[320px] translate-x-0"
+                ? "w-[clamp(240px,80%,320px)] translate-x-0"
                 : "w-0 -translate-x-full"
               : isSidebarOpen
-              ? "w-[20%] min-w-[240px] max-w-[320px]"
+              ? "w-[clamp(240px,20vw,320px)]"
               : "w-16"
           }
         `}
@@ -123,25 +123,19 @@ export const Sidebar = () => {
           `}
         >
           {/* Header - Logo & Toggle */}
-          <div
-            className={`
-            flex items-center border-b border-gray-100 px-4 py-4
-            transition-all duration-300
-            ${isSidebarOpen ? "justify-between" : "justify-center"}
-          `}
-          >
-            {/* Logo - 펼쳐졌을 때만 표시 */}
+          <div className="flex items-center border-b border-gray-100 px-4 py-4">
+            {/* Logo - 고정 레이아웃, 사이드바 접히면 잘려나감 */}
             <div
               className={`
-              flex items-center gap-2 overflow-hidden
-              transition-all duration-300
-              ${isSidebarOpen ? "opacity-100 w-auto" : "opacity-0 w-0"}
+              flex items-center gap-2 overflow-hidden whitespace-nowrap flex-1 min-w-0
+              transition-opacity duration-300
+              ${isSidebarOpen ? "opacity-100" : "opacity-0 pointer-events-none"}
             `}
             >
               <img
                 src="/assets/images/logo.svg"
                 alt="강냉봇 로고"
-                className="h-6 w-auto"
+                className="h-6 w-auto flex-shrink-0"
               />
               <span className="text-sm font-medium text-gray-600 whitespace-nowrap">
                 gangnyeongbot
@@ -163,24 +157,20 @@ export const Sidebar = () => {
             </button>
           </div>
 
-          {/* History Section - 펼쳐졌을 때만 표시 */}
+          {/* History Section - 콘텐츠는 고정 크기, 사이드바가 줄어들면 잘려나감 */}
           <div
             className={`
-            overflow-hidden
-            transition-all duration-300 ease-in-out
-            ${
-              isSidebarOpen
-                ? "flex-1 opacity-100 px-4 py-4"
-                : "flex-none h-0 opacity-0 px-0 py-0"
-            }
+            flex-1 overflow-hidden px-4 py-4
+            transition-opacity duration-300 ease-in-out
+            ${isSidebarOpen ? "opacity-100" : "opacity-0 pointer-events-none"}
           `}
           >
-            <div className="overflow-y-auto overflow-x-hidden h-full">
-              {/* History Header */}
-              <div className="flex items-center justify-between mb-3">
+            <div className="overflow-y-auto overflow-x-hidden h-full min-w-[200px]">
+              {/* History Header - 고정 레이아웃으로 너비 변화에도 여백 유지 */}
+              <div className="flex items-center justify-between mb-3 gap-2">
                 <button
                   onClick={() => setIsHistoryOpen(!isHistoryOpen)}
-                  className="flex items-center gap-1.5 text-sm font-semibold text-gray-800 whitespace-nowrap"
+                  className="flex items-center gap-1.5 text-sm font-semibold text-gray-800 whitespace-nowrap flex-shrink-0"
                 >
                   내 대화 모아보기
                   <ChevronDown
@@ -190,7 +180,7 @@ export const Sidebar = () => {
                     }`}
                   />
                 </button>
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1 flex-shrink-0">
                   <button
                     onClick={handleRefresh}
                     className="p-1.5 rounded-lg hover:bg-gray-100 text-gray-400 transition-colors"
@@ -207,10 +197,8 @@ export const Sidebar = () => {
               {isHistoryOpen && (
                 <div className="space-y-1">
                   {sessions.length === 0 ? (
-                    <p className="text-sm text-gray-400 py-4">
-                      아직 강냉봇과
-                      <br />
-                      나눈 대화가 없어요.
+                    <p className="text-sm text-gray-400 py-4 whitespace-nowrap overflow-hidden">
+                      아직 강냉봇과 나눈 대화가 없어요.
                     </p>
                   ) : (
                     sessions.map((session) => (
