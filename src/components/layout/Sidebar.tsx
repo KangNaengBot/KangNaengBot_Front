@@ -160,7 +160,7 @@ export const Sidebar = () => {
             {/* Toggle Button - 회전 애니메이션 */}
             <button
               onClick={toggleSidebar}
-              className="p-1.5 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-gray-600 transition-all duration-200 flex-shrink-0"
+              className="p-1.5 rounded-lg hover:bg-gray-100 text-gray-500 hover:text-gray-700 transition-all duration-200 flex-shrink-0"
             >
               <div
                 className={`transition-transform duration-300 ${
@@ -190,7 +190,7 @@ export const Sidebar = () => {
                   내 대화 모아보기
                   <ChevronDown
                     size={16}
-                    className={`text-gray-400 transition-transform ${
+                    className={`text-gray-500 transition-transform ${
                       isHistoryOpen ? "" : "-rotate-90"
                     }`}
                   />
@@ -198,11 +198,11 @@ export const Sidebar = () => {
                 <div className="flex items-center gap-1 flex-shrink-0">
                   <button
                     onClick={handleRefresh}
-                    className="p-1.5 rounded-lg hover:bg-gray-100 text-gray-400 transition-colors"
+                    className="p-1.5 rounded-lg hover:bg-gray-100 text-gray-500 hover:text-gray-700 transition-colors"
                   >
                     <RefreshCw size={14} />
                   </button>
-                  <button className="p-1.5 rounded-lg hover:bg-gray-100 text-gray-400 transition-colors">
+                  <button className="p-1.5 rounded-lg hover:bg-gray-100 text-gray-500 hover:text-gray-700 transition-colors">
                     <MoreHorizontal size={14} />
                   </button>
                 </div>
