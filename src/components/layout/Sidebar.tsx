@@ -12,7 +12,7 @@ import {
   LogOut,
 } from "lucide-react";
 import { useUIStore, useChatStore, useAuthStore, useToastStore } from "@/store";
-import { AlertModal } from "@/components/common";
+import { AlertModal, SwipeableItem } from "@/components/common";
 
 export const Sidebar = () => {
   const navigate = useNavigate();
@@ -66,6 +66,11 @@ export const Sidebar = () => {
 
   const handleDeleteClick = (e: React.MouseEvent, sessionId: string) => {
     e.stopPropagation();
+    setDeleteTargetId(sessionId);
+  };
+
+  // 모바일 스와이프 삭제용
+  const handleMobileDelete = (sessionId: string) => {
     setDeleteTargetId(sessionId);
   };
 
@@ -211,45 +216,64 @@ export const Sidebar = () => {
                       아직 강냉봇과 나눈 대화가 없어요.
                     </p>
                   ) : (
-                    sessions.map((session) => (
-                      <div
-                        key={session.sid}
-                        role="button"
-                        tabIndex={0}
-                        onClick={() => handleSelectSession(session.sid)}
-                        onKeyDown={(e) => {
-                          if (e.key === "Enter" || e.key === " ") {
-                            e.preventDefault();
-                            handleSelectSession(session.sid);
-                          }
-                        }}
-                        className={`
-                        w-full flex items-center justify-between gap-2 px-3 py-2.5 rounded-xl text-left
-                        transition-all duration-200 group cursor-pointer border
-                        ${
-                          currentSessionId === session.sid
-                            ? "bg-primary-50 text-primary-600 border-primary-200 shadow-sm"
-                            : "border-transparent hover:bg-primary-50/50 text-gray-700"
-                        }
-                      `}
-                      >
-                        <div className="flex items-center gap-2 flex-1 min-w-0">
-                          <MessageSquare
-                            size={14}
-                            className="flex-shrink-0 opacity-60"
-                          />
-                          <span className="truncate text-sm">
-                            {session.title}
-                          </span>
-                        </div>
-                        <button
-                          onClick={(e) => handleDeleteClick(e, session.sid)}
-                          className="opacity-0 group-hover:opacity-100 p-1 rounded hover:bg-gray-200 text-gray-400 hover:text-red-500 transition-all flex-shrink-0"
+                    sessions.map((session) => {
+                      // 세션 아이템 공통 컨텐츠
+                      const sessionContent = (
+                        <div
+                          role="button"
+                          tabIndex={0}
+                          onClick={() => handleSelectSession(session.sid)}
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter" || e.key === " ") {
+                              e.preventDefault();
+                              handleSelectSession(session.sid);
+                            }
+                          }}
+                          className={`
+                            w-full flex items-center justify-between gap-2 px-3 py-2.5 rounded-xl text-left
+                            transition-all duration-200 group cursor-pointer border
+                            ${
+                              currentSessionId === session.sid
+                                ? "bg-primary-50 text-primary-600 border-primary-200 shadow-sm"
+                                : "border-transparent hover:bg-primary-50/50 text-gray-700"
+                            }
+                          `}
                         >
-                          <Trash2 size={12} />
-                        </button>
-                      </div>
-                    ))
+                          <div className="flex items-center gap-2 flex-1 min-w-0">
+                            <MessageSquare
+                              size={14}
+                              className="flex-shrink-0 opacity-60"
+                            />
+                            <span className="truncate text-sm">
+                              {session.title}
+                            </span>
+                          </div>
+                          {/* 데스크톱: 호버 시 삭제 버튼 표시 */}
+                          {!isMobile && (
+                            <button
+                              onClick={(e) => handleDeleteClick(e, session.sid)}
+                              className="opacity-0 group-hover:opacity-100 p-1 rounded hover:bg-gray-200 text-gray-400 hover:text-red-500 transition-all flex-shrink-0"
+                            >
+                              <Trash2 size={12} />
+                            </button>
+                          )}
+                        </div>
+                      );
+
+                      // 모바일: SwipeableItem으로 래핑
+                      // 데스크톱: 그대로 렌더링
+                      return isMobile ? (
+                        <SwipeableItem
+                          key={session.sid}
+                          onDelete={() => handleMobileDelete(session.sid)}
+                          resetTrigger={isSidebarOpen}
+                        >
+                          {sessionContent}
+                        </SwipeableItem>
+                      ) : (
+                        <div key={session.sid}>{sessionContent}</div>
+                      );
+                    })
                   )}
                 </div>
               )}
