@@ -215,11 +215,11 @@ export const Sidebar = () => {
                         }}
                         className={`
                         w-full flex items-center justify-between gap-2 px-3 py-2.5 rounded-xl text-left
-                        transition-all duration-200 group cursor-pointer
+                        transition-all duration-200 group cursor-pointer border
                         ${
                           currentSessionId === session.sid
-                            ? "bg-primary-50 text-primary-600"
-                            : "hover:bg-gray-50 text-gray-700"
+                            ? "bg-primary-50 text-primary-600 border-primary-200 shadow-sm"
+                            : "border-transparent hover:bg-primary-50/50 text-gray-700"
                         }
                       `}
                       >
