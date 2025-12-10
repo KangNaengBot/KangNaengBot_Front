@@ -233,10 +233,38 @@ export const useChatStore = create<ChatState>((set, get) => ({
         user_id: guestUserId ?? undefined,
       });
 
+      // 빈 응답 재시도 로직 (최대 5번)
+      let responseText = response.text;
+      const MAX_RETRIES = 5;
+      const RETRY_DELAY = 500; // ms
+
+      for (
+        let attempt = 1;
+        attempt < MAX_RETRIES && !responseText?.trim();
+        attempt++
+      ) {
+        // 재시도 전 대기
+        await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY));
+
+        const retryResponse = await chatService.sendMessage({
+          session_id: currentSessionId,
+          message,
+          user_id: guestUserId ?? undefined,
+        });
+        responseText = retryResponse.text;
+      }
+
+      // 5번 다 실패하면 에러 처리
+      if (!responseText?.trim()) {
+        throw new Error(
+          "AI 응답을 생성하지 못했습니다. 잠시 후 다시 시도해 주세요."
+        );
+      }
+
       // AI 응답 추가
       const assistantMessage: MessageItem = {
         role: "assistant",
-        content: response.text,
+        content: responseText,
         created_at: new Date().toISOString(),
       };
       set((state) => ({
