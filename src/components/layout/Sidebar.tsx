@@ -202,12 +202,20 @@ export const Sidebar = () => {
                     </p>
                   ) : (
                     sessions.map((session) => (
-                      <button
+                      <div
                         key={session.sid}
+                        role="button"
+                        tabIndex={0}
                         onClick={() => handleSelectSession(session.sid)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault();
+                            handleSelectSession(session.sid);
+                          }
+                        }}
                         className={`
                         w-full flex items-center justify-between gap-2 px-3 py-2.5 rounded-xl text-left
-                        transition-all duration-200 group
+                        transition-all duration-200 group cursor-pointer
                         ${
                           currentSessionId === session.sid
                             ? "bg-primary-50 text-primary-600"
@@ -230,7 +238,7 @@ export const Sidebar = () => {
                         >
                           <Trash2 size={12} />
                         </button>
-                      </button>
+                      </div>
                     ))
                   )}
                 </div>
