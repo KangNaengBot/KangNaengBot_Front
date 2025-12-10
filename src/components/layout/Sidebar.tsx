@@ -12,6 +12,7 @@ import {
   LogOut,
 } from "lucide-react";
 import { useUIStore, useChatStore, useAuthStore } from "@/store";
+import { AlertModal } from "@/components/common";
 
 export const Sidebar = () => {
   const navigate = useNavigate();
@@ -32,6 +33,7 @@ export const Sidebar = () => {
   const { user, profile, isAuthenticated, logout } = useAuthStore();
   const [isHistoryOpen, setIsHistoryOpen] = useState(true);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+  const [deleteTargetId, setDeleteTargetId] = useState<string | null>(null);
   const popoverRef = useRef<HTMLDivElement>(null);
 
   // 팝오버 외부 클릭 감지
@@ -61,12 +63,16 @@ export const Sidebar = () => {
     if (isMobile) setSidebarOpen(false);
   };
 
-  const handleDeleteSession = async (
-    e: React.MouseEvent,
-    sessionId: string
-  ) => {
+  const handleDeleteClick = (e: React.MouseEvent, sessionId: string) => {
     e.stopPropagation();
-    await deleteSession(sessionId);
+    setDeleteTargetId(sessionId);
+  };
+
+  const handleDeleteConfirm = async () => {
+    if (deleteTargetId) {
+      await deleteSession(deleteTargetId);
+      setDeleteTargetId(null);
+    }
   };
 
   const handleRefresh = () => {
@@ -233,7 +239,7 @@ export const Sidebar = () => {
                           </span>
                         </div>
                         <button
-                          onClick={(e) => handleDeleteSession(e, session.sid)}
+                          onClick={(e) => handleDeleteClick(e, session.sid)}
                           className="opacity-0 group-hover:opacity-100 p-1 rounded hover:bg-gray-200 text-gray-400 hover:text-red-500 transition-all flex-shrink-0"
                         >
                           <Trash2 size={12} />
@@ -376,6 +382,18 @@ export const Sidebar = () => {
 
       {/* Main Content 영역을 위한 spacer (사이드바 닫혔을 때) */}
       {!isMobile && !isSidebarOpen && <div className="w-16 flex-shrink-0" />}
+
+      {/* 삭제 확인 모달 */}
+      <AlertModal
+        isOpen={!!deleteTargetId}
+        onClose={() => setDeleteTargetId(null)}
+        onConfirm={handleDeleteConfirm}
+        type="warning"
+        title="대화를 삭제할까요?"
+        message="삭제된 대화는 복구할 수 없습니다."
+        confirmText="삭제"
+        cancelText="취소"
+      />
     </>
   );
 };
