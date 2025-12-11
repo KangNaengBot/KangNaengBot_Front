@@ -8,13 +8,15 @@ import {
 import { useChatStore, useUIStore } from "@/store";
 
 export const ChatPage = () => {
-  const { messages } = useChatStore();
+  const { messages, currentSessionId, isLoading } = useChatStore();
   const { isMobile } = useUIStore();
-  const hasMessages = messages.length > 0;
+  // 메시지가 있거나, 세션이 선택되어 로딩 중일 때 MessageList 표시
+  const showMessageList =
+    messages.length > 0 || (currentSessionId && isLoading);
 
   return (
     <MainLayout>
-      {hasMessages ? (
+      {showMessageList ? (
         <>
           <MessageList />
           <ChatInput showNewChatButton />
