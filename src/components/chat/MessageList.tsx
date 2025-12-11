@@ -52,8 +52,10 @@ export const MessageList = () => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isSending]);
 
-  // 세션 로딩 중일 때 AI 스피너 표시
-  if (isLoading) {
+  // 세션 로딩 중일 때만 AI 스피너 표시 (메시지가 없고, 세션 선택 상태에서만)
+  // 게스트 모드에서는 currentSessionId가 null이므로 스피너가 표시되지 않음
+  const { currentSessionId } = useChatStore();
+  if (isLoading && currentSessionId && filteredMessages.length === 0) {
     return <AILoadingSpinner />;
   }
 
