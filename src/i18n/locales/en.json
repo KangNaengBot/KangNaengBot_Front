@@ -1,11 +1,77 @@
 {
   "common": {
+    "appName": "GangNaengBot",
     "save": "Save",
     "cancel": "Cancel",
     "confirm": "Confirm",
     "close": "Close",
     "loading": "Loading...",
-    "error": "An error occurred"
+    "error": "An error occurred",
+    "terms": "Terms of Service",
+    "privacy": "Privacy Policy",
+    "delete": "Delete",
+    "user": "User"
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "articles": {
+      "purpose": "Article 1 (Purpose of Processing Personal Information)",
+      "items": "Article 2 (Items of Personal Information Collected)",
+      "method": "Article 3 (Method of Collection)",
+      "period": "Article 4 (Retention and Usage Period)",
+      "destruction": "Article 5 (Procedure and Method of Destruction)",
+      "thirdParty": "Article 6 (Provision to Third Parties)",
+      "consignment": "Article 7 (Consignment of Personal Information Processing)",
+      "ai": "Article 8 (Processing of AI Training Data)",
+      "rights": "Article 9 (Rights and Obligations of Data Subjects)",
+      "automated": "Article 10 (Rights Regarding Automated Decisions)",
+      "children": "Article 11 (Processing of Personal Information of Children Under 14)",
+      "cookies": "Article 12 (Installation, Operation and Rejection of Cookies)",
+      "safety": "Article 13 (Measures for Ensuring Safety)",
+      "officer": "Article 14 (Chief Privacy Officer)",
+      "remedy": "Article 15 (Remedies for Infringement of Rights)",
+      "amendment": "Article 16 (Amendment of Privacy Policy)"
+    },
+    "addendum": "Addendum",
+    "history": "Revision History"
+  },
+  "terms": {
+    "title": "Terms of Service",
+    "articles": {
+      "purpose": "Article 1 (Purpose)",
+      "definition": "Article 2 (Definition of Terms)",
+      "efficacy": "Article 3 (Effect and Amendment of Terms)",
+      "contract": "Article 4 (Conclusion of Service Contract)",
+      "account": "Article 5 (Account Management)",
+      "service": "Article 6 (Provision of Service)",
+      "aiLimit": "Article 7 (Characteristics and Limitations of AI Service)",
+      "duty": "Article 8 (Obligations of Users)",
+      "copyright": "Article 9 (Intellectual Property Rights)",
+      "restriction": "Article 10 (Restriction of Service Use and Account Suspension)",
+      "change": "Article 11 (Change and Discontinuation of Service)",
+      "exemption": "Article 12 (Disclaimer)",
+      "damages": "Article 13 (Compensation for Damages)",
+      "privacy": "Article 14 (Protection of Personal Information)",
+      "dispute": "Article 15 (Dispute Resolution and Governing Law)",
+      "contact": "Article 16 (Contact Information)"
+    },
+    "addendum": "Addendum",
+    "history": "Revision History",
+    "lastUpdate": "Last Updated: December 10, 2025"
+  },
+  "store": {
+    "error": {
+      "sessionList": "Failed to load session list.",
+      "createSession": "Failed to start a new conversation.",
+      "fetchMessages": "Failed to load conversation history.",
+      "deleteSession": "Failed to delete conversation.",
+      "sessionNotSelected": "No session selected.",
+      "aiResponse": "Failed to generate AI response. Please try again later.",
+      "sendMessage": "Failed to send message.",
+      "login": "Login failed.",
+      "profileLoad": "Failed to load profile.",
+      "profileSave": "Failed to save profile."
+    }
   },
   "settings": {
     "title": "Settings",
@@ -26,11 +92,13 @@
       "grade": "Grade",
       "semester": "Semester",
       "select": "Select",
+      "namePlaceholder": "John Doe",
       "saving": "Saving..."
     },
     "account": {
       "title": "Account Info",
       "email": "Email",
+      "googleAccount": "Google Account",
       "logout": "Log out",
       "logoutConfirm": "Are you sure you want to log out?",
       "guestMode": "Guest Mode",
@@ -58,16 +126,32 @@
     "send": "Send",
     "loginRequired": "Login Required",
     "loginRequiredDesc": "Please sign in to start a new conversation.\nYou can also save your chat history!",
-    "login": "Sign In"
+    "login": "Sign In",
+    "suggestions": {
+      "food": "What's the menu today?",
+      "professor": "Tell me about Prof. Hong's class",
+      "office": "Where is the admin office?"
+    }
   },
   "sidebar": {
     "history": "My Conversations",
     "noHistory": "No conversations with GangNaengBot yet",
     "deleteConfirm": "Delete this conversation?",
-    "refresh": "Refresh"
+    "refresh": "Refresh",
+    "deleteWarning": "Deleted conversations cannot be recovered."
+  },
+  "auth": {
+    "googleLogin": "Continue with Google",
+    "guestLogin": "Continue as Guest"
   },
   "welcome": {
     "title": "Welcome to GangNaengBot!",
-    "subtitle": "I'm the Kangnam University AI chatbot. Ask me anything!"
+    "subtitle": "I'm the Kangnam University AI chatbot. Ask me anything!",
+    "loginSubtitle": "Kangnam University Chatbot, GangNaengBot",
+    "messages": [
+      "Hi, I'm GangNaengBot, the Kangnam Univ AI!",
+      "Ask me about enrollment, graduation requirements, or schedules!",
+      "I'm here to help with anything 😊"
+    ]
   }
 }

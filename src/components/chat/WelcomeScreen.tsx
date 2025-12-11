@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react";
-
-// 타이핑 애니메이션으로 표시할 문장들
-const messages = [
-  "안녕, 난 강남대학교 AI 강냉봇이야!",
-  "수강신청, 졸업요건, 학사일정 등을 물어봐!",
-  "뭐든지 도와줄게 😊",
-];
+import { useState, useEffect, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 
 export const WelcomeScreen = () => {
+  const { t } = useTranslation();
+
+  const messages = useMemo(() => {
+    return (t("welcome.messages", { returnObjects: true }) as string[]) || [];
+  }, [t]);
+
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState("");
   const [isTyping, setIsTyping] = useState(true);

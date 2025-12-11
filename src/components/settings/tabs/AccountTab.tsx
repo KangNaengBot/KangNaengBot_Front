@@ -75,10 +75,10 @@ export const AccountTab = () => {
           )}
           <div>
             <p className="font-semibold text-gray-800 dark:text-gray-100">
-              {user?.name || "사용자"}
+              {user?.name || t("common.user")}
             </p>
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              Google 계정
+              {t("settings.account.googleAccount")}
             </p>
           </div>
         </div>

@@ -1,10 +1,14 @@
+import { useTranslation } from "react-i18next";
 import { useChatStore, useUIStore } from "@/store";
 
-const SUGGESTED_QUESTIONS = [
-  { id: "1", text: "오늘 학식 뭐야?" },
-  { id: "2", text: "홍길동 교수님 수업 알려줘" },
-  { id: "3", text: "행정실이 어디야?" },
-];
+const useSuggestedQuestions = () => {
+  const { t } = useTranslation();
+  return [
+    { id: "1", text: t("chat.suggestions.food") },
+    { id: "2", text: t("chat.suggestions.professor") },
+    { id: "3", text: t("chat.suggestions.office") },
+  ];
+};
 
 // 모바일에서 비눗방울 레이아웃을 위한 위치 스타일 (컨테이너 기준)
 const BUBBLE_POSITIONS = [
@@ -16,6 +20,7 @@ const BUBBLE_POSITIONS = [
 export const SuggestedQuestions = () => {
   const { sendMessage, currentSessionId } = useChatStore();
   const { isMobile } = useUIStore();
+  const questions = useSuggestedQuestions();
 
   const handleQuestionClick = async (question: string) => {
     try {
@@ -40,7 +45,7 @@ export const SuggestedQuestions = () => {
       {isMobile ? (
         // 모바일: 고정 너비 컨테이너 안에서 비눗방울 레이아웃
         <div className="flex flex-col gap-3 w-full max-w-sm px-4">
-          {SUGGESTED_QUESTIONS.map((q, index) => (
+          {questions.map((q, index) => (
             <button
               key={q.id}
               onClick={() => handleQuestionClick(q.text)}
@@ -52,7 +57,7 @@ export const SuggestedQuestions = () => {
         </div>
       ) : (
         // 데스크톱: 기존 레이아웃
-        SUGGESTED_QUESTIONS.map((q) => (
+        questions.map((q) => (
           <button
             key={q.id}
             onClick={() => handleQuestionClick(q.text)}

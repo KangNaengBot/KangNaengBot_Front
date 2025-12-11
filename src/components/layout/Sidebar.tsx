@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate, Link } from "react-router-dom";
 import {
   MessageSquare,
@@ -15,6 +16,7 @@ import { useUIStore, useChatStore, useAuthStore, useToastStore } from "@/store";
 import { AlertModal, SwipeableItem, Spinner } from "@/components/common";
 
 export const Sidebar = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const {
     isSidebarOpen,
@@ -216,7 +218,7 @@ export const Sidebar = () => {
                   onClick={() => setIsHistoryOpen(!isHistoryOpen)}
                   className="flex items-center gap-1.5 text-sm font-semibold text-gray-800 dark:text-gray-100 whitespace-nowrap flex-shrink-0"
                 >
-                  내 대화 모아보기
+                  {t("sidebar.history")}
                   <ChevronDown
                     size={16}
                     className={`text-gray-500 transition-transform ${
@@ -243,10 +245,8 @@ export const Sidebar = () => {
                   {!isAuthenticated ? (
                     // 게스트 모드: 로그인 유도
                     <div className="flex flex-col items-center justify-center py-6 gap-3 text-center">
-                      <p className="text-sm text-gray-500 dark:text-gray-400">
-                        로그인하면 대화 기록을
-                        <br />
-                        저장할 수 있어요
+                      <p className="text-sm text-gray-500 dark:text-gray-400 whitespace-pre-wrap">
+                        {t("chat.loginRequiredDesc")}
                       </p>
                       <button
                         onClick={() => navigate("/login")}
@@ -258,7 +258,7 @@ export const Sidebar = () => {
                             "0px 0px 24px 0px rgba(105, 162, 255, 0.24)",
                         }}
                       >
-                        로그인하기
+                        {t("chat.login")}
                       </button>
                     </div>
                   ) : sessions.length === 0 ? (
@@ -266,12 +266,12 @@ export const Sidebar = () => {
                       <div className="flex flex-col items-center justify-center py-8 gap-3">
                         <Spinner size="md" />
                         <span className="text-xs text-gray-400">
-                          불러오는 중...
+                          {t("common.loading")}
                         </span>
                       </div>
                     ) : (
                       <p className="text-sm text-gray-400 py-4 whitespace-nowrap overflow-hidden">
-                        아직 강냉봇과 나눈 대화가 없어요.
+                        {t("sidebar.noHistory")}
                       </p>
                     )
                   ) : (
@@ -356,14 +356,14 @@ export const Sidebar = () => {
                 to="/terms"
                 className="hover:text-gray-600 transition-colors"
               >
-                이용약관
+                {t("common.terms")}
               </Link>
               <span>•</span>
               <Link
                 to="/privacy"
                 className="hover:text-gray-600 transition-colors"
               >
-                개인정보처리방침
+                {t("common.privacy")}
               </Link>
             </div>
           </div>
@@ -479,7 +479,7 @@ export const Sidebar = () => {
                     size={18}
                     className="text-gray-500 dark:text-gray-400 group-hover:text-primary-500"
                   />
-                  <span className="text-sm">설정</span>
+                  <span className="text-sm">{t("settings.title")}</span>
                 </button>
                 <button
                   onClick={() => {
@@ -493,7 +493,9 @@ export const Sidebar = () => {
                     size={18}
                     className="text-gray-500 dark:text-gray-400 group-hover:text-primary-500"
                   />
-                  <span className="text-sm">로그아웃</span>
+                  <span className="text-sm">
+                    {t("settings.account.logout")}
+                  </span>
                 </button>
               </div>
             )}
@@ -510,10 +512,10 @@ export const Sidebar = () => {
         onClose={() => setDeleteTargetId(null)}
         onConfirm={handleDeleteConfirm}
         type="warning"
-        title="대화를 삭제할까요?"
-        message="삭제된 대화는 복구할 수 없습니다."
-        confirmText="삭제"
-        cancelText="취소"
+        title={t("sidebar.deleteConfirm")}
+        message={t("sidebar.deleteWarning")}
+        confirmText={t("common.delete")}
+        cancelText={t("common.cancel")}
       />
     </>
   );

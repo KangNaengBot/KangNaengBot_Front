@@ -1,7 +1,9 @@
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 
 export const PrivacyPage = () => {
+  const { t } = useTranslation();
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800">
       {/* Header */}
@@ -14,7 +16,7 @@ export const PrivacyPage = () => {
             <ArrowLeft size={20} />
           </Link>
           <h1 className="text-lg font-bold text-gray-800 dark:text-gray-100">
-            개인정보 처리방침
+            {t("privacy.title")}
           </h1>
         </div>
       </header>
@@ -35,7 +37,7 @@ export const PrivacyPage = () => {
           {/* 제1조: 개인정보 처리 목적 */}
           <section>
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-              제1조 (개인정보의 처리 목적)
+              {t("privacy.articles.purpose")}
             </h2>
             <div className="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
               <p>
@@ -82,7 +84,7 @@ export const PrivacyPage = () => {
           {/* 제2조: 수집하는 개인정보 항목 */}
           <section>
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-              제2조 (수집하는 개인정보 항목)
+              {t("privacy.articles.items")}
             </h2>
             <div className="text-gray-600 leading-relaxed space-y-4">
               <div className="overflow-x-auto">
@@ -155,7 +157,7 @@ export const PrivacyPage = () => {
           {/* 제3조: 개인정보 수집 방법 */}
           <section>
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-              제3조 (개인정보의 수집 방법)
+              {t("privacy.articles.method")}
             </h2>
             <div className="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
               <p>서비스는 다음과 같은 방법으로 개인정보를 수집합니다:</p>
@@ -181,7 +183,7 @@ export const PrivacyPage = () => {
           {/* 제4조: 개인정보의 보유 및 이용 기간 */}
           <section>
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-              제4조 (개인정보의 보유 및 이용 기간)
+              {t("privacy.articles.period")}
             </h2>
             <div className="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
               <p>
@@ -258,7 +260,7 @@ export const PrivacyPage = () => {
           {/* 제5조: 개인정보의 파기 */}
           <section>
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-              제5조 (개인정보의 파기 절차 및 방법)
+              {t("privacy.articles.destruction")}
             </h2>
             <div className="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
               <p>
@@ -297,7 +299,7 @@ export const PrivacyPage = () => {
           {/* 제6조: 개인정보의 제3자 제공 */}
           <section>
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-              제6조 (개인정보의 제3자 제공)
+              {t("privacy.articles.thirdParty")}
             </h2>
             <div className="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
               <p>
@@ -329,7 +331,7 @@ export const PrivacyPage = () => {
           {/* 제7조: 개인정보 처리의 위탁 */}
           <section>
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-              제7조 (개인정보 처리의 위탁)
+              {t("privacy.articles.consignment")}
             </h2>
             <div className="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
               <p>
@@ -389,7 +391,7 @@ export const PrivacyPage = () => {
           {/* 제8조: AI 학습 데이터 처리 */}
           <section>
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-              제8조 (AI 학습 데이터 처리)
+              {t("privacy.articles.ai")}
             </h2>
             <div className="bg-purple-50/50 dark:bg-purple-900/20 rounded-xl p-4 border border-purple-100 dark:border-purple-800 mb-4">
               <p className="text-purple-800 dark:text-purple-200 text-sm font-medium">
@@ -426,7 +428,7 @@ export const PrivacyPage = () => {
           {/* 제9조: 정보주체의 권리 */}
           <section>
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-              제9조 (정보주체와 법정대리인의 권리·의무 및 행사 방법)
+              {t("privacy.articles.rights")}
             </h2>
             <div className="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
               <p>
@@ -491,7 +493,7 @@ export const PrivacyPage = () => {
           {/* 제10조: 자동화된 결정에 대한 권리 */}
           <section>
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-              제10조 (자동화된 결정에 대한 정보주체의 권리)
+              {t("privacy.articles.automated")}
             </h2>
             <div className="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
               <p>
@@ -521,7 +523,7 @@ export const PrivacyPage = () => {
           {/* 제11조: 만 14세 미만 아동 */}
           <section>
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-              제11조 (만 14세 미만 아동의 개인정보 처리)
+              {t("privacy.articles.children")}
             </h2>
             <div className="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
               <p>
@@ -539,7 +541,7 @@ export const PrivacyPage = () => {
           {/* 제12조: 쿠키 */}
           <section>
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-              제12조 (쿠키의 설치·운영 및 거부)
+              {t("privacy.articles.cookies")}
             </h2>
             <div className="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
               <p>
@@ -605,7 +607,7 @@ export const PrivacyPage = () => {
           {/* 제13조: 안전성 확보 조치 */}
           <section>
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-              제13조 (개인정보의 안전성 확보 조치)
+              {t("privacy.articles.safety")}
             </h2>
             <div className="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
               <p>
@@ -644,7 +646,7 @@ export const PrivacyPage = () => {
           {/* 제14조: 개인정보 보호책임자 */}
           <section>
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-              제14조 (개인정보 보호책임자)
+              {t("privacy.articles.officer")}
             </h2>
             <div className="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
               <p>
@@ -684,7 +686,7 @@ export const PrivacyPage = () => {
           {/* 제15조: 권익침해 구제방법 */}
           <section>
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-              제15조 (권익침해 구제방법)
+              {t("privacy.articles.remedy")}
             </h2>
             <div className="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
               <p>
@@ -755,7 +757,7 @@ export const PrivacyPage = () => {
           {/* 제16조: 개인정보 처리방침 변경 */}
           <section>
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-              제16조 (개인정보 처리방침의 변경)
+              {t("privacy.articles.amendment")}
             </h2>
             <div className="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
               <ul className="space-y-2 list-decimal list-inside ml-2">
@@ -776,7 +778,7 @@ export const PrivacyPage = () => {
           {/* 부칙 */}
           <section className="pt-6 border-t border-gray-200 dark:border-gray-700">
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-              부칙
+              {t("privacy.addendum")}
             </h2>
             <div className="text-gray-600 dark:text-gray-300 leading-relaxed space-y-2">
               <p>
@@ -789,7 +791,7 @@ export const PrivacyPage = () => {
           {/* 개정이력 */}
           <section className="pt-4 border-t border-gray-100 dark:border-gray-700">
             <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-              개정이력
+              {t("privacy.history")}
             </h3>
             <ul className="text-gray-500 dark:text-gray-400 text-sm space-y-1">
               <li>

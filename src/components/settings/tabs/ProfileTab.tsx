@@ -165,7 +165,7 @@ export const ProfileTab = ({ isMobile = false }: ProfileTabProps) => {
               name="profile_name"
               value={form.profile_name}
               onChange={handleChange}
-              placeholder="홍길동"
+              placeholder={t("settings.profile.namePlaceholder")}
               className={inputStyle}
             />
           </div>

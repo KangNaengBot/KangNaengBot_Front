@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { ArrowLeft } from "lucide-react";
 
 export const TermsPage = () => {
+  const { t } = useTranslation();
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800">
       {/* Header */}
@@ -14,7 +16,7 @@ export const TermsPage = () => {
             <ArrowLeft size={20} />
           </Link>
           <h1 className="text-lg font-bold text-gray-800 dark:text-gray-100">
-            이용약관
+            {t("common.terms")}
           </h1>
         </div>
       </header>
@@ -35,7 +37,7 @@ export const TermsPage = () => {
           {/* 제1조: 목적 */}
           <section>
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-              제1조 (목적)
+              {t("terms.articles.purpose")}
             </h2>
             <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
               본 약관은 강냉봇(이하 "서비스")이 제공하는 인공지능(AI) 기반
@@ -48,7 +50,7 @@ export const TermsPage = () => {
           {/* 제2조: 용어의 정의 */}
           <section>
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-              제2조 (용어의 정의)
+              {t("terms.articles.definition")}
             </h2>
             <div className="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
               <p>본 약관에서 사용하는 용어의 정의는 다음과 같습니다:</p>
@@ -90,7 +92,7 @@ export const TermsPage = () => {
           {/* 제3조: 약관의 효력 및 변경 */}
           <section>
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-              제3조 (약관의 효력 및 변경)
+              {t("terms.articles.efficacy")}
             </h2>
             <div className="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
               <ul className="space-y-3 list-decimal list-inside ml-2">
@@ -123,7 +125,7 @@ export const TermsPage = () => {
           {/* 제4조: 서비스 이용계약의 체결 */}
           <section>
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-              제4조 (서비스 이용계약의 체결)
+              {t("terms.articles.contract")}
             </h2>
             <div className="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
               <ul className="space-y-3 list-decimal list-inside ml-2">
@@ -158,7 +160,7 @@ export const TermsPage = () => {
           {/* 제5조: 계정 관리 */}
           <section>
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-              제5조 (계정 관리)
+              {t("terms.articles.account")}
             </h2>
             <div className="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
               <ul className="space-y-3 list-decimal list-inside ml-2">
@@ -186,7 +188,7 @@ export const TermsPage = () => {
           {/* 제6조: 서비스의 제공 */}
           <section>
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-              제6조 (서비스의 제공)
+              {t("terms.articles.service")}
             </h2>
             <div className="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
               <p>운영자는 이용자에게 다음과 같은 서비스를 제공합니다:</p>
@@ -213,7 +215,7 @@ export const TermsPage = () => {
           {/* 제7조: AI 서비스의 특성 및 한계 */}
           <section>
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-              제7조 (AI 서비스의 특성 및 한계)
+              {t("terms.articles.aiLimit")}
             </h2>
             <div className="bg-yellow-50/70 dark:bg-yellow-900/20 rounded-xl p-4 border border-yellow-200 dark:border-yellow-800 mb-4">
               <p className="text-yellow-800 dark:text-yellow-200 text-sm font-medium">
@@ -263,7 +265,7 @@ export const TermsPage = () => {
           {/* 제8조: 이용자의 의무 */}
           <section>
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-              제8조 (이용자의 의무)
+              {t("terms.articles.duty")}
             </h2>
             <div className="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
               <p>이용자는 다음 각 호의 행위를 하여서는 안 됩니다:</p>
@@ -302,7 +304,7 @@ export const TermsPage = () => {
           {/* 제9조: 지적재산권 */}
           <section>
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-              제9조 (지적재산권)
+              {t("terms.articles.copyright")}
             </h2>
             <div className="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
               <ul className="space-y-3 list-decimal list-inside ml-2">
@@ -338,7 +340,7 @@ export const TermsPage = () => {
           {/* 제10조: 서비스 이용 제한 및 계정 정지 */}
           <section>
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-              제10조 (서비스 이용 제한 및 계정 정지)
+              {t("terms.articles.restriction")}
             </h2>
             <div className="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
               <ul className="space-y-3 list-decimal list-inside ml-2">
@@ -378,7 +380,7 @@ export const TermsPage = () => {
           {/* 제11조: 서비스의 변경 및 중단 */}
           <section>
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-              제11조 (서비스의 변경 및 중단)
+              {t("terms.articles.change")}
             </h2>
             <div className="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
               <ul className="space-y-3 list-decimal list-inside ml-2">
@@ -404,7 +406,7 @@ export const TermsPage = () => {
           {/* 제12조: 면책조항 */}
           <section>
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-              제12조 (면책조항)
+              {t("terms.articles.exemption")}
             </h2>
             <div className="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
               <ul className="space-y-3 list-decimal list-inside ml-2">
@@ -444,7 +446,7 @@ export const TermsPage = () => {
           {/* 제13조: 손해배상 */}
           <section>
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-              제13조 (손해배상)
+              {t("terms.articles.damages")}
             </h2>
             <div className="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
               <ul className="space-y-3 list-decimal list-inside ml-2">
@@ -474,7 +476,7 @@ export const TermsPage = () => {
           {/* 제14조: 개인정보 보호 */}
           <section>
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-              제14조 (개인정보 보호)
+              {t("terms.articles.privacy")}
             </h2>
             <div className="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
               <ul className="space-y-3 list-decimal list-inside ml-2">
@@ -510,7 +512,7 @@ export const TermsPage = () => {
           {/* 제15조: 분쟁 해결 및 준거법 */}
           <section>
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-              제15조 (분쟁 해결 및 준거법)
+              {t("terms.articles.dispute")}
             </h2>
             <div className="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
               <ul className="space-y-3 list-decimal list-inside ml-2">
@@ -533,7 +535,7 @@ export const TermsPage = () => {
           {/* 제16조: 연락처 */}
           <section>
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-              제16조 (연락처)
+              {t("terms.articles.contact")}
             </h2>
             <div className="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
               <p>
@@ -557,7 +559,7 @@ export const TermsPage = () => {
           {/* 부칙 */}
           <section className="pt-6 border-t border-gray-200 dark:border-gray-700">
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-              부칙
+              {t("terms.addendum")}
             </h2>
             <div className="text-gray-600 dark:text-gray-300 leading-relaxed space-y-2">
               <p>
@@ -579,7 +581,7 @@ export const TermsPage = () => {
           {/* 개정이력 */}
           <section className="pt-4 border-t border-gray-100 dark:border-gray-700">
             <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-              약관 개정이력
+              {t("terms.history")}
             </h3>
             <ul className="text-gray-500 dark:text-gray-400 text-sm space-y-1">
               <li>
@@ -593,7 +595,7 @@ export const TermsPage = () => {
           {/* 최종 업데이트 */}
           <section className="pt-4 border-t border-gray-100 dark:border-gray-700">
             <p className="text-gray-400 dark:text-gray-500 text-xs text-center">
-              최종 업데이트: 2025년 12월 10일
+              {t("terms.lastUpdate")}
             </p>
           </section>
         </div>

@@ -1,11 +1,77 @@
 {
   "common": {
+    "appName": "강냉봇",
     "save": "저장",
     "cancel": "취소",
     "confirm": "확인",
     "close": "닫기",
     "loading": "로딩 중...",
-    "error": "오류가 발생했습니다"
+    "error": "오류가 발생했습니다",
+    "terms": "이용약관",
+    "privacy": "개인정보처리방침",
+    "delete": "삭제",
+    "user": "사용자"
+  },
+  "privacy": {
+    "title": "개인정보 처리방침",
+    "articles": {
+      "purpose": "제1조 (개인정보의 처리 목적)",
+      "items": "제2조 (수집하는 개인정보 항목)",
+      "method": "제3조 (개인정보의 수집 방법)",
+      "period": "제4조 (개인정보의 보유 및 이용 기간)",
+      "destruction": "제5조 (개인정보의 파기 절차 및 방법)",
+      "thirdParty": "제6조 (개인정보의 제3자 제공)",
+      "consignment": "제7조 (개인정보 처리의 위탁)",
+      "ai": "제8조 (AI 학습 데이터 처리)",
+      "rights": "제9조 (정보주체와 법정대리인의 권리·의무 및 행사 방법)",
+      "automated": "제10조 (자동화된 결정에 대한 정보주체의 권리)",
+      "children": "제11조 (만 14세 미만 아동의 개인정보 처리)",
+      "cookies": "제12조 (쿠키의 설치·운영 및 거부)",
+      "safety": "제13조 (개인정보의 안전성 확보 조치)",
+      "officer": "제14조 (개인정보 보호책임자)",
+      "remedy": "제15조 (권익침해 구제방법)",
+      "amendment": "제16조 (개인정보 처리방침의 변경)"
+    },
+    "addendum": "부칙",
+    "history": "개정이력"
+  },
+  "terms": {
+    "title": "이용약관",
+    "articles": {
+      "purpose": "제1조 (목적)",
+      "definition": "제2조 (용어의 정의)",
+      "efficacy": "제3조 (약관의 효력 및 변경)",
+      "contract": "제4조 (서비스 이용계약의 체결)",
+      "account": "제5조 (계정 관리)",
+      "service": "제6조 (서비스의 제공)",
+      "aiLimit": "제7조 (AI 서비스의 특성 및 한계)",
+      "duty": "제8조 (이용자의 의무)",
+      "copyright": "제9조 (지적재산권)",
+      "restriction": "제10조 (서비스 이용 제한 및 계정 정지)",
+      "change": "제11조 (서비스의 변경 및 중단)",
+      "exemption": "제12조 (면책조항)",
+      "damages": "제13조 (손해배상)",
+      "privacy": "제14조 (개인정보 보호)",
+      "dispute": "제15조 (분쟁 해결 및 준거법)",
+      "contact": "제16조 (연락처)"
+    },
+    "addendum": "부칙",
+    "history": "약관 개정이력",
+    "lastUpdate": "최종 업데이트: 2025년 12월 10일"
+  },
+  "store": {
+    "error": {
+      "sessionList": "세션 목록을 불러오지 못했습니다.",
+      "createSession": "새 대화를 시작하지 못했습니다.",
+      "fetchMessages": "대화 내용을 불러오지 못했습니다.",
+      "deleteSession": "대화를 삭제하지 못했습니다.",
+      "sessionNotSelected": "세션이 선택되지 않았습니다.",
+      "aiResponse": "AI 응답을 생성하지 못했습니다. 잠시 후 다시 시도해 주세요.",
+      "sendMessage": "메시지 전송에 실패했습니다.",
+      "login": "로그인에 실패했습니다.",
+      "profileLoad": "프로필을 불러오지 못했습니다.",
+      "profileSave": "프로필 저장에 실패했습니다."
+    }
   },
   "settings": {
     "title": "설정",
@@ -26,11 +92,13 @@
       "grade": "학년",
       "semester": "학기",
       "select": "선택",
+      "namePlaceholder": "홍길동",
       "saving": "저장 중..."
     },
     "account": {
       "title": "계정 정보",
       "email": "이메일",
+      "googleAccount": "Google 계정",
       "logout": "로그아웃",
       "logoutConfirm": "정말 로그아웃 하시겠습니까?",
       "guestMode": "게스트 모드",
@@ -58,16 +126,32 @@
     "send": "전송",
     "loginRequired": "로그인이 필요해요",
     "loginRequiredDesc": "새 대화를 시작하려면 로그인이 필요합니다.\n로그인하면 대화 기록도 저장할 수 있어요!",
-    "login": "로그인하기"
+    "login": "로그인하기",
+    "suggestions": {
+      "food": "오늘 학식 뭐야?",
+      "professor": "홍길동 교수님 수업 알려줘",
+      "office": "행정실이 어디야?"
+    }
   },
   "sidebar": {
     "history": "내 대화 모아보기",
     "noHistory": "아직 강냉봇과 나눈 대화가 없어요",
     "deleteConfirm": "이 대화를 삭제하시겠습니까?",
-    "refresh": "새로고침"
+    "refresh": "새로고침",
+    "deleteWarning": "삭제된 대화는 복구할 수 없습니다."
+  },
+  "auth": {
+    "googleLogin": "구글 계정으로 시작하기",
+    "guestLogin": "게스트로 시작하기"
   },
   "welcome": {
     "title": "강냉봇에 오신 것을 환영해요!",
-    "subtitle": "강남대학교 AI 챗봇 강냉봇입니다. 무엇이든 물어보세요!"
+    "subtitle": "강남대학교 AI 챗봇 강냉봇입니다. 무엇이든 물어보세요!",
+    "loginSubtitle": "강남대학교 챗봇, 강냉봇",
+    "messages": [
+      "안녕, 난 강남대학교 AI 강냉봇이야!",
+      "수강신청, 졸업요건, 학사일정 등을 물어봐!",
+      "뭐든지 도와줄게 😊"
+    ]
   }
 }

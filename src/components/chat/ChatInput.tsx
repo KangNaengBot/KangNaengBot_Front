@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, FormEvent, KeyboardEvent } from "react";
+import { useTranslation } from "react-i18next";
 import { Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useChatStore, useAuthStore } from "@/store";
@@ -14,6 +15,7 @@ const SINGLE_LINE_HEIGHT = 56;
 const MAX_HEIGHT = 180;
 
 export const ChatInput = ({ showNewChatButton = false }: ChatInputProps) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
   const [showLoginAlert, setShowLoginAlert] = useState(false);
@@ -113,7 +115,7 @@ export const ChatInput = ({ showNewChatButton = false }: ChatInputProps) => {
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder="무엇이든 물어보세요."
+                placeholder={t("chat.placeholder")}
                 rows={1}
                 className="flex-1 px-6 py-4 resize-none outline-none text-gray-800 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 overflow-y-auto bg-transparent"
                 style={{
@@ -146,7 +148,7 @@ export const ChatInput = ({ showNewChatButton = false }: ChatInputProps) => {
                   ) : (
                     <img
                       src="/assets/images/subtract.svg"
-                      alt="전송"
+                      alt={t("chat.send")}
                       className="w-[17px] h-[18px]"
                     />
                   )}
@@ -163,16 +165,10 @@ export const ChatInput = ({ showNewChatButton = false }: ChatInputProps) => {
         onClose={() => setShowLoginAlert(false)}
         onConfirm={handleLoginConfirm}
         type="info"
-        title="로그인이 필요해요"
-        message={
-          <>
-            새 대화를 시작하려면 로그인이 필요합니다.
-            <br />
-            로그인하면 대화 기록도 저장할 수 있어요!
-          </>
-        }
-        confirmText="로그인하기"
-        cancelText="취소"
+        title={t("chat.loginRequired")}
+        message={t("chat.loginRequiredDesc")}
+        confirmText={t("chat.login")}
+        cancelText={t("common.cancel")}
       />
     </>
   );

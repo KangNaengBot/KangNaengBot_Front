@@ -1,11 +1,77 @@
 {
   "common": {
+    "appName": "GangNaengBot",
     "save": "保存",
     "cancel": "取消",
     "confirm": "确认",
     "close": "关闭",
     "loading": "加载中...",
-    "error": "发生错误"
+    "error": "发生错误",
+    "terms": "服务条款",
+    "privacy": "隐私政策",
+    "delete": "删除",
+    "user": "用户"
+  },
+  "privacy": {
+    "title": "隐私政策",
+    "articles": {
+      "purpose": "第1条（个人信息处理目的）",
+      "items": "第2条（收集的个人信息项目）",
+      "method": "第3条（个人信息收集方法）",
+      "period": "第4条（个人信息保有及使用期间）",
+      "destruction": "第5条（个人信息销毁程序及方法）",
+      "thirdParty": "第6条（个人信息提供给第三方）",
+      "consignment": "第7条（个人信息处理委托）",
+      "ai": "第8条（AI学习数据处理）",
+      "rights": "第9条（信息主体及法定代理人的权利·义务及行使方法）",
+      "automated": "第10条（关于自动化决策的权利）",
+      "children": "第11条（未满14岁儿童的个人信息处理）",
+      "cookies": "第12条（Cookie的安装·运营及拒绝）",
+      "safety": "第13条（个人信息安全性确保措施）",
+      "officer": "第14条（个人信息保护责任人）",
+      "remedy": "第15条（权益侵害救济方法）",
+      "amendment": "第16条（个人信息处理方针的变更）"
+    },
+    "addendum": "附则",
+    "history": "修订历史"
+  },
+  "terms": {
+    "title": "使用条款",
+    "articles": {
+      "purpose": "第1条（目的）",
+      "definition": "第2条（术语定义）",
+      "efficacy": "第3条（条款效力及变更）",
+      "contract": "第4条（服务使用合同的签订）",
+      "account": "第5条（账户管理）",
+      "service": "第6条（服务提供）",
+      "aiLimit": "第7条（AI服务的特性及界限）",
+      "duty": "第8条（用户的义务）",
+      "copyright": "第9条（知识产权）",
+      "restriction": "第10条（服务使用限制及账户暂停）",
+      "change": "第11条（服务变更及中断）",
+      "exemption": "第12条（免责条款）",
+      "damages": "第13条（损害赔偿）",
+      "privacy": "第14条（个人信息保护）",
+      "dispute": "第15条（纠纷解决及适用法律）",
+      "contact": "第16条（联系方式）"
+    },
+    "addendum": "附则",
+    "history": "条款修订历史",
+    "lastUpdate": "最后更新：2025年12月10日"
+  },
+  "store": {
+    "error": {
+      "sessionList": "无法加载会话列表。",
+      "createSession": "无法开始新对话。",
+      "fetchMessages": "无法加载对话记录。",
+      "deleteSession": "无法删除对话。",
+      "sessionNotSelected": "未选择会话。",
+      "aiResponse": "无法生成AI回复。请稍后再试。",
+      "sendMessage": "消息发送失败。",
+      "login": "登录失败。",
+      "profileLoad": "无法加载个人资料。",
+      "profileSave": "无法保存个人资料。"
+    }
   },
   "settings": {
     "title": "设置",
@@ -26,11 +92,13 @@
       "grade": "年级",
       "semester": "学期",
       "select": "选择",
+      "namePlaceholder": "洪吉童",
       "saving": "保存中..."
     },
     "account": {
       "title": "账户信息",
       "email": "邮箱",
+      "googleAccount": "Google 账号",
       "logout": "退出登录",
       "logoutConfirm": "确定要退出登录吗？",
       "guestMode": "访客模式",
@@ -60,16 +128,32 @@
     "send": "发送",
     "loginRequired": "需要登录",
     "loginRequiredDesc": "请登录以开始新对话。\n您还可以保存通过对话记录！",
-    "login": "登录"
+    "login": "登录",
+    "suggestions": {
+      "food": "今天的食堂菜单是什么？",
+      "professor": "告诉我关于洪吉童教授的课",
+      "office": "行政室在哪里？"
+    }
   },
   "sidebar": {
     "history": "对话记录",
     "noHistory": "还没有与GangNaengBot的对话",
     "deleteConfirm": "确定要删除此对话吗？",
-    "refresh": "刷新"
+    "refresh": "刷新",
+    "deleteWarning": "已删除的对话将无法恢复。"
+  },
+  "auth": {
+    "googleLogin": "通过 Google 继续",
+    "guestLogin": "以访客身份继续"
   },
   "welcome": {
     "title": "欢迎使用GangNaengBot！",
-    "subtitle": "我是江南大学AI聊天机器人。有什么问题都可以问我！"
+    "subtitle": "我是江南大学AI聊天机器人。有什么问题都可以问我！",
+    "loginSubtitle": "江南大学聊天机器人，GangNaengBot",
+    "messages": [
+      "你好，我是江南大学AI GangNaengBot！",
+      "问我选课、毕业要求、校历等问题吧！",
+      "什么都可以帮你 😊"
+    ]
   }
 }

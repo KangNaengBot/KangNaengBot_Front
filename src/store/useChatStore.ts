@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import type { MessageItem, SessionItem } from "@/types";
 import { sessionsService, chatService } from "@/api";
+import i18n from "@/i18n";
 
 // 진행 중인 프리페치 요청을 추적하기 위한 Map (컴포넌트 외부에 선언)
 const pendingPrefetches = new Map<string, Promise<MessageItem[]>>();
@@ -54,7 +55,7 @@ export const useChatStore = create<ChatState>((set, get) => ({
         error:
           error instanceof Error
             ? error.message
-            : "세션 목록을 불러오지 못했습니다.",
+            : i18n.t("store.error.sessionList"),
       });
     }
   },
@@ -83,7 +84,7 @@ export const useChatStore = create<ChatState>((set, get) => ({
         error:
           error instanceof Error
             ? error.message
-            : "새 대화를 시작하지 못했습니다.",
+            : i18n.t("store.error.createSession"),
       });
       throw error;
     }
@@ -159,7 +160,7 @@ export const useChatStore = create<ChatState>((set, get) => ({
         error:
           error instanceof Error
             ? error.message
-            : "대화 내용을 불러오지 못했습니다.",
+            : i18n.t("store.error.fetchMessages"),
       });
     }
   },
@@ -228,7 +229,7 @@ export const useChatStore = create<ChatState>((set, get) => ({
           error:
             error instanceof Error
               ? error.message
-              : "대화를 삭제하지 못했습니다.",
+              : i18n.t("store.error.deleteSession"),
         }));
       }
     }
@@ -277,7 +278,10 @@ export const useChatStore = create<ChatState>((set, get) => ({
       }
 
       if (!currentSessionId) {
-        set({ error: "세션이 선택되지 않았습니다.", isSending: false });
+        set({
+          error: i18n.t("store.error.sessionNotSelected"),
+          isSending: false,
+        });
         return;
       }
 
@@ -310,9 +314,7 @@ export const useChatStore = create<ChatState>((set, get) => ({
 
       // 5번 다 실패하면 에러 처리
       if (!responseText?.trim()) {
-        throw new Error(
-          "AI 응답을 생성하지 못했습니다. 잠시 후 다시 시도해 주세요."
-        );
+        throw new Error(i18n.t("store.error.aiResponse"));
       }
 
       // AI 응답 추가
@@ -355,7 +357,7 @@ export const useChatStore = create<ChatState>((set, get) => ({
         error:
           error instanceof Error
             ? error.message
-            : "메시지 전송에 실패했습니다.",
+            : i18n.t("store.error.sendMessage"),
       }));
     }
   },

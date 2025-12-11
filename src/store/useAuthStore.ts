@@ -3,6 +3,7 @@ import { persist } from "zustand/middleware";
 import type { User, ProfileResponse } from "@/types";
 import { setAccessToken, removeAccessToken } from "@/api";
 import { authService, profilesService } from "@/api";
+import i18n from "@/i18n";
 
 interface AuthState {
   // State
@@ -54,7 +55,9 @@ export const useAuthStore = create<AuthState>()(
             isAuthenticated: false,
             isLoading: false,
             error:
-              error instanceof Error ? error.message : "로그인에 실패했습니다.",
+              error instanceof Error
+                ? error.message
+                : i18n.t("store.error.login"),
           });
         }
       },
@@ -80,7 +83,7 @@ export const useAuthStore = create<AuthState>()(
             error:
               error instanceof Error
                 ? error.message
-                : "프로필을 불러오지 못했습니다.",
+                : i18n.t("store.error.profileLoad"),
           });
         }
       },
@@ -96,7 +99,7 @@ export const useAuthStore = create<AuthState>()(
             error:
               error instanceof Error
                 ? error.message
-                : "프로필 저장에 실패했습니다.",
+                : i18n.t("store.error.profileSave"),
           });
           throw error;
         }

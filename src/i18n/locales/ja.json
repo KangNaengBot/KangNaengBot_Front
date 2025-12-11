@@ -1,11 +1,77 @@
 {
   "common": {
+    "appName": "GangNaengBot",
     "save": "保存",
     "cancel": "キャンセル",
     "confirm": "確認",
     "close": "閉じる",
     "loading": "読み込み中...",
-    "error": "エラーが発生しました"
+    "error": "エラーが発生しました",
+    "terms": "利用規約",
+    "privacy": "プライバシーポリシー",
+    "delete": "削除",
+    "user": "ユーザー"
+  },
+  "privacy": {
+    "title": "プライバシーポリシー",
+    "articles": {
+      "purpose": "第1条（個人情報の処理目的）",
+      "items": "第2条（収集する個人情報の項目）",
+      "method": "第3条（個人情報の収集方法）",
+      "period": "第4条（個人情報の保有および利用期間）",
+      "destruction": "第5条（個人情報の破棄手続きおよび方法）",
+      "thirdParty": "第6条（個人情報の第三者提供）",
+      "consignment": "第7条（個人情報処理の委託）",
+      "ai": "第8条（AI学習データの処理）",
+      "rights": "第9条（情報主体および法定代理人の権利・義務および行使方法）",
+      "automated": "第10条（自動化された決定に関する権利）",
+      "children": "第11条（満14歳未満の児童の個人情報処理）",
+      "cookies": "第12条（クッキーの設置・運営および拒否）",
+      "safety": "第13条（個人情報の安全性確保措置）",
+      "officer": "第14条（個人情報保護責任者）",
+      "remedy": "第15条（権益侵害の救済方法）",
+      "amendment": "第16条（個人情報処理方針の変更）"
+    },
+    "addendum": "付則",
+    "history": "改定履歴"
+  },
+  "terms": {
+    "title": "利用規約",
+    "articles": {
+      "purpose": "第1条（目的）",
+      "definition": "第2条（用語の定義）",
+      "efficacy": "第3条（約款の効力および変更）",
+      "contract": "第4条（サービス利用契約の締結）",
+      "account": "第5条（アカウント管理）",
+      "service": "第6条（サービスの提供）",
+      "aiLimit": "第7条（AIサービスの特性および限界）",
+      "duty": "第8条（利用者の義務）",
+      "copyright": "第9条（知的財産権）",
+      "restriction": "第10条（サービス利用制限およびアカウント停止）",
+      "change": "第11条（サービスの変更および中断）",
+      "exemption": "第12条（免責条項）",
+      "damages": "第13条（損害賠償）",
+      "privacy": "第14条（個人情報保護）",
+      "dispute": "第15条（紛争解決および準拠法）",
+      "contact": "第16条（連絡先）"
+    },
+    "addendum": "付則",
+    "history": "約款改定履歴",
+    "lastUpdate": "最終更新日：2025年12月10日"
+  },
+  "store": {
+    "error": {
+      "sessionList": "セッションリストを読み込めませんでした。",
+      "createSession": "新しい会話を開始できませんでした。",
+      "fetchMessages": "会話履歴を読み込めませんでした。",
+      "deleteSession": "会話を削除できませんでした。",
+      "sessionNotSelected": "セッションが選択されていません。",
+      "aiResponse": "AI応答を生成できませんでした。しばらくしてからもう一度お試しください。",
+      "sendMessage": "メッセージの送信に失敗しました。",
+      "login": "ログインに失敗しました。",
+      "profileLoad": "プロフィールの読み込みに失敗しました。",
+      "profileSave": "プロフィールの保存に失敗しました。"
+    }
   },
   "settings": {
     "title": "設定",
@@ -26,11 +92,13 @@
       "grade": "学年",
       "semester": "学期",
       "select": "選択",
+      "namePlaceholder": "山田 太郎",
       "saving": "保存中..."
     },
     "account": {
       "title": "アカウント情報",
       "email": "メール",
+      "googleAccount": "Google アカウント",
       "logout": "ログアウト",
       "logoutConfirm": "ログアウトしますか？",
       "guestMode": "ゲストモード",
@@ -60,16 +128,32 @@
     "send": "送信",
     "loginRequired": "ログインが必要です",
     "loginRequiredDesc": "新しい会話を始めるにはログインしてください。\n会話履歴も保存されます！",
-    "login": "ログイン"
+    "login": "ログイン",
+    "suggestions": {
+      "food": "今日の学食メニューは？",
+      "professor": "ホン・ギルドン教授の授業について教えて",
+      "office": "行政室はどこ？"
+    }
   },
   "sidebar": {
     "history": "会話履歴",
-    "noHistory": "GnagNaengBotとの会話がまだありません",
+    "noHistory": "GangNaengBotとの会話がまだありません",
     "deleteConfirm": "この会話を削除しますか？",
-    "refresh": "更新"
+    "refresh": "更新",
+    "deleteWarning": "削除された会話は復元できません。"
+  },
+  "auth": {
+    "googleLogin": "Googleで続ける",
+    "guestLogin": "ゲストとして続ける"
   },
   "welcome": {
-    "title": "GnagNaengBotへようこそ！",
-    "subtitle": "江南大学校のAIチャットボットです。何でも聞いてください！"
+    "title": "GangNaengBotへようこそ！",
+    "subtitle": "江南大学校のAIチャットボットです。何でも聞いてください！",
+    "loginSubtitle": "江南大学校チャットボット、GangNaengBot",
+    "messages": [
+      "こんにちは、江南大学校AI GangNaengBotです！",
+      "履修登録、卒業要件、学事日程などを聞いてみてね！",
+      "何でも手伝うよ 😊"
+    ]
   }
 }
