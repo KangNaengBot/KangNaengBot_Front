@@ -224,7 +224,7 @@ export const SettingsModal = () => {
 
       {/* Modal */}
       <div
-        className="relative w-full max-w-2xl rounded-2xl overflow-hidden glass-modal"
+        className="relative w-[95%] md:w-[90%] lg:w-[80%] max-w-3xl rounded-2xl overflow-hidden glass-modal"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
@@ -238,7 +238,7 @@ export const SettingsModal = () => {
         {/* Content */}
         <div className="flex min-h-[400px]">
           {/* Left Sidebar - Tab List */}
-          <div className="w-40 flex-shrink-0 p-6 border-r border-gray-200 dark:border-gray-700">
+          <div className="w-56 flex-shrink-0 p-6 border-r border-gray-200 dark:border-gray-700">
             <nav className="space-y-1">
               {TABS.map((tab) => (
                 <button
@@ -253,8 +253,8 @@ export const SettingsModal = () => {
                     }
                   `}
                 >
-                  {tab.icon}
-                  {t(tab.labelKey)}
+                  <span className="flex-shrink-0">{tab.icon}</span>
+                  <span className="truncate">{t(tab.labelKey)}</span>
                 </button>
               ))}
             </nav>
