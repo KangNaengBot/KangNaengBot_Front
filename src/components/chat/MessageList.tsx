@@ -57,7 +57,7 @@ export const MessageList = () => {
   const { currentSessionId } = useChatStore();
   if (isLoading && currentSessionId && filteredMessages.length === 0) {
     return (
-      <div className="flex h-full items-center justify-center">
+      <div className="flex-1 w-full flex items-center justify-center">
         <Spinner size="lg" />
       </div>
     );
