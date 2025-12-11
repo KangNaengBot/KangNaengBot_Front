@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 type Theme = "light" | "dark" | "system";
-type Language = "ko" | "en";
+type Language = "ko" | "en" | "ja" | "zh";
 
 interface SettingsState {
   // State

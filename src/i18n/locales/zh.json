@@ -1,0 +1,75 @@
+{
+  "common": {
+    "save": "保存",
+    "cancel": "取消",
+    "confirm": "确认",
+    "close": "关闭",
+    "loading": "加载中...",
+    "error": "发生错误"
+  },
+  "settings": {
+    "title": "设置",
+    "tabs": {
+      "profile": "个人资料",
+      "account": "账户",
+      "theme": "主题",
+      "language": "语言"
+    },
+    "profile": {
+      "title": "个人资料设置",
+      "name": "姓名",
+      "studentId": "学号",
+      "college": "学院",
+      "department": "学部/学科",
+      "major": "专业",
+      "currentSemester": "当前学期",
+      "grade": "年级",
+      "semester": "学期",
+      "select": "选择",
+      "saving": "保存中..."
+    },
+    "account": {
+      "title": "账户信息",
+      "email": "邮箱",
+      "logout": "退出登录",
+      "logoutConfirm": "确定要退出登录吗？",
+      "guestMode": "访客模式",
+      "guestDescription": "登录以保存您的对话记录"
+    },
+    "theme": {
+      "title": "主题设置",
+      "light": "浅色模式",
+      "dark": "深色模式",
+      "system": "系统默认",
+      "lightDesc": "明亮背景的默认主题",
+      "darkDesc": "减轻眼部疲劳的深色背景",
+      "systemDesc": "跟随系统设置"
+    },
+    "language": {
+      "title": "语言设置",
+      "korean": "韩语",
+      "english": "英语",
+      "japanese": "日语",
+      "chinese": "中文",
+      "current": "当前语言"
+    }
+  },
+  "chat": {
+    "placeholder": "有什么可以帮您的吗？",
+    "newChat": "新对话",
+    "send": "发送",
+    "loginRequired": "需要登录",
+    "loginRequiredDesc": "请登录以开始新对话。\n您还可以保存通过对话记录！",
+    "login": "登录"
+  },
+  "sidebar": {
+    "history": "对话记录",
+    "noHistory": "还没有与GangNaengBot的对话",
+    "deleteConfirm": "确定要删除此对话吗？",
+    "refresh": "刷新"
+  },
+  "welcome": {
+    "title": "欢迎使用GangNaengBot！",
+    "subtitle": "我是江南大学AI聊天机器人。有什么问题都可以问我！"
+  }
+}

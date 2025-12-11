@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { Check } from "lucide-react";
 import { useSettingsStore } from "@/store";
 
-type Language = "ko" | "en";
+type Language = "ko" | "en" | "ja" | "zh";
 
 interface LanguageOption {
   id: Language;
@@ -14,6 +14,8 @@ interface LanguageOption {
 const LANGUAGE_OPTIONS: LanguageOption[] = [
   { id: "ko", name: "Korean", nativeName: "한국어", flag: "🇰🇷" },
   { id: "en", name: "English", nativeName: "English", flag: "🇺🇸" },
+  { id: "ja", name: "Japanese", nativeName: "日本語", flag: "🇯🇵" },
+  { id: "zh", name: "Chinese", nativeName: "中文", flag: "🇨🇳" },
 ];
 
 export const LanguageTab = () => {
