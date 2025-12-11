@@ -5,6 +5,22 @@ interface ChatBubbleProps {
   message: MessageItem;
 }
 
+// HTML 태그를 마크다운으로 변환하는 함수
+const convertHtmlToMarkdown = (content: string) => {
+  if (!content) return "";
+
+  // <a> 태그 변환: <a href="...">text</a> -> [text](href)
+  let markdown = content.replace(
+    /<a\s+(?:[^>]*?\s+)?href="([^"]*)"[^>]*>(.*?)<\/a>/g,
+    "[$2]($1)"
+  );
+
+  // 필요하다면 다른 태그 변환도 추가 가능 (예: <br> -> \n)
+  markdown = markdown.replace(/<br\s*\/?>/g, "\n");
+
+  return markdown;
+};
+
 export const ChatBubble = ({ message }: ChatBubbleProps) => {
   const isUser = message.role === "user";
 
@@ -34,7 +50,20 @@ export const ChatBubble = ({ message }: ChatBubbleProps) => {
           </p>
         ) : (
           <div className="prose prose-sm max-w-none prose-p:my-1 prose-headings:mb-2 prose-headings:mt-3 prose-li:my-0.5 prose-ul:my-1 prose-ol:my-1 text-gray-800">
-            <ReactMarkdown>{message.content}</ReactMarkdown>
+            <ReactMarkdown
+              components={{
+                a: ({ node, ...props }) => (
+                  <a
+                    {...props}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-600 hover:text-blue-800 underline decoration-blue-300 hover:decoration-blue-800 transition-colors break-all"
+                  />
+                ),
+              }}
+            >
+              {convertHtmlToMarkdown(message.content)}
+            </ReactMarkdown>
           </div>
         )}
       </div>
