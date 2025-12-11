@@ -433,7 +433,7 @@ export const Sidebar = () => {
               <div
                 ref={popoverRef}
                 className={`
-                  absolute bg-white rounded-xl shadow-lg border border-gray-100 py-2 min-w-[140px]
+                  absolute bg-white rounded-xl shadow-lg border border-gray-100 py-2 min-w-[140px] z-50
                   animate-fade-in
                   ${
                     isSidebarOpen

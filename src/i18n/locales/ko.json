@@ -1,0 +1,73 @@
+{
+  "common": {
+    "save": "저장",
+    "cancel": "취소",
+    "confirm": "확인",
+    "close": "닫기",
+    "loading": "로딩 중...",
+    "error": "오류가 발생했습니다"
+  },
+  "settings": {
+    "title": "설정",
+    "tabs": {
+      "profile": "프로필",
+      "account": "계정",
+      "theme": "테마",
+      "language": "다국어"
+    },
+    "profile": {
+      "title": "프로필 설정",
+      "name": "이름",
+      "studentId": "학번",
+      "college": "단과대학",
+      "department": "학부",
+      "major": "전공",
+      "currentSemester": "현재학기",
+      "grade": "학년",
+      "semester": "학기",
+      "select": "선택",
+      "saving": "저장 중..."
+    },
+    "account": {
+      "title": "계정 정보",
+      "email": "이메일",
+      "logout": "로그아웃",
+      "logoutConfirm": "정말 로그아웃 하시겠습니까?",
+      "guestMode": "게스트 모드",
+      "guestDescription": "로그인하면 대화 기록을 저장할 수 있어요"
+    },
+    "theme": {
+      "title": "테마 설정",
+      "light": "라이트 모드",
+      "dark": "다크 모드",
+      "system": "시스템 설정",
+      "lightDesc": "밝은 배경의 기본 테마",
+      "darkDesc": "어두운 배경으로 눈의 피로를 줄여줍니다",
+      "systemDesc": "시스템 설정을 따릅니다"
+    },
+    "language": {
+      "title": "언어 설정",
+      "korean": "한국어",
+      "english": "English",
+      "current": "현재 언어"
+    }
+  },
+  "chat": {
+    "placeholder": "무엇이든 물어보세요.",
+    "newChat": "새 대화 시작하기",
+    "send": "전송",
+    "loginRequired": "로그인이 필요해요",
+    "loginRequiredDesc": "새 대화를 시작하려면 로그인이 필요합니다.\n로그인하면 대화 기록도 저장할 수 있어요!",
+    "login": "로그인하기"
+  },
+  "sidebar": {
+    "history": "내 대화 모아보기",
+    "noHistory": "아직 강냉봇과 나눈 대화가 없어요",
+    "deleteConfirm": "이 대화를 삭제하시겠습니까?",
+    "refresh": "새로고침"
+  },
+  "welcome": {
+    "title": "강냉봇에 오신 것을 환영해요!",
+    "subtitle": "강남대학교 AI 챗봇 강냉봇입니다. 무엇이든 물어보세요!"
+  }
+}

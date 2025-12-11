@@ -64,6 +64,44 @@ body::before {
   z-index: 1;
 }
 
+/* ========== Dark Mode 시스템 ========== */
+.dark {
+  --color-bg: #0f172a;
+  --color-bg-secondary: #1e293b;
+  --color-bg-tertiary: #334155;
+  --color-text: #f1f5f9;
+  --color-text-secondary: #94a3b8;
+  --color-text-tertiary: #64748b;
+  --color-border: #334155;
+  --color-border-light: #1e293b;
+
+  color-scheme: dark;
+}
+
+/* 다크 모드 배경 */
+.dark body {
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+/* 다크 모드 배경 객체 */
+.dark body::before {
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    rgba(78, 146, 255, 0.15) 0%,
+    rgba(78, 146, 255, 0) 100%
+  );
+}
+
+/* 다크 모드 스크롤바 */
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.3);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.5);
+}
+
 /* Scrollbar styling */
 ::-webkit-scrollbar {
   width: 6px;
@@ -219,6 +257,15 @@ body::before {
 
   .shadow-input {
     box-shadow: var(--shadow-input);
+  }
+
+  /* 스크롤바 숨기기 유틸리티 */
+  .scrollbar-hide {
+    -ms-overflow-style: none; /* IE, Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
   }
 }
 

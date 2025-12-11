@@ -3,21 +3,29 @@ import { create } from "zustand";
 interface UIState {
   // State
   isSidebarOpen: boolean;
-  isProfileModalOpen: boolean;
+  isSettingsModalOpen: boolean;
   isMobile: boolean;
+
+  // Legacy alias (deprecated, use isSettingsModalOpen)
+  isProfileModalOpen: boolean;
 
   // Actions
   toggleSidebar: () => void;
   setSidebarOpen: (open: boolean) => void;
+  openSettingsModal: () => void;
+  closeSettingsModal: () => void;
+  setIsMobile: (isMobile: boolean) => void;
+
+  // Legacy alias (deprecated)
   openProfileModal: () => void;
   closeProfileModal: () => void;
-  setIsMobile: (isMobile: boolean) => void;
 }
 
 export const useUIStore = create<UIState>((set) => ({
   // Initial State
   isSidebarOpen: true,
-  isProfileModalOpen: false,
+  isSettingsModalOpen: false,
+  isProfileModalOpen: false, // Legacy alias
   isMobile: typeof window !== "undefined" ? window.innerWidth < 768 : false,
 
   // Actions
@@ -26,9 +34,17 @@ export const useUIStore = create<UIState>((set) => ({
 
   setSidebarOpen: (open) => set({ isSidebarOpen: open }),
 
-  openProfileModal: () => set({ isProfileModalOpen: true }),
+  openSettingsModal: () =>
+    set({ isSettingsModalOpen: true, isProfileModalOpen: true }),
 
-  closeProfileModal: () => set({ isProfileModalOpen: false }),
+  closeSettingsModal: () =>
+    set({ isSettingsModalOpen: false, isProfileModalOpen: false }),
 
   setIsMobile: (isMobile) => set({ isMobile, isSidebarOpen: !isMobile }),
+
+  // Legacy alias (deprecated, use openSettingsModal/closeSettingsModal)
+  openProfileModal: () =>
+    set({ isSettingsModalOpen: true, isProfileModalOpen: true }),
+  closeProfileModal: () =>
+    set({ isSettingsModalOpen: false, isProfileModalOpen: false }),
 }));

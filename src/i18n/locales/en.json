@@ -1,0 +1,73 @@
+{
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "close": "Close",
+    "loading": "Loading...",
+    "error": "An error occurred"
+  },
+  "settings": {
+    "title": "Settings",
+    "tabs": {
+      "profile": "Profile",
+      "account": "Account",
+      "theme": "Theme",
+      "language": "Language"
+    },
+    "profile": {
+      "title": "Profile Settings",
+      "name": "Name",
+      "studentId": "Student ID",
+      "college": "College",
+      "department": "Department",
+      "major": "Major",
+      "currentSemester": "Current Semester",
+      "grade": "Grade",
+      "semester": "Semester",
+      "select": "Select",
+      "saving": "Saving..."
+    },
+    "account": {
+      "title": "Account Info",
+      "email": "Email",
+      "logout": "Log out",
+      "logoutConfirm": "Are you sure you want to log out?",
+      "guestMode": "Guest Mode",
+      "guestDescription": "Sign in to save your chat history"
+    },
+    "theme": {
+      "title": "Theme Settings",
+      "light": "Light Mode",
+      "dark": "Dark Mode",
+      "system": "System Default",
+      "lightDesc": "Default theme with bright background",
+      "darkDesc": "Dark background to reduce eye strain",
+      "systemDesc": "Follow system settings"
+    },
+    "language": {
+      "title": "Language Settings",
+      "korean": "한국어",
+      "english": "English",
+      "current": "Current Language"
+    }
+  },
+  "chat": {
+    "placeholder": "Ask me anything.",
+    "newChat": "Start New Chat",
+    "send": "Send",
+    "loginRequired": "Login Required",
+    "loginRequiredDesc": "Please sign in to start a new conversation.\nYou can also save your chat history!",
+    "login": "Sign In"
+  },
+  "sidebar": {
+    "history": "My Conversations",
+    "noHistory": "No conversations with GangNaengBot yet",
+    "deleteConfirm": "Delete this conversation?",
+    "refresh": "Refresh"
+  },
+  "welcome": {
+    "title": "Welcome to GangNaengBot!",
+    "subtitle": "I'm the Kangnam University AI chatbot. Ask me anything!"
+  }
+}
