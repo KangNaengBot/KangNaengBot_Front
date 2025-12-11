@@ -1,11 +1,52 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useMemo } from "react";
 import { ChatBubble } from "./ChatBubble";
 import { MessageSkeleton } from "@/components/common";
 import { useChatStore } from "@/store";
+import type { MessageItem } from "@/types";
+
+/**
+ * 메시지 중복 제거 및 1:1 페어링 보장
+ * - 연속된 동일 user 메시지 중복 제거
+ * - user → assistant 순서 보장 (응답 없는 중복 user 메시지 필터링)
+ */
+const deduplicateMessages = (messages: MessageItem[]): MessageItem[] => {
+  if (messages.length === 0) return [];
+
+  const result: MessageItem[] = [];
+  let lastUserMessage: MessageItem | null = null;
+
+  for (const msg of messages) {
+    if (msg.role === "user") {
+      // user 메시지: 이전 user 메시지와 내용이 같으면 스킵
+      if (
+        lastUserMessage &&
+        lastUserMessage.content === msg.content &&
+        result[result.length - 1]?.role === "user"
+      ) {
+        // 연속된 동일 user 메시지 → 스킵
+        continue;
+      }
+      lastUserMessage = msg;
+      result.push(msg);
+    } else {
+      // assistant 메시지: 그대로 추가
+      result.push(msg);
+      lastUserMessage = null; // 응답이 왔으므로 리셋
+    }
+  }
+
+  return result;
+};
 
 export const MessageList = () => {
   const { messages, isSending, isLoading } = useChatStore();
   const bottomRef = useRef<HTMLDivElement>(null);
+
+  // 메시지 중복 제거 (메모이제이션)
+  const filteredMessages = useMemo(
+    () => deduplicateMessages(messages),
+    [messages]
+  );
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -25,7 +66,7 @@ export const MessageList = () => {
   return (
     <div className="flex-1 overflow-y-auto px-4 py-6">
       <div className="max-w-3xl mx-auto space-y-6">
-        {messages.map((message, index) => (
+        {filteredMessages.map((message, index) => (
           <ChatBubble key={index} message={message} />
         ))}
 
