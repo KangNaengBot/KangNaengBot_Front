@@ -1,7 +1,7 @@
 import { useChatStore, useUIStore } from "@/store";
 
 const SUGGESTED_QUESTIONS = [
-  { id: "1", text: "오늘 급식 뭐야?" },
+  { id: "1", text: "오늘 학식 뭐야?" },
   { id: "2", text: "홍길동 교수님 수업 알려줘" },
   { id: "3", text: "행정실이 어디야?" },
 ];
