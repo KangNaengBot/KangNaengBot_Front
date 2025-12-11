@@ -1,18 +1,25 @@
 import { X, CheckCircle, AlertCircle } from "lucide-react";
 import { useToastStore, ToastType } from "@/store/useToastStore";
+import { useSettingsStore } from "@/store";
 
 const icons: Record<ToastType, React.ReactNode> = {
   success: <CheckCircle size={18} className="text-primary-500" />,
   error: <AlertCircle size={18} className="text-red-500" />,
 };
 
-const bgColors: Record<ToastType, string> = {
-  success: "bg-primary-50 border-primary-200",
-  error: "bg-red-50 border-red-200",
-};
-
 export const ToastContainer = () => {
   const { toasts, removeToast } = useToastStore();
+  const { resolvedTheme } = useSettingsStore();
+  const isDark = resolvedTheme === "dark";
+
+  const getToastStyles = (type: ToastType) => {
+    if (type === "success") {
+      return isDark
+        ? "bg-slate-800 border-primary-500"
+        : "bg-primary-50 border-primary-200";
+    }
+    return isDark ? "bg-slate-800 border-red-500" : "bg-red-50 border-red-200";
+  };
 
   if (toasts.length === 0) return null;
 
@@ -23,7 +30,7 @@ export const ToastContainer = () => {
           key={toast.id}
           className={`
             flex items-center gap-3 px-4 py-3 rounded-xl border shadow-lg
-            animate-slide-up ${bgColors[toast.type]}
+            animate-slide-up ${getToastStyles(toast.type)}
           `}
         >
           {icons[toast.type]}
@@ -32,7 +39,7 @@ export const ToastContainer = () => {
           </span>
           <button
             onClick={() => removeToast(toast.id)}
-            className="ml-2 p-1 rounded-lg hover:bg-black/5 text-gray-400 hover:text-gray-600 transition-colors"
+            className="ml-2 p-1 rounded-lg hover:bg-black/5 dark:hover:bg-white/10 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors"
           >
             <X size={14} />
           </button>
