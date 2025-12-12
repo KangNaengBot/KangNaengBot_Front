@@ -12,10 +12,10 @@ interface LanguageOption {
 }
 
 const LANGUAGE_OPTIONS: LanguageOption[] = [
-  { id: "ko", name: "Korean", nativeName: "한국어", flag: "🇰🇷" },
-  { id: "en", name: "English", nativeName: "English", flag: "🇺🇸" },
-  { id: "ja", name: "Japanese", nativeName: "日本語", flag: "🇯🇵" },
-  { id: "zh", name: "Chinese", nativeName: "中文", flag: "🇨🇳" },
+  { id: "ko", name: "Korean", nativeName: "한국어", flag: "KR" },
+  { id: "en", name: "English", nativeName: "English", flag: "US" },
+  { id: "ja", name: "Japanese", nativeName: "日本語", flag: "JP" },
+  { id: "zh", name: "Chinese", nativeName: "中文", flag: "CN" },
 ];
 
 export const LanguageTab = () => {
@@ -57,8 +57,10 @@ export const LanguageTab = () => {
             >
               {/* 플래그 */}
               <div
-                className={`w-12 h-12 rounded-xl flex items-center justify-center text-2xl ${
-                  isDark ? "bg-gray-700" : "bg-gray-100"
+                className={`w-12 h-12 rounded-xl flex items-center justify-center text-sm font-semibold leading-none ${
+                  isDark
+                    ? "bg-gray-700 text-gray-300"
+                    : "bg-gray-100 text-gray-600"
                 }`}
               >
                 {option.flag}
