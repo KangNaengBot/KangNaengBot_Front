@@ -8,3 +8,4 @@ export { SwipeableItem } from "./SwipeableItem";
 export { Skeleton, MessageSkeleton } from "./Skeleton";
 export { AILoadingSpinner } from "./AILoadingSpinner";
 export { Spinner } from "./Spinner";
+export { LanguageSwitcher } from "./LanguageSwitcher";
