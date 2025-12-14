@@ -1,9 +1,13 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useAuthStore, useSettingsStore } from "@/store";
 import { ChevronDown } from "lucide-react";
-import { CustomDropdown, LanguageSwitcher } from "@/components/common";
+import {
+  CustomDropdown,
+  LanguageSwitcher,
+  CustomCheckbox,
+} from "@/components/common";
 import { UNIVERSITY_TRANS_KEYS } from "@/constants/universityTranslation";
 
 // 드롭다운 옵션들 - ProfileTab과 동일
@@ -113,6 +117,13 @@ export const OnboardingPage = () => {
     current_semester: 1,
   });
 
+  // 약관 동의 상태
+  const [agreements, setAgreements] = useState({
+    terms: false, // 이용약관 (필수)
+    privacy: false, // 개인정보처리방침 (필수)
+    marketing: false, // 마케팅 수신 (선택)
+  });
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -175,13 +186,15 @@ export const OnboardingPage = () => {
   const inputStyle =
     "flex-1 min-w-0 px-4 py-3 bg-gray-100/80 dark:bg-slate-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-400/30 text-gray-800 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 transition-all";
 
-  // 모든 필수 필드 입력 여부
+  // 모든 필수 필드 + 필수 동의 입력 여부
   const isFormValid =
     form.profile_name.trim() !== "" &&
     form.student_id.trim() !== "" &&
     form.college !== "" &&
     form.department !== "" &&
-    form.major !== "";
+    form.major !== "" &&
+    agreements.terms &&
+    agreements.privacy;
 
   return (
     <div
@@ -190,18 +203,20 @@ export const OnboardingPage = () => {
       }`}
     >
       {/* 헤더 */}
-      <div className="flex justify-between items-center px-4 pt-4 pb-2">
-        <div className="w-10" /> {/* 좌측 여백 */}
+      <div className="relative flex justify-center items-center px-4 pt-6 pb-2">
         <img
           src="/assets/images/logo.svg"
           alt={t("common.appName")}
           className="h-12"
         />
-        <LanguageSwitcher />
+        {/* 언어 전환 버튼 - 우측 고정 */}
+        <div className="absolute right-4 top-1/2 -translate-y-1/2">
+          <LanguageSwitcher />
+        </div>
       </div>
 
       {/* 메인 컨텐츠 */}
-      <div className="flex-1 flex flex-col items-center px-4 py-6">
+      <div className="flex-1 flex flex-col items-center px-4 py-4">
         <div
           className={`w-full max-w-md rounded-2xl p-6 ${
             isDark
@@ -337,7 +352,7 @@ export const OnboardingPage = () => {
                 <label className="w-20 text-sm text-gray-500 dark:text-gray-400 flex-shrink-0">
                   {t("settings.profile.currentSemester")}
                 </label>
-                <div className="flex items-center gap-3 flex-1">
+                <div className="flex items-center gap-2 flex-1 flex-wrap">
                   <div className="relative">
                     <select
                       name="current_grade"
@@ -383,6 +398,107 @@ export const OnboardingPage = () => {
                 </div>
               </div>
 
+              {/* 약관 동의 섹션 */}
+              <div
+                className={`mt-6 pt-5 border-t ${
+                  isDark ? "border-slate-700" : "border-gray-200"
+                }`}
+              >
+                {/* 제목 + 전체동의 */}
+                <div className="flex items-center justify-between mb-3">
+                  <p
+                    className={`text-sm font-medium ${
+                      isDark ? "text-gray-300" : "text-gray-700"
+                    }`}
+                  >
+                    {t("onboarding.agreementTitle")}
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const allChecked =
+                        agreements.terms &&
+                        agreements.privacy &&
+                        agreements.marketing;
+                      setAgreements({
+                        terms: !allChecked,
+                        privacy: !allChecked,
+                        marketing: !allChecked,
+                      });
+                    }}
+                    className={`text-xs px-3 py-1.5 rounded-full transition-all ${
+                      agreements.terms &&
+                      agreements.privacy &&
+                      agreements.marketing
+                        ? "bg-primary-500 text-white"
+                        : isDark
+                        ? "bg-slate-700 text-gray-300 hover:bg-slate-600"
+                        : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                    }`}
+                  >
+                    {t("onboarding.agreeAll")}
+                  </button>
+                </div>
+
+                {/* 이용약관 동의 (필수) */}
+                <CustomCheckbox
+                  checked={agreements.terms}
+                  onChange={(checked) =>
+                    setAgreements((prev) => ({ ...prev, terms: checked }))
+                  }
+                  id="terms-checkbox"
+                >
+                  <span className="text-red-500 font-medium mr-1">
+                    [{t("onboarding.required")}]
+                  </span>
+                  <Link
+                    to="/terms"
+                    target="_blank"
+                    className="underline hover:text-primary-500 transition-colors"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    {t("common.terms")}
+                  </Link>
+                  {t("onboarding.agreeToTerms")}
+                </CustomCheckbox>
+
+                {/* 개인정보처리방침 동의 (필수) */}
+                <CustomCheckbox
+                  checked={agreements.privacy}
+                  onChange={(checked) =>
+                    setAgreements((prev) => ({ ...prev, privacy: checked }))
+                  }
+                  id="privacy-checkbox"
+                >
+                  <span className="text-red-500 font-medium mr-1">
+                    [{t("onboarding.required")}]
+                  </span>
+                  <Link
+                    to="/privacy"
+                    target="_blank"
+                    className="underline hover:text-primary-500 transition-colors"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    {t("common.privacy")}
+                  </Link>
+                  {t("onboarding.agreeToPrivacy")}
+                </CustomCheckbox>
+
+                {/* 마케팅 수신 동의 (선택) */}
+                <CustomCheckbox
+                  checked={agreements.marketing}
+                  onChange={(checked) =>
+                    setAgreements((prev) => ({ ...prev, marketing: checked }))
+                  }
+                  id="marketing-checkbox"
+                >
+                  <span className="text-gray-400 dark:text-gray-500 mr-1">
+                    [{t("onboarding.optional")}]
+                  </span>
+                  {t("onboarding.agreeToMarketing")}
+                </CustomCheckbox>
+              </div>
+
               {/* 시작하기 버튼 */}
               <button
                 type="submit"
@@ -408,7 +524,7 @@ export const OnboardingPage = () => {
             isDark ? "text-gray-500" : "text-gray-400"
           }`}
         >
-          {t("onboarding.required")}
+          {t("onboarding.requiredHint")}
         </p>
       </div>
     </div>

@@ -16,7 +16,14 @@
     "title": "Welcome to GangNaengBot! 🎉",
     "subtitle": "Please enter your profile for a better experience.",
     "start": "Get Started",
-    "required": "* All fields are required."
+    "required": "Required",
+    "optional": "Optional",
+    "requiredHint": "* Profile fields and required agreements are mandatory.",
+    "agreementTitle": "Terms & Agreements",
+    "agreeAll": "Agree All",
+    "agreeToTerms": " - I agree to the terms.",
+    "agreeToPrivacy": " - I agree to the policy.",
+    "agreeToMarketing": "I agree to receive marketing communications. (Email, Push)"
   },
   "privacy": {
     "title": "Privacy Policy",
@@ -95,9 +102,9 @@
       "college": "College",
       "department": "Department",
       "major": "Major",
-      "currentSemester": "Current Semester",
-      "grade": "Grade",
-      "semester": "Semester",
+      "currentSemester": "Current",
+      "grade": "Yr",
+      "semester": "Sem",
       "select": "Select",
       "namePlaceholder": "John Doe",
       "saving": "Saving..."

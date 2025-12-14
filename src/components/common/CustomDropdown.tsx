@@ -55,9 +55,9 @@ export const CustomDropdown = ({
   };
 
   return (
-    <div className="flex items-center gap-6">
+    <div className="flex items-center gap-4">
       {label && (
-        <label className="w-16 text-sm text-gray-500 dark:text-gray-400 flex-shrink-0">
+        <label className="w-20 text-sm text-gray-500 dark:text-gray-400 flex-shrink-0">
           {label}
         </label>
       )}

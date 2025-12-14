@@ -172,8 +172,8 @@ export const ProfileTab = ({ isMobile = false }: ProfileTabProps) => {
           )}
 
           {/* 이름 */}
-          <div className="flex items-center gap-6">
-            <label className="w-16 text-sm text-gray-500 dark:text-gray-400 flex-shrink-0">
+          <div className="flex items-center gap-4">
+            <label className="w-20 text-sm text-gray-500 dark:text-gray-400 flex-shrink-0">
               {t("settings.profile.name")}
             </label>
             <input
@@ -187,8 +187,8 @@ export const ProfileTab = ({ isMobile = false }: ProfileTabProps) => {
           </div>
 
           {/* 학번 */}
-          <div className="flex items-center gap-6">
-            <label className="w-16 text-sm text-gray-500 dark:text-gray-400 flex-shrink-0">
+          <div className="flex items-center gap-4">
+            <label className="w-20 text-sm text-gray-500 dark:text-gray-400 flex-shrink-0">
               {t("settings.profile.studentId")}
             </label>
             <input

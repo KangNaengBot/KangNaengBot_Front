@@ -16,7 +16,14 @@
     "title": "강냉봇에 오신 것을 환영합니다! 🎉",
     "subtitle": "더 나은 서비스를 위해 프로필을 입력해주세요.",
     "start": "시작하기",
-    "required": "* 모든 항목은 필수 입력입니다."
+    "required": "필수",
+    "optional": "선택",
+    "requiredHint": "* 프로필 항목과 필수 약관 동의가 필요합니다.",
+    "agreementTitle": "약관 동의",
+    "agreeAll": "전체동의",
+    "agreeToTerms": "에 동의합니다.",
+    "agreeToPrivacy": "에 동의합니다.",
+    "agreeToMarketing": "마케팅 정보 수신에 동의합니다. (이메일, 푸시 알림)"
   },
   "privacy": {
     "title": "개인정보 처리방침",

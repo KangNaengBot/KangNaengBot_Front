@@ -16,7 +16,14 @@
     "title": "GangNaengBotへようこそ！🎉",
     "subtitle": "より良いサービスのためにプロフィールを入力してください。",
     "start": "始める",
-    "required": "* すべての項目は必須入力です。"
+    "required": "必須",
+    "optional": "任意",
+    "requiredHint": "* プロフィール項目と必須同意が必要です。",
+    "agreementTitle": "利用規約の同意",
+    "agreeAll": "全て同意",
+    "agreeToTerms": "に同意します。",
+    "agreeToPrivacy": "に同意します。",
+    "agreeToMarketing": "マーケティング情報の受信に同意します。（メール、プッシュ通知）"
   },
   "privacy": {
     "title": "プライバシーポリシー",
