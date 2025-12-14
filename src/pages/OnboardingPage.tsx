@@ -7,6 +7,7 @@ import {
   CustomDropdown,
   LanguageSwitcher,
   CustomCheckbox,
+  Spinner,
 } from "@/components/common";
 import { UNIVERSITY_TRANS_KEYS } from "@/constants/universityTranslation";
 
@@ -87,18 +88,20 @@ export const OnboardingPage = () => {
   } = useAuthStore();
   const { resolvedTheme } = useSettingsStore();
 
+  // 동기적으로 프로필 완료 여부 확인
+  const isComplete =
+    Boolean(profile?.profile_name?.trim()) &&
+    Boolean(profile?.student_id?.trim()) &&
+    Boolean(profile?.college) &&
+    Boolean(profile?.department) &&
+    Boolean(profile?.major);
+
   // 이미 프로필이 완전히 있으면 홈으로 리다이렉트
   useEffect(() => {
-    const isComplete =
-      profile?.profile_name?.trim() &&
-      profile?.student_id?.trim() &&
-      profile?.college &&
-      profile?.department &&
-      profile?.major;
     if (isComplete) {
       navigate("/", { replace: true });
     }
-  }, [profile, navigate]);
+  }, [isComplete, navigate]);
 
   // 로그인 안 되어 있으면 로그인 페이지로
   useEffect(() => {
@@ -195,6 +198,16 @@ export const OnboardingPage = () => {
     form.major !== "" &&
     agreements.terms &&
     agreements.privacy;
+
+  // 로딩 중이거나, 이미 인증되어 있고 프로필이 완성된 경우 (리다이렉트 대기 중)
+  // 스피너를 보여줘서 폼이 깜빡이는 것을 방지
+  if (isLoading || (isAuthenticated && isComplete)) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-white dark:bg-slate-950">
+        <Spinner size="lg" />
+      </div>
+    );
+  }
 
   return (
     <div

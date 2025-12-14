@@ -43,16 +43,21 @@ export const useAuthStore = create<AuthState>()(
         set({ isLoading: true, error: null });
         try {
           setAccessToken(accessToken);
+          // User와 Profile을 모두 가져온 후에 상태 업데이트 (Race Condition 방지)
           const user = await authService.getMe();
-          set({ user, isAuthenticated: true, isLoading: false });
-
-          // 프로필도 함께 로드
           const profile = await profilesService.getProfile();
-          set({ profile });
+
+          set({
+            user,
+            profile,
+            isAuthenticated: true,
+            isLoading: false,
+          });
         } catch (error) {
           removeAccessToken();
           set({
             user: null,
+            profile: null,
             isAuthenticated: false,
             isLoading: false,
             error:
