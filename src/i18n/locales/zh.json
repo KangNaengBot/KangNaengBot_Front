@@ -108,7 +108,15 @@
       "semester": "学期",
       "select": "选择",
       "namePlaceholder": "洪吉童",
-      "saving": "保存中..."
+      "saving": "保存中...",
+      "saveSuccess": "个人资料已保存。",
+      "validation": {
+        "nameRequired": "请输入姓名。",
+        "studentIdRequired": "请输入学号。",
+        "collegeRequired": "请选择学院。",
+        "departmentRequired": "请选择学部。",
+        "majorRequired": "请选择专业。"
+      }
     },
     "account": {
       "title": "账户信息",

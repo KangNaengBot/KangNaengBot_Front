@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { X, User, Settings, Palette, Globe, MessageSquare } from "lucide-react";
-import { useUIStore } from "@/store";
+import { useUIStore, SettingsTabId } from "@/store";
 import { useTranslation } from "react-i18next";
 import { ProfileTab } from "./tabs/ProfileTab";
 import { AccountTab } from "./tabs/AccountTab";
@@ -8,10 +8,8 @@ import { ThemeTab } from "./tabs/ThemeTab";
 import { LanguageTab } from "./tabs/LanguageTab";
 import { FeedbackTab } from "./tabs/FeedbackTab";
 
-type TabId = "profile" | "account" | "theme" | "language" | "feedback";
-
 interface Tab {
-  id: TabId;
+  id: SettingsTabId;
   labelKey: string;
   icon: React.ReactNode;
 }
@@ -45,10 +43,9 @@ export const SettingsModal = () => {
   const {
     isSettingsModalOpen,
     closeSettingsModal,
-    settingsInitialTab,
-    setSettingsInitialTab,
+    activeSettingsTab,
+    setActiveSettingsTab,
   } = useUIStore();
-  const [activeTab, setActiveTab] = useState<TabId>("profile");
   const [isMobile, setIsMobile] = useState(false);
 
   // 드래그 상태
@@ -80,18 +77,13 @@ export const SettingsModal = () => {
     };
   }, [isSettingsModalOpen, closeSettingsModal]);
 
-  // 모달 열릴 때 드래그 상태 초기화 및 초기 탭 설정
+  // 모달 열릴 때 드래그 상태 초기화
   useEffect(() => {
     if (isSettingsModalOpen) {
       setDragY(0);
       setIsDragging(false);
-      // 초기 탭 설정 (피드백 버튼에서 열 때)
-      if (settingsInitialTab) {
-        setActiveTab(settingsInitialTab as TabId);
-        setSettingsInitialTab(null);
-      }
     }
-  }, [isSettingsModalOpen, settingsInitialTab, setSettingsInitialTab]);
+  }, [isSettingsModalOpen]);
 
   // 드래그 시작
   const handleDragStart = (clientY: number) => {
@@ -132,7 +124,7 @@ export const SettingsModal = () => {
     handleDragEnd();
   };
 
-  // 마우스 이벤트 핸들러
+  // 마우스 이벤트 핸д러
   const handleMouseDown = (e: React.MouseEvent) => {
     handleDragStart(e.clientY);
   };
@@ -154,7 +146,7 @@ export const SettingsModal = () => {
   if (!isSettingsModalOpen) return null;
 
   const renderTabContent = () => {
-    switch (activeTab) {
+    switch (activeSettingsTab) {
       case "profile":
         return <ProfileTab isMobile={isMobile} />;
       case "account":
@@ -211,11 +203,11 @@ export const SettingsModal = () => {
             {TABS.map((tab) => (
               <button
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
+                onClick={() => setActiveSettingsTab(tab.id)}
                 className={`
                   flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all
                   ${
-                    activeTab === tab.id
+                    activeSettingsTab === tab.id
                       ? "bg-gradient-to-r from-primary-500 to-blue-600 text-white shadow-md"
                       : "bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-slate-700"
                   }
@@ -261,11 +253,11 @@ export const SettingsModal = () => {
               {TABS.map((tab) => (
                 <button
                   key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
+                  onClick={() => setActiveSettingsTab(tab.id)}
                   className={`
                     w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left text-sm font-medium transition-all
                     ${
-                      activeTab === tab.id
+                      activeSettingsTab === tab.id
                         ? "bg-gradient-to-r from-primary-500 to-blue-600 text-white shadow-md"
                         : "text-gray-600 dark:text-gray-400 hover:bg-primary-50/50 dark:hover:bg-primary-900/20 text-gray-700 dark:text-gray-300"
                     }

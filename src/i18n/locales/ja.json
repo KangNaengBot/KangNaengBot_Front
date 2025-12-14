@@ -108,7 +108,15 @@
       "semester": "学期",
       "select": "選択",
       "namePlaceholder": "山田 太郎",
-      "saving": "保存中..."
+      "saving": "保存中...",
+      "saveSuccess": "プロフィールが保存されました。",
+      "validation": {
+        "nameRequired": "名前を入力してください。",
+        "studentIdRequired": "学番を入力してください。",
+        "collegeRequired": "単科大学を選択してください。",
+        "departmentRequired": "学部を選択してください。",
+        "majorRequired": "専攻を選択してください。"
+      }
     },
     "account": {
       "title": "アカウント情報",

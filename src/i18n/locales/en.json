@@ -108,7 +108,15 @@
       "semester": "Sem",
       "select": "Select",
       "namePlaceholder": "John Doe",
-      "saving": "Saving..."
+      "saving": "Saving...",
+      "saveSuccess": "Profile saved successfully.",
+      "validation": {
+        "nameRequired": "Please enter your name.",
+        "studentIdRequired": "Please enter your student ID.",
+        "collegeRequired": "Please select a college.",
+        "departmentRequired": "Please select a department.",
+        "majorRequired": "Please select a major."
+      }
     },
     "account": {
       "title": "Account Info",

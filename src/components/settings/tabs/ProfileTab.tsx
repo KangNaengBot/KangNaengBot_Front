@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { useAuthStore } from "@/store";
+import { useAuthStore, useToastStore } from "@/store";
 import { ChevronDown } from "lucide-react";
 import { CustomDropdown } from "@/components/common";
 import { UNIVERSITY_TRANS_KEYS } from "@/constants/universityTranslation";
@@ -14,6 +14,11 @@ export const ProfileTab = ({ isMobile = false }: ProfileTabProps) => {
   const { t } = useTranslation();
   const { profile, updateProfile, isLoading, error, clearError } =
     useAuthStore();
+  const { addToast } = useToastStore();
+
+  // 입력 필드 ref (포커스 이동용)
+  const nameInputRef = useRef<HTMLInputElement>(null);
+  const studentIdInputRef = useRef<HTMLInputElement>(null);
 
   const [form, setForm] = useState({
     profile_name: "",
@@ -62,11 +67,45 @@ export const ProfileTab = ({ isMobile = false }: ProfileTabProps) => {
     });
   };
 
+  // 첫 번째 비어있는 필드 찾기 및 포커스
+  const validateAndFocus = (): boolean => {
+    if (!form.profile_name.trim()) {
+      nameInputRef.current?.focus();
+      addToast("error", t("settings.profile.validation.nameRequired"));
+      return false;
+    }
+    if (!form.student_id.trim()) {
+      studentIdInputRef.current?.focus();
+      addToast("error", t("settings.profile.validation.studentIdRequired"));
+      return false;
+    }
+    if (!form.college) {
+      addToast("error", t("settings.profile.validation.collegeRequired"));
+      return false;
+    }
+    if (!form.department) {
+      addToast("error", t("settings.profile.validation.departmentRequired"));
+      return false;
+    }
+    if (!form.major) {
+      addToast("error", t("settings.profile.validation.majorRequired"));
+      return false;
+    }
+    return true;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     clearError();
+
+    // 유효성 검사
+    if (!validateAndFocus()) {
+      return;
+    }
+
     try {
       await updateProfile(form);
+      addToast("success", t("settings.profile.saveSuccess"));
     } catch {
       // 에러는 store에서 처리됨
     }
@@ -90,16 +129,6 @@ export const ProfileTab = ({ isMobile = false }: ProfileTabProps) => {
   const departmentOptions = getTranslatedOptions(departmentList);
   const majorOptions = getTranslatedOptions(majorList);
 
-  // 모든 필드가 채워져 있는지 확인
-  const isFormValid =
-    form.profile_name.trim() !== "" &&
-    form.student_id.trim() !== "" &&
-    form.college !== "" &&
-    form.department !== "" &&
-    form.major !== "" &&
-    form.current_grade > 0 &&
-    form.current_semester > 0;
-
   const inputStyle =
     "flex-1 min-w-0 px-4 py-3 bg-gray-100/80 dark:bg-slate-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-400/30 text-gray-800 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 transition-all";
 
@@ -118,12 +147,14 @@ export const ProfileTab = ({ isMobile = false }: ProfileTabProps) => {
             </div>
           )}
 
-          {/* 이름 */}
+          {/* 이름 (필수) */}
           <div className="flex items-center gap-4">
             <label className="w-20 text-sm text-gray-500 dark:text-gray-400 flex-shrink-0">
-              {t("settings.profile.name")}
+              {t("settings.profile.name")}{" "}
+              <span className="text-red-500">*</span>
             </label>
             <input
+              ref={nameInputRef}
               type="text"
               name="profile_name"
               value={form.profile_name}
@@ -133,12 +164,14 @@ export const ProfileTab = ({ isMobile = false }: ProfileTabProps) => {
             />
           </div>
 
-          {/* 학번 */}
+          {/* 학번 (필수) */}
           <div className="flex items-center gap-4">
             <label className="w-20 text-sm text-gray-500 dark:text-gray-400 flex-shrink-0">
-              {t("settings.profile.studentId")}
+              {t("settings.profile.studentId")}{" "}
+              <span className="text-red-500">*</span>
             </label>
             <input
+              ref={studentIdInputRef}
               type="text"
               name="student_id"
               value={form.student_id}
@@ -148,9 +181,14 @@ export const ProfileTab = ({ isMobile = false }: ProfileTabProps) => {
             />
           </div>
 
-          {/* 단과대학 */}
+          {/* 단과대학 (필수) */}
           <CustomDropdown
-            label={t("settings.profile.college")}
+            label={
+              <>
+                {t("settings.profile.college")}{" "}
+                <span className="text-red-500">*</span>
+              </>
+            }
             options={collegeOptions}
             value={form.college}
             onChange={(value) => {
@@ -164,9 +202,14 @@ export const ProfileTab = ({ isMobile = false }: ProfileTabProps) => {
             placeholder={t("settings.profile.select")}
           />
 
-          {/* 학부 */}
+          {/* 학부 (필수) */}
           <CustomDropdown
-            label={t("settings.profile.department")}
+            label={
+              <>
+                {t("settings.profile.department")}{" "}
+                <span className="text-red-500">*</span>
+              </>
+            }
             options={departmentOptions}
             value={form.department}
             onChange={(value) => {
@@ -180,9 +223,14 @@ export const ProfileTab = ({ isMobile = false }: ProfileTabProps) => {
             disabled={!form.college}
           />
 
-          {/* 전공 */}
+          {/* 전공 (필수) */}
           <CustomDropdown
-            label={t("settings.profile.major")}
+            label={
+              <>
+                {t("settings.profile.major")}{" "}
+                <span className="text-red-500">*</span>
+              </>
+            }
             options={majorOptions}
             value={form.major}
             onChange={(value) => {
@@ -251,23 +299,18 @@ export const ProfileTab = ({ isMobile = false }: ProfileTabProps) => {
             <div className="flex justify-end pt-4">
               <button
                 type="submit"
-                disabled={isLoading || !isFormValid}
+                disabled={isLoading}
                 className={`
                   px-8 py-3 text-white font-medium rounded-full shadow-lg transition-all
                   hover:scale-105 active:scale-95
-                  ${
-                    isLoading || !isFormValid
-                      ? "opacity-60 cursor-not-allowed"
-                      : ""
-                  }
+                  ${isLoading ? "opacity-60 cursor-not-allowed" : ""}
                 `}
                 style={{
                   background:
                     "radial-gradient(63.37% 63.37% at 50% 50%, #4E92FF 0%, rgba(78, 146, 255, 0.5) 100%)",
-                  boxShadow:
-                    isLoading || !isFormValid
-                      ? "0px 0px 24px 0px rgba(105, 162, 255, 0.3)"
-                      : "0px 0px 40px 0px rgba(105, 162, 255, 0.24)",
+                  boxShadow: isLoading
+                    ? "0px 0px 24px 0px rgba(105, 162, 255, 0.3)"
+                    : "0px 0px 40px 0px rgba(105, 162, 255, 0.24)",
                 }}
               >
                 {isLoading ? t("settings.profile.saving") : t("common.save")}
@@ -282,21 +325,18 @@ export const ProfileTab = ({ isMobile = false }: ProfileTabProps) => {
         <div className="sticky bottom-0 left-0 right-0 pt-4 pb-2 bg-gradient-to-t from-white via-white to-transparent dark:from-slate-900 dark:via-slate-900">
           <button
             type="submit"
-            disabled={isLoading || !isFormValid}
+            disabled={isLoading}
             className={`
               w-full px-8 py-3 text-white font-medium rounded-full shadow-lg transition-all
               hover:scale-105 active:scale-95
-              ${
-                isLoading || !isFormValid ? "opacity-60 cursor-not-allowed" : ""
-              }
+              ${isLoading ? "opacity-60 cursor-not-allowed" : ""}
             `}
             style={{
               background:
                 "radial-gradient(63.37% 63.37% at 50% 50%, #4E92FF 0%, rgba(78, 146, 255, 0.5) 100%)",
-              boxShadow:
-                isLoading || !isFormValid
-                  ? "0px 0px 24px 0px rgba(105, 162, 255, 0.3)"
-                  : "0px 0px 40px 0px rgba(105, 162, 255, 0.24)",
+              boxShadow: isLoading
+                ? "0px 0px 24px 0px rgba(105, 162, 255, 0.3)"
+                : "0px 0px 40px 0px rgba(105, 162, 255, 0.24)",
             }}
           >
             {isLoading ? t("settings.profile.saving") : t("common.save")}

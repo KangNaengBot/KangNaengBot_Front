@@ -1,11 +1,18 @@
 import { create } from "zustand";
 
+export type SettingsTabId =
+  | "profile"
+  | "account"
+  | "theme"
+  | "language"
+  | "feedback";
+
 interface UIState {
   // State
   isSidebarOpen: boolean;
   isSettingsModalOpen: boolean;
   isMobile: boolean;
-  settingsInitialTab: string | null;
+  activeSettingsTab: SettingsTabId;
 
   // Legacy alias (deprecated, use isSettingsModalOpen)
   isProfileModalOpen: boolean;
@@ -13,10 +20,10 @@ interface UIState {
   // Actions
   toggleSidebar: () => void;
   setSidebarOpen: (open: boolean) => void;
-  openSettingsModal: (initialTab?: string) => void;
+  openSettingsModal: (tab?: SettingsTabId) => void;
   closeSettingsModal: () => void;
   setIsMobile: (isMobile: boolean) => void;
-  setSettingsInitialTab: (tab: string | null) => void;
+  setActiveSettingsTab: (tab: SettingsTabId) => void;
 
   // Legacy alias (deprecated)
   openProfileModal: () => void;
@@ -29,7 +36,7 @@ export const useUIStore = create<UIState>((set) => ({
   isSettingsModalOpen: false,
   isProfileModalOpen: false, // Legacy alias
   isMobile: typeof window !== "undefined" ? window.innerWidth < 768 : false,
-  settingsInitialTab: null,
+  activeSettingsTab: "profile",
 
   // Actions
   toggleSidebar: () =>
@@ -37,23 +44,35 @@ export const useUIStore = create<UIState>((set) => ({
 
   setSidebarOpen: (open) => set({ isSidebarOpen: open }),
 
-  openSettingsModal: (initialTab) =>
+  openSettingsModal: (tab) =>
     set({
       isSettingsModalOpen: true,
       isProfileModalOpen: true,
-      settingsInitialTab: initialTab || null,
+      activeSettingsTab: tab || "profile",
     }),
 
   closeSettingsModal: () =>
-    set({ isSettingsModalOpen: false, isProfileModalOpen: false }),
+    set({
+      isSettingsModalOpen: false,
+      isProfileModalOpen: false,
+      activeSettingsTab: "profile",
+    }),
 
   setIsMobile: (isMobile) => set({ isMobile, isSidebarOpen: !isMobile }),
 
-  setSettingsInitialTab: (tab) => set({ settingsInitialTab: tab }),
+  setActiveSettingsTab: (tab) => set({ activeSettingsTab: tab }),
 
   // Legacy alias (deprecated, use openSettingsModal/closeSettingsModal)
   openProfileModal: () =>
-    set({ isSettingsModalOpen: true, isProfileModalOpen: true }),
+    set({
+      isSettingsModalOpen: true,
+      isProfileModalOpen: true,
+      activeSettingsTab: "profile",
+    }),
   closeProfileModal: () =>
-    set({ isSettingsModalOpen: false, isProfileModalOpen: false }),
+    set({
+      isSettingsModalOpen: false,
+      isProfileModalOpen: false,
+      activeSettingsTab: "profile",
+    }),
 }));

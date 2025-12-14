@@ -88,12 +88,12 @@
     }
   },
   "settings": {
-    "title": "Settings",
+    "title": "설정",
     "tabs": {
       "profile": "프로필",
       "account": "계정",
       "theme": "테마",
-      "language": "Language",
+      "language": "언어",
       "feedback": "피드백"
     },
     "profile": {
@@ -108,13 +108,21 @@
       "semester": "학기",
       "select": "선택",
       "namePlaceholder": "홍길동",
-      "saving": "저장 중..."
+      "saving": "저장 중...",
+      "saveSuccess": "프로필이 저장되었습니다.",
+      "validation": {
+        "nameRequired": "이름을 입력해주세요.",
+        "studentIdRequired": "학번을 입력해주세요.",
+        "collegeRequired": "단과대학을 선택해주세요.",
+        "departmentRequired": "학부를 선택해주세요.",
+        "majorRequired": "전공을 선택해주세요."
+      }
     },
     "account": {
       "title": "계정 정보",
       "email": "이메일",
       "googleAccount": "Google 계정",
-      "logout": "Log out",
+      "logout": "로그아웃",
       "logoutConfirm": "정말 로그아웃 하시겠습니까?",
       "guestMode": "게스트 모드",
       "guestDescription": "로그인하면 대화 기록을 저장할 수 있어요"
