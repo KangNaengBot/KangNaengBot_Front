@@ -1,6 +1,12 @@
 import { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { ChatPage, LoginPage, TermsPage, PrivacyPage } from "@/pages";
+import {
+  ChatPage,
+  LoginPage,
+  TermsPage,
+  PrivacyPage,
+  OnboardingPage,
+} from "@/pages";
 import { ToastContainer } from "@/components/common";
 import { useSettingsStore } from "@/store";
 
@@ -15,11 +21,15 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<ChatPage />} />
-        <Route path="/chat/:sessionId" element={<ChatPage />} />
+        {/* 공개 라우트 */}
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/onboarding" element={<OnboardingPage />} />
         <Route path="/terms" element={<TermsPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
+
+        {/* 게스트도 접근 가능한 채팅 라우트 (프로필 체크 없음) */}
+        <Route path="/" element={<ChatPage />} />
+        <Route path="/chat/:sessionId" element={<ChatPage />} />
       </Routes>
       <ToastContainer />
     </BrowserRouter>

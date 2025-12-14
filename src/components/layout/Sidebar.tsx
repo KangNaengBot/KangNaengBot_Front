@@ -455,7 +455,7 @@ export const Sidebar = () => {
                 }
               `}
               >
-                {user?.email || profile?.profile_name || "hello@gmail.com"}
+                {profile?.profile_name || user?.email || "hello@gmail.com"}
               </span>
             </button>
 

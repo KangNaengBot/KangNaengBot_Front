@@ -12,6 +12,12 @@
     "delete": "Delete",
     "user": "User"
   },
+  "onboarding": {
+    "title": "Welcome to GangNaengBot! 🎉",
+    "subtitle": "Please enter your profile for a better experience.",
+    "start": "Get Started",
+    "required": "* All fields are required."
+  },
   "privacy": {
     "title": "Privacy Policy",
     "articles": {

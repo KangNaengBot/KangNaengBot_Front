@@ -12,6 +12,12 @@
     "delete": "삭제",
     "user": "사용자"
   },
+  "onboarding": {
+    "title": "강냉봇에 오신 것을 환영합니다! 🎉",
+    "subtitle": "더 나은 서비스를 위해 프로필을 입력해주세요.",
+    "start": "시작하기",
+    "required": "* 모든 항목은 필수 입력입니다."
+  },
   "privacy": {
     "title": "개인정보 처리방침",
     "articles": {

@@ -12,6 +12,12 @@
     "delete": "削除",
     "user": "ユーザー"
   },
+  "onboarding": {
+    "title": "GangNaengBotへようこそ！🎉",
+    "subtitle": "より良いサービスのためにプロフィールを入力してください。",
+    "start": "始める",
+    "required": "* すべての項目は必須入力です。"
+  },
   "privacy": {
     "title": "プライバシーポリシー",
     "articles": {

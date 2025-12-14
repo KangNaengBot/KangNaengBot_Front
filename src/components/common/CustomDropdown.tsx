@@ -12,7 +12,7 @@ interface CustomDropdownProps {
   onChange: (value: string) => void;
   placeholder?: string;
   disabled?: boolean;
-  label?: string;
+  label?: React.ReactNode;
 }
 
 export const CustomDropdown = ({

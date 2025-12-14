@@ -25,15 +25,28 @@ export const LoginPage = () => {
     const token = searchParams.get("token");
     if (token) {
       login(token).then(() => {
-        navigate("/", { replace: true });
+        // 프로필 유무에 따라 리다이렉트 결정은 useAuthStore.login에서 profile 로드 후
+        // 다음 useEffect에서 처리
       });
     }
-  }, [searchParams, login, navigate]);
+  }, [searchParams, login]);
 
-  // 이미 로그인되어 있으면 홈으로
+  // 로그인 상태 및 프로필에 따른 리다이렉트
   useEffect(() => {
     if (isAuthenticated) {
-      navigate("/", { replace: true });
+      // profile 정보 확인 (모든 필수 필드)
+      const p = useAuthStore.getState().profile;
+      const hasProfile =
+        p?.profile_name?.trim() &&
+        p?.student_id?.trim() &&
+        p?.college &&
+        p?.department &&
+        p?.major;
+      if (hasProfile) {
+        navigate("/", { replace: true });
+      } else {
+        navigate("/onboarding", { replace: true });
+      }
     }
   }, [isAuthenticated, navigate]);
 
