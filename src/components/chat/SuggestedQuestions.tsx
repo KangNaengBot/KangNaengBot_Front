@@ -6,16 +6,15 @@ import { useChatStore, useUIStore } from "@/store";
 const QUESTION_KEYS = [
   "food",
   "professor",
-  "office",
+  "profLocation",
+  "profEmail",
+  "profSchedule",
+  "deptPhone",
+  "deptLocation",
   "graduation",
-  "schedule",
-  "library",
-  "club",
-  "scholarship",
-  "dormitory",
-  "exchange",
-  "lab",
-  "inquiry",
+  "building",
+  "majorCredits",
+  "liberalCredits",
 ];
 
 // Fisher-Yates 셔플 알고리즘으로 랜덤 선택

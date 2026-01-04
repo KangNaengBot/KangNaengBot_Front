@@ -787,16 +787,15 @@
     "suggestions": {
       "food": "What's the menu today?",
       "professor": "Tell me about the professor's class",
-      "office": "Where is the academic affairs office?",
+      "profLocation": "Where is the professor's office?",
+      "profEmail": "What is the professor's email?",
+      "profSchedule": "What is the professor's schedule?",
+      "deptPhone": "What is the Academic Affairs Team 2 manager's phone number?",
+      "deptLocation": "Where is Academic Affairs Team 1?",
       "graduation": "What are the graduation requirements?",
-      "schedule": "When is course registration?",
-      "library": "What are the library hours?",
-      "club": "Recommend me a major club",
-      "scholarship": "How do I apply for scholarships?",
-      "dormitory": "How do I apply for dormitory?",
-      "exchange": "Are there exchange programs?",
-      "lab": "Where is the professor's office?",
-      "inquiry": "I don't know who to contact"
+      "building": "Where is Simjeon Engineering Hall?",
+      "majorCredits": "How many major credits do I need?",
+      "liberalCredits": "How many liberal arts credits do I need?"
     }
   },
   "sidebar": {

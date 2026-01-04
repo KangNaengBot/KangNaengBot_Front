@@ -787,16 +787,15 @@
     "suggestions": {
       "food": "오늘 학식 뭐야?",
       "professor": "교수님 수업 알려줘",
-      "office": "교학팀이 어디야?",
-      "graduation": "졸업요건이 어떻게 돼?",
-      "schedule": "수강신청 일정 알려줘",
-      "library": "도서관 운영시간 알려줘",
-      "club": "전공 동아리 추천해줘",
-      "scholarship": "장학금 신청 방법 알려줘",
-      "dormitory": "기숙사 신청은 어떻게 해?",
-      "exchange": "교환학생 프로그램이 있어?",
-      "lab": "교수님 연구실 위치를 알려줘",
-      "inquiry": "어디에 문의를 해야 할지 모르겠어"
+      "profLocation": "교수님 연구실 위치 알려줘",
+      "profEmail": "교수님 이메일 알려줘",
+      "profSchedule": "교수님 시간표 알려줘",
+      "deptPhone": "교학2팀 팀장님 전화번호 알려줘",
+      "deptLocation": "교학1팀 위치 알려줘",
+      "graduation": "졸업요건 알려줘",
+      "building": "심전산학관이 어디야?",
+      "majorCredits": "전공학점 얼마나 채워야 해?",
+      "liberalCredits": "균형교양 학점 얼마나 들어야 해?"
     }
   },
   "sidebar": {
