@@ -1,6 +1,6 @@
 {
   "common": {
-    "appName": "GangNaengBot",
+    "appName": "KangNaengBot",
     "save": "Save",
     "cancel": "Cancel",
     "confirm": "Confirm",
@@ -13,7 +13,7 @@
     "user": "User"
   },
   "onboarding": {
-    "title": "Welcome to GangNaengBot! 🎉",
+    "title": "Welcome to KangNaengBot! 🎉",
     "subtitle": "Please enter your profile for a better experience.",
     "start": "Get Started",
     "required": "Required",
@@ -49,7 +49,7 @@
     "history": "Revision History",
     "content": {
       "overview": "GangNaengBot (hereinafter referred to as \"Service\") establishes and discloses this Privacy Policy in accordance with Article 30 of the Personal Information Protection Act to protect the personal information of data subjects (users) and to handle related complaints swiftly and smoothly. This policy applies when using the Service.",
-      "serviceName": "GangNaengBot",
+      "serviceName": "KangNaengBot",
       "purpose": {
         "intro": "The Service processes personal information for the following purposes. Personal information being processed will not be used for purposes other than the following, and if the purpose of use changes, necessary measures such as obtaining separate consent will be taken in accordance with Article 18 of the Personal Information Protection Act.",
         "service": {
@@ -335,7 +335,7 @@
         "intro": "The Service designates a Chief Privacy Officer as follows to take overall responsibility for personal information processing and to handle complaints and damage relief related to personal information processing by data subjects.",
         "title": "Chief Privacy Officer",
         "serviceName": "Service Name:",
-        "serviceValue": "GangNaengBot",
+        "serviceValue": "KangNaengBot",
         "person": "Officer:",
         "personValue": "Hong Ki-hyun",
         "email": "Email:",
@@ -651,7 +651,7 @@
         "details": {
           "service": {
             "label": "Service Name:",
-            "value": "GangNaengBot"
+            "value": "KangNaengBot"
           },
           "person": {
             "label": "Officer:",
@@ -801,7 +801,7 @@
   },
   "sidebar": {
     "history": "My Conversations",
-    "noHistory": "No conversations with GangNaengBot yet",
+    "noHistory": "No conversations with KangNaengBot yet",
     "deleteConfirm": "Delete this conversation?",
     "refresh": "Refresh",
     "deleteWarning": "Deleted conversations cannot be recovered.",
@@ -820,11 +820,11 @@
     "logoutSuccess": "Logged out successfully."
   },
   "welcome": {
-    "title": "Welcome to GangNaengBot!",
+    "title": "Welcome to KangNaengBot!",
     "subtitle": "I'm the Kangnam University AI chatbot. Ask me anything!",
-    "loginSubtitle": "Kangnam University Chatbot, GangNaengBot",
+    "loginSubtitle": "Kangnam University Chatbot, KangNaengBot",
     "messages": [
-      "Hi, I'm GangNaengBot, the Kangnam Univ AI!",
+      "Hi, I'm KangNaengBot, the Kangnam Univ AI!",
       "Ask me about enrollment, graduation requirements, or schedules!",
       "I'm here to help with anything 😊"
     ]

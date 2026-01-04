@@ -1,6 +1,6 @@
 {
   "common": {
-    "appName": "GangNaengBot",
+    "appName": "KangNaengBot",
     "save": "保存",
     "cancel": "キャンセル",
     "confirm": "確認",
@@ -13,7 +13,7 @@
     "user": "ユーザー"
   },
   "onboarding": {
-    "title": "GangNaengBotへようこそ！🎉",
+    "title": "KangNaengBotへようこそ！🎉",
     "subtitle": "より良いサービスのためにプロフィールを入力してください。",
     "start": "始める",
     "required": "必須",
@@ -49,7 +49,7 @@
     "history": "改定履歴",
     "content": {
       "overview": "GangNaengBot（以下「サービス」）は、個人情報保護法第30条に基づき、情報主体（利用者）の個人情報を保護し、これに関する苦情を迅速かつ円滑に処理できるよう、以下のとおり個人情報処理方針を策定・公開します。本方針はサービス利用時に適用されます。",
-      "serviceName": "GangNaengBot",
+      "serviceName": "KangNaengBot",
       "purpose": {
         "intro": "サービスは以下の目的のために個人情報を処理します。処理している個人情報は以下の目的以外の用途には使用されず、利用目的が変更される場合は個人情報保護法第18条に基づき、別途の同意を得るなど必要な措置を講じる予定です。",
         "service": {
@@ -335,7 +335,7 @@
         "intro": "サービスは個人情報処理に関する業務を総括して責任を持ち、個人情報処理に関連した情報主体の苦情処理および被害救済等のために、以下のとおり個人情報保護責任者を指定しています。",
         "title": "個人情報保護責任者",
         "serviceName": "サービス名：",
-        "serviceValue": "GangNaengBot",
+        "serviceValue": "KangNaengBot",
         "person": "責任者：",
         "personValue": "洪基賢",
         "email": "メール：",
@@ -651,7 +651,7 @@
         "details": {
           "service": {
             "label": "サービス名：",
-            "value": "ガンネンボット (GangNaengBot)"
+            "value": "ガンネンボット (KangNaengBot)"
           },
           "person": {
             "label": "責任者：",
@@ -801,7 +801,7 @@
   },
   "sidebar": {
     "history": "会話履歴",
-    "noHistory": "GangNaengBotとの会話がまだありません",
+    "noHistory": "KangNaengBotとの会話がまだありません",
     "deleteConfirm": "この会話を削除しますか？",
     "refresh": "更新",
     "deleteWarning": "削除された会話は復元できません。",
@@ -820,11 +820,11 @@
     "logoutSuccess": "ログアウトしました。"
   },
   "welcome": {
-    "title": "GangNaengBotへようこそ！",
+    "title": "KangNaengBotへようこそ！",
     "subtitle": "江南大学校のAIチャットボットです。何でも聞いてください！",
-    "loginSubtitle": "江南大学校チャットボット、GangNaengBot",
+    "loginSubtitle": "江南大学校チャットボット、KangNaengBot",
     "messages": [
-      "こんにちは、江南大学校AI GangNaengBotです！",
+      "こんにちは、江南大学校AI KangNaengBotです！",
       "履修登録、卒業要件、学事日程などを聞いてみてね！",
       "何でも手伝うよ 😊"
     ]

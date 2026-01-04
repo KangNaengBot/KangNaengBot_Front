@@ -335,7 +335,7 @@
         "intro": "서비스는 개인정보 처리에 관한 업무를 총괄해서 책임지고, 개인정보 처리와 관련한 정보주체의 불만처리 및 피해구제 등을 위하여 아래와 같이 개인정보 보호책임자를 지정하고 있습니다.",
         "title": "개인정보 보호책임자",
         "serviceName": "서비스명:",
-        "serviceValue": "강냉봇 (GangNaengBot)",
+        "serviceValue": "강냉봇 (KangNaengBot)",
         "person": "책임자:",
         "personValue": "홍기현",
         "email": "이메일:",
@@ -651,7 +651,7 @@
         "details": {
           "service": {
             "label": "서비스명:",
-            "value": "강냉봇 (GangNaengBot)"
+            "value": "강냉봇 (KangNaengBot)"
           },
           "person": {
             "label": "책임자:",
