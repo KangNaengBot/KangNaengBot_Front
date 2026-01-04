@@ -7,7 +7,7 @@ import {
   WelcomeScreen,
   SuggestedQuestions,
 } from "@/components/chat";
-import { useChatStore, useUIStore } from "@/store";
+import { useChatStore, useUIStore, useAuthStore } from "@/store";
 
 export const ChatPage = () => {
   const { sessionId } = useParams<{ sessionId?: string }>();
@@ -15,6 +15,22 @@ export const ChatPage = () => {
   const { messages, currentSessionId, isLoading, selectSession } =
     useChatStore();
   const { isMobile } = useUIStore();
+  const { isAuthenticated, profile, isLoading: isAuthLoading } = useAuthStore();
+
+  // Profile completeness check (same logic as OnboardingPage)
+  const isProfileComplete =
+    Boolean(profile?.profile_name?.trim()) &&
+    Boolean(profile?.student_id?.trim()) &&
+    Boolean(profile?.college) &&
+    Boolean(profile?.department) &&
+    Boolean(profile?.major);
+
+  // Redirect authenticated users with incomplete profile to onboarding
+  useEffect(() => {
+    if (!isAuthLoading && isAuthenticated && !isProfileComplete) {
+      navigate("/onboarding", { replace: true });
+    }
+  }, [isAuthLoading, isAuthenticated, isProfileComplete, navigate]);
 
   // URL의 sessionId가 변경되면 해당 세션 로드
   useEffect(() => {

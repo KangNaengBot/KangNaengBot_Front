@@ -403,9 +403,7 @@ export const OnboardingPage = () => {
                   </span>
                   <Link
                     to="/terms"
-                    target="_blank"
                     className="underline hover:text-primary-500 transition-colors"
-                    onClick={(e) => e.stopPropagation()}
                   >
                     {t("common.terms")}
                   </Link>
@@ -425,9 +423,7 @@ export const OnboardingPage = () => {
                   </span>
                   <Link
                     to="/privacy"
-                    target="_blank"
                     className="underline hover:text-primary-500 transition-colors"
-                    onClick={(e) => e.stopPropagation()}
                   >
                     {t("common.privacy")}
                   </Link>

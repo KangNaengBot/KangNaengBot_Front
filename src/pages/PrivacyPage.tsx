@@ -1,20 +1,22 @@
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 
 export const PrivacyPage = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800">
       {/* Header */}
       <header className="sticky top-0 z-10 backdrop-blur-lg bg-white/70 dark:bg-slate-900/70 border-b border-gray-100 dark:border-gray-700">
         <div className="max-w-4xl mx-auto px-4 py-4 flex items-center gap-4">
-          <Link
-            to="/"
+          <button
+            onClick={() => navigate(-1)}
             className="p-2 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-300 transition-colors"
           >
             <ArrowLeft size={20} />
-          </Link>
+          </button>
           <h1 className="text-lg font-bold text-gray-800 dark:text-gray-100">
             {t("privacy.title")}
           </h1>
