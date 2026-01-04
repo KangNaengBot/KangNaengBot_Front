@@ -316,7 +316,7 @@ export const Sidebar = () => {
                         </span>
                       </div>
                     ) : (
-                      <p className="text-sm text-gray-400 py-4 whitespace-nowrap overflow-hidden">
+                      <p className="text-sm text-gray-400 py-4 whitespace-nowrap overflow-hidden text-center">
                         {t("sidebar.noHistory")}
                       </p>
                     )
