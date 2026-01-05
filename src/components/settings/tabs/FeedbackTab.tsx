@@ -25,7 +25,7 @@ export const FeedbackTab = () => {
   };
 
   const getUserEmail = () => {
-    return user?.email || "guest@gannaengbot.com";
+    return user?.email || "guest@kangnaengbot.com";
   };
 
   const handleChange = (
