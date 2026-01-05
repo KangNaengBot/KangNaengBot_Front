@@ -292,7 +292,7 @@
             "desc": "사용자 프로필 및 인증 상태 캐싱"
           },
           "settings": {
-            "title": "설정 정보 (gangnaeng-settings)",
+            "title": "설정 정보 (kangnaeng-settings)",
             "desc": "테마(다크/라이트 모드), 선호 언어 설정"
           },
           "i18n": {

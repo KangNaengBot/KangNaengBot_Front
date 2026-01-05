@@ -48,7 +48,7 @@
     "addendum": "Addendum",
     "history": "Revision History",
     "content": {
-      "overview": "GangNaengBot (hereinafter referred to as \"Service\") establishes and discloses this Privacy Policy in accordance with Article 30 of the Personal Information Protection Act to protect the personal information of data subjects (users) and to handle related complaints swiftly and smoothly. This policy applies when using the Service.",
+      "overview": "KangNaengBot (hereinafter referred to as \"Service\") establishes and discloses this Privacy Policy in accordance with Article 30 of the Personal Information Protection Act to protect the personal information of data subjects (users) and to handle related complaints swiftly and smoothly. This policy applies when using the Service.",
       "serviceName": "KangNaengBot",
       "purpose": {
         "intro": "The Service processes personal information for the following purposes. Personal information being processed will not be used for purposes other than the following, and if the purpose of use changes, necessary measures such as obtaining separate consent will be taken in accordance with Article 18 of the Personal Information Protection Act.",
@@ -292,7 +292,7 @@
             "desc": "User profile and authentication state caching"
           },
           "settings": {
-            "title": "Settings Information (gangnaeng-settings)",
+            "title": "Settings Information (kangnaeng-settings)",
             "desc": "Theme (dark/light mode), preferred language settings"
           },
           "i18n": {
@@ -419,8 +419,8 @@
     "history": "Revision History",
     "lastUpdate": "Last Updated: December 10, 2025",
     "content": {
-      "overview": "These Terms of Service (hereinafter referred to as \"Terms\") govern the rights, obligations, and responsibilities between the Service Operator (hereinafter referred to as \"Operator\") and the User regarding the use of GangNaengBot (hereinafter referred to as \"Service\"). Please read these Terms carefully before using the Service.",
-      "purpose": "The purpose of these Terms is to prescribe the conditions and procedures for using the AI-based Kangnam University academic information chatbot service provided by GangNaengBot (hereinafter referred to as \"Service\"), the rights, obligations, and responsibilities of the Operator and the User, and other necessary matters.",
+      "overview": "These Terms of Service (hereinafter referred to as \"Terms\") govern the rights, obligations, and responsibilities between the Service Operator (hereinafter referred to as \"Operator\") and the User regarding the use of KangNaengBot (hereinafter referred to as \"Service\"). Please read these Terms carefully before using the Service.",
+      "purpose": "The purpose of these Terms is to prescribe the conditions and procedures for using the AI-based Kangnam University academic information chatbot service provided by KangNaengBot (hereinafter referred to as \"Service\"), the rights, obligations, and responsibilities of the Operator and the User, and other necessary matters.",
       "definition": {
         "intro": "The definitions of terms used in these Terms are as follows:",
         "items": [

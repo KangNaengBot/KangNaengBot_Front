@@ -75,7 +75,7 @@ export const useSettingsStore = create<SettingsState>()(
       },
     }),
     {
-      name: "gangnaeng-settings",
+      name: "kangnaeng-settings",
       partialize: (state) => ({
         theme: state.theme,
         language: state.language,
