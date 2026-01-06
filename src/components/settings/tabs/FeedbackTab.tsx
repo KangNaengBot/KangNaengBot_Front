@@ -127,7 +127,8 @@ export const FeedbackTab = () => {
       {/* 제목 */}
       <div>
         <label className="block text-sm text-gray-600 dark:text-gray-400 mb-2">
-          {t("settings.feedback.subject")}
+          {t("settings.feedback.subject")}{" "}
+          <span className="text-red-500">*</span>
         </label>
         <input
           type="text"
@@ -143,7 +144,8 @@ export const FeedbackTab = () => {
       {/* 내용 */}
       <div>
         <label className="block text-sm text-gray-600 dark:text-gray-400 mb-2">
-          {t("settings.feedback.message")}
+          {t("settings.feedback.message")}{" "}
+          <span className="text-red-500">*</span>
         </label>
         <textarea
           name="message"
