@@ -1,6 +1,7 @@
 /**
  * 시간표 Mock 데이터
  * 백엔드 API 연동 전까지 사용할 샘플 데이터
+ * 실제 대학 수업 시간 체계 반영 (50분 수업 + 10분 휴식)
  */
 
 import type {
@@ -23,7 +24,8 @@ const COURSE_COLORS = [
   "#84CC16", // lime
 ];
 
-// 샘플 과목 데이터 (24시간 형식)
+// 샘플 과목 데이터 (실제 대학 수업 시간 반영)
+// 50분 수업 기준: 1시간 40분(2교시), 2시간 30분(3교시), 3시간 20분(4교시)
 export const MOCK_COURSES: Course[] = [
   {
     id: "CSE101-01",
@@ -32,16 +34,17 @@ export const MOCK_COURSES: Course[] = [
     professor: "김철수",
     credits: 3,
     slots: [
+      // 주 2회, 1시간 15분씩 (75분)
       {
         day: "mon",
-        startTime: "10:00",
-        endTime: "12:00",
+        startTime: "09:00",
+        endTime: "10:15",
         location: "공학관 301",
       },
       {
         day: "wed",
-        startTime: "10:00",
-        endTime: "12:00",
+        startTime: "09:00",
+        endTime: "10:15",
         location: "공학관 301",
       },
     ],
@@ -55,16 +58,17 @@ export const MOCK_COURSES: Course[] = [
     professor: "박영희",
     credits: 3,
     slots: [
+      // 주 2회, 1시간 15분씩
       {
         day: "tue",
-        startTime: "09:00",
-        endTime: "11:00",
+        startTime: "10:30",
+        endTime: "11:45",
         location: "공학관 302",
       },
       {
         day: "thu",
-        startTime: "09:00",
-        endTime: "11:00",
+        startTime: "10:30",
+        endTime: "11:45",
         location: "공학관 302",
       },
     ],
@@ -78,16 +82,17 @@ export const MOCK_COURSES: Course[] = [
     professor: "이민호",
     credits: 3,
     slots: [
+      // 주 2회, 1시간 15분씩
       {
         day: "tue",
-        startTime: "11:00",
-        endTime: "13:00",
+        startTime: "13:00",
+        endTime: "14:15",
         location: "공학관 201",
       },
       {
         day: "thu",
-        startTime: "11:00",
-        endTime: "13:00",
+        startTime: "13:00",
+        endTime: "14:15",
         location: "공학관 201",
       },
     ],
@@ -101,16 +106,17 @@ export const MOCK_COURSES: Course[] = [
     professor: "정수진",
     credits: 3,
     slots: [
+      // 주 2회, 1시간 15분씩
       {
         day: "mon",
-        startTime: "12:00",
-        endTime: "14:00",
+        startTime: "13:00",
+        endTime: "14:15",
         location: "공학관 202",
       },
       {
         day: "wed",
-        startTime: "12:00",
-        endTime: "14:00",
+        startTime: "13:00",
+        endTime: "14:15",
         location: "공학관 202",
       },
     ],
@@ -124,10 +130,11 @@ export const MOCK_COURSES: Course[] = [
     professor: "Smith John",
     credits: 2,
     slots: [
+      // 주 1회, 1시간 40분 (2교시 연강)
       {
         day: "fri",
         startTime: "09:00",
-        endTime: "11:00",
+        endTime: "10:40",
         location: "어학관 101",
       },
     ],
@@ -141,10 +148,11 @@ export const MOCK_COURSES: Course[] = [
     professor: "Johnson Emily",
     credits: 2,
     slots: [
+      // 주 1회, 1시간 40분
       {
         day: "wed",
-        startTime: "14:00",
-        endTime: "16:00",
+        startTime: "15:00",
+        endTime: "16:40",
         location: "어학관 102",
       },
     ],
@@ -158,16 +166,17 @@ export const MOCK_COURSES: Course[] = [
     professor: "최지능",
     credits: 3,
     slots: [
+      // 주 2회, 1시간 15분씩
       {
         day: "mon",
-        startTime: "14:00",
-        endTime: "16:00",
+        startTime: "14:30",
+        endTime: "15:45",
         location: "공학관 401",
       },
       {
         day: "wed",
-        startTime: "14:00",
-        endTime: "16:00",
+        startTime: "14:30",
+        endTime: "15:45",
         location: "공학관 401",
       },
     ],
@@ -181,16 +190,17 @@ export const MOCK_COURSES: Course[] = [
     professor: "한구조",
     credits: 3,
     slots: [
+      // 주 2회, 1시간 15분씩
       {
         day: "tue",
-        startTime: "13:00",
-        endTime: "15:00",
+        startTime: "14:30",
+        endTime: "15:45",
         location: "공학관 303",
       },
       {
         day: "thu",
-        startTime: "13:00",
-        endTime: "15:00",
+        startTime: "14:30",
+        endTime: "15:45",
         location: "공학관 303",
       },
     ],
@@ -205,7 +215,8 @@ export const MOCK_COURSES: Course[] = [
     professor: "목사님",
     credits: 0.5,
     slots: [
-      { day: "thu", startTime: "16:00", endTime: "17:00", location: "채플실" },
+      // 주 1회, 50분
+      { day: "thu", startTime: "12:00", endTime: "12:50", location: "채플실" },
     ],
     category: "other",
     isRequired: true,
@@ -218,21 +229,34 @@ export const MOCK_COURSES: Course[] = [
     professor: "박시스템",
     credits: 3,
     slots: [
+      // 주 1회, 2시간 30분 (3교시 연강)
       {
         day: "mon",
         startTime: "16:00",
-        endTime: "18:00",
-        location: "공학관 305",
-      },
-      {
-        day: "wed",
-        startTime: "16:00",
-        endTime: "18:00",
+        endTime: "18:30",
         location: "공학관 305",
       },
     ],
     category: "major",
     color: COURSE_COLORS[7],
+  },
+  {
+    id: "CSE501-01",
+    name: "캡스톤디자인",
+    code: "CSE501-01",
+    professor: "김창업",
+    credits: 3,
+    slots: [
+      // 주 1회, 3시간 20분 (4교시 연강) - 야간수업 예시
+      {
+        day: "wed",
+        startTime: "18:00",
+        endTime: "21:20",
+        location: "공학관 501",
+      },
+    ],
+    category: "major",
+    color: COURSE_COLORS[0],
   },
 ];
 
@@ -261,10 +285,10 @@ export const MOCK_SCHEDULES: Schedule[] = [
       MOCK_COURSES[8], // 채플
     ],
     totalCredits: 8.5,
-    emptyDays: ["tue", "fri"],
+    emptyDays: ["fri"],
     compactScore: 60,
     warnings: [],
-    recommendations: ["화요일, 금요일 공강이 있어요!"],
+    recommendations: ["금요일 공강이 있어요!"],
   },
   {
     id: "schedule-3",
@@ -308,6 +332,20 @@ export const MOCK_SCHEDULES: Schedule[] = [
     compactScore: 85,
     warnings: [],
     recommendations: ["전공 집중! 금요일 공강으로 프로젝트 시간 확보!"],
+  },
+  {
+    id: "schedule-6",
+    courses: [
+      MOCK_COURSES[0], // 컴퓨터개론 김철수
+      MOCK_COURSES[3], // 데이터베이스 정수진
+      MOCK_COURSES[10], // 캡스톤디자인 (야간)
+      MOCK_COURSES[8], // 채플
+    ],
+    totalCredits: 9.5,
+    emptyDays: ["tue", "fri"],
+    compactScore: 70,
+    warnings: [],
+    recommendations: ["수요일 야간수업 포함! 저녁까지 학교에 있어야 해요."],
   },
 ];
 
@@ -359,6 +397,13 @@ export const mockParseCoursesFromMessage = async (
 
   if (lowerMessage.includes("운영체제") || lowerMessage.includes("os")) {
     courses.push(MOCK_COURSES[9]);
+  }
+
+  if (
+    lowerMessage.includes("캡스톤") ||
+    lowerMessage.includes("졸업프로젝트")
+  ) {
+    courses.push(MOCK_COURSES[10]);
   }
 
   // 필터 추출
