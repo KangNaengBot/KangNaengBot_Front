@@ -1,7 +1,7 @@
 import { useState, MouseEvent, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useScheduleStore, useToastStore, useUIStore } from "@/store";
-import { Trash2, Star, Calendar } from "lucide-react";
+import { Trash2, Star, Calendar, MoreHorizontal } from "lucide-react";
 import type { SavedSchedule } from "@/types";
 import { AlertModal } from "@/components/common";
 
@@ -53,6 +53,8 @@ export const SavedScheduleList = () => {
     );
   }
 
+  const { isMobile, setSidebarOpen } = useUIStore.getState();
+
   return (
     <>
       <div className="space-y-1 px-2">
@@ -86,13 +88,26 @@ export const SavedScheduleList = () => {
               </div>
             </div>
 
-            <button
-              onClick={(e) => handleDeleteClick(schedule.id, e)}
-              className="opacity-0 group-hover:opacity-100 p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-all"
-              title={t("schedule.saved.delete")}
-            >
-              <Trash2 size={14} />
-            </button>
+            {/* Desktop: Hover to show delete */}
+            {!isMobile && (
+              <button
+                onClick={(e) => handleDeleteClick(schedule.id, e)}
+                className="opacity-0 group-hover:opacity-100 p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-all"
+                title={t("schedule.saved.delete")}
+              >
+                <Trash2 size={14} />
+              </button>
+            )}
+
+            {/* Mobile: Always show MoreHorizontal */}
+            {isMobile && (
+              <button
+                onClick={(e) => handleDeleteClick(schedule.id, e)}
+                className="p-1.5 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+              >
+                <MoreHorizontal size={16} />
+              </button>
+            )}
           </div>
         ))}
       </div>
