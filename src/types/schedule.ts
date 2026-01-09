@@ -91,7 +91,7 @@ export interface GenerateSchedulesResponse {
   success: boolean;
   schedules: Schedule[];
   warnings: ScheduleWarning[];
-  message: string;
+  message?: string; // AI 생성 메시지 (선택적)
   fallback?: {
     reason: "all_conflict" | "no_courses";
     suggestions: string[];

@@ -10,6 +10,7 @@ import { useScheduleStore, useUIStore } from "@/store";
 import { ScheduleCarousel } from "./ScheduleCarousel";
 import { CourseDetailModal } from "./CourseDetailModal";
 import { FilterPanel } from "./FilterPanel";
+import { SavedScheduleList } from "./SavedScheduleList";
 import { toPng } from "html-to-image";
 import type { Course } from "@/types";
 
@@ -27,6 +28,8 @@ export const ScheduleCanvas = () => {
     saveSchedule,
     status,
     setFilters,
+    isSavedListOpen,
+    toggleSavedList,
   } = useScheduleStore();
 
   const handleResetFilters = () => {
@@ -156,6 +159,9 @@ export const ScheduleCanvas = () => {
           )}
         </div>
 
+        {/* 보관함 (Overlay) */}
+        <SavedScheduleList />
+
         {/* 액션 버튼 */}
         {generatedSchedules.length > 0 && (
           <div className="p-4 border-t border-gray-200 dark:border-slate-700 flex-shrink-0">
@@ -174,11 +180,20 @@ export const ScheduleCanvas = () => {
                 <Share2 size={18} />
                 <span className="text-sm">{t("schedule.canvas.share")}</span>
               </button>
-              <button
-                onClick={() => saveSchedule()}
-                className="flex items-center justify-center gap-2 px-4 py-2.5 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors"
               >
-                <Bookmark size={18} />
+                <Share2 size={18} />
+                <span className="text-sm">{t("schedule.canvas.share")}</span>
+              </button>
+              <button
+                onClick={toggleSavedList}
+                className={`flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg transition-colors ${
+                  isSavedListOpen
+                    ? "bg-primary-600 text-white"
+                    : "bg-primary-500 text-white hover:bg-primary-600"
+                }`}
+                title="보관함 열기"
+              >
+                <Bookmark size={18} className={isSavedListOpen ? "fill-white" : ""} />
               </button>
             </div>
           </div>

@@ -347,7 +347,10 @@ export const mockGenerateSchedules = async (
         ? matchingSchedules
         : MOCK_SCHEDULES.slice(0, 3),
     warnings: [],
-    message: `${matchingSchedules.length || 3}개의 시간표를 생성했어요!`,
+    message:
+      matchingSchedules.length > 0
+        ? "요청하신 과목들로 시간표 조합을 찾아냈어요! 1공학관 이동 동선을 고려해서 최적의 조합을 추천해 드려요. 금요일 공강도 챙겨봤습니다! 😊"
+        : "요청하신 조건에 완벽히 맞는 시간표를 찾기 어려워서, 가장 비슷한 대안들을 몇 가지 가져와봤어요.",
   };
 };
 
