@@ -136,9 +136,11 @@ export const ChatInput = ({ showNewChatButton = false }: ChatInputProps) => {
 
               {/* Schedule Mode Chip */}
               {isScheduleMode && (
-                <div className="flex items-center gap-1.5 px-3 py-1.5 ml-1 bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 rounded-full text-sm font-medium flex-shrink-0">
+                <div className="flex items-center gap-1.5 px-2 md:px-3 py-1.5 ml-1 bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 rounded-full text-sm font-medium flex-shrink-0">
                   <Calendar size={14} />
-                  <span>{t("schedule.createSchedule")}</span>
+                  <span className="hidden md:inline">
+                    {t("schedule.createSchedule")}
+                  </span>
                   <button
                     type="button"
                     onClick={exitScheduleMode}
