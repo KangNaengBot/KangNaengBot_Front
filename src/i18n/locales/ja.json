@@ -954,7 +954,9 @@
       "success": "時間割が保存されました。",
       "error": "保存に失敗しました。",
       "confirm": "保存",
-      "overwrite": "同じ名前の時間割が既に存在します。上書きしますか？"
+      "overwrite": "同じ名前の時間割が既に存在します。上書きしますか？",
+      "success_image_download": "時間割画像のダウンロードに成功しました。",
+      "failed_image_download": "時間割画像のダウンロードに失敗しました。"
     },
     "delete": {
       "confirm": "本当に削除しますか？",

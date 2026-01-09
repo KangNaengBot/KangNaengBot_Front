@@ -954,7 +954,9 @@
       "success": "课程表已保存。",
       "error": "保存失败。",
       "confirm": "保存",
-      "overwrite": "已有同名课程表。要覆盖吗？"
+      "overwrite": "已有同名课程表。要覆盖吗？",
+      "success_image_download": "课程表图片下载成功。",
+      "failed_image_download": "课程表图片下载失败。"
     },
     "delete": {
       "confirm": "确定要删除吗？",

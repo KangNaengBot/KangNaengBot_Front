@@ -53,7 +53,7 @@ export const SavedScheduleList = () => {
     );
   }
 
-  const { isMobile, setSidebarOpen } = useUIStore.getState();
+  const { isMobile } = useUIStore.getState();
 
   return (
     <>

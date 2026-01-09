@@ -9,7 +9,7 @@ import { X, Download, Share2, Bookmark, ChevronLeft } from "lucide-react";
 import { useScheduleStore, useUIStore, useToastStore } from "@/store";
 import { ScheduleCarousel } from "./ScheduleCarousel";
 
-import { InputModal, AlertModal } from "@/components/common";
+import { InputModal, AlertModal, Spinner } from "@/components/common";
 import { Course } from "@/types";
 import { toPng } from "html-to-image";
 import { FilterPanel } from "./FilterPanel";
@@ -22,6 +22,7 @@ export const ScheduleCanvas = () => {
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
   const [isInputModalOpen, setIsInputModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isDownloading, setIsDownloading] = useState(false);
   const {
     isCanvasOpen,
     closeCanvas,
@@ -56,24 +57,34 @@ export const ScheduleCanvas = () => {
 
   // 이미지 저장 - 시간표 그리드만 저장
   const handleSaveImage = async () => {
-    if (!gridRef.current) return;
+    if (!gridRef.current || isDownloading) return;
 
     try {
+      setIsDownloading(true);
       // 다크 모드 감지
       const isDarkMode = document.documentElement.classList.contains("dark");
       const backgroundColor = isDarkMode ? "#0f172a" : "#ffffff"; // slate-900 or white
 
       const dataUrl = await toPng(gridRef.current, {
         backgroundColor,
-        pixelRatio: 2,
+        pixelRatio: 2, // 고해상도 (속도 저하의 주원인이지만 품질 위해 유지)
       });
 
       const link = document.createElement("a");
       link.download = `timetable-${Date.now()}.png`;
       link.href = dataUrl;
       link.click();
+
+      useToastStore
+        .getState()
+        .addToast("success", t("schedule.save.success_image_download"));
     } catch (error) {
       console.error("Image save failed:", error);
+      useToastStore
+        .getState()
+        .addToast("error", t("schedule.save.failed_image_download"));
+    } finally {
+      setIsDownloading(false);
     }
   };
 
@@ -201,10 +212,11 @@ export const ScheduleCanvas = () => {
               {/* Icon Only Buttons */}
               <button
                 onClick={handleSaveImage}
-                className="p-3 bg-gray-100 dark:bg-slate-800 text-gray-700 dark:text-gray-300 rounded-xl hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors"
+                disabled={isDownloading}
+                className="p-3 bg-gray-100 dark:bg-slate-800 text-gray-700 dark:text-gray-300 rounded-xl hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors disabled:opacity-50 disabled:cursor-wait"
                 title={t("schedule.save.title")}
               >
-                <Download size={20} />
+                {isDownloading ? <Spinner size="sm" /> : <Download size={20} />}
               </button>
               <button
                 onClick={handleShare}
