@@ -19,7 +19,7 @@ interface ChatState {
 
   // Actions
   fetchSessions: () => Promise<void>;
-  createSession: () => Promise<string>;
+  createSession: (keepMessages?: boolean) => Promise<string>;
   selectSession: (sessionId: string, forceRefresh?: boolean) => Promise<void>;
   prefetchSession: (sessionId: string) => void; // 호버 프리페칭용
   deleteSession: (sessionId: string) => Promise<void>;
@@ -90,7 +90,7 @@ export const useChatStore = create<ChatState>((set, get) => ({
     }
   },
 
-  createSession: async () => {
+  createSession: async (keepMessages = false) => {
     set({ isLoading: true, error: null });
     try {
       const response = await sessionsService.createSession();
@@ -104,7 +104,7 @@ export const useChatStore = create<ChatState>((set, get) => ({
         sessions: [newSession, ...state.sessions],
         currentSessionId: response.session_id,
         guestUserId: response.user_id, // 세션 생성 시 user_id 저장 (게스트 모드용)
-        messages: [],
+        messages: keepMessages ? state.messages : [],
         isLoading: false,
       }));
       return response.session_id;

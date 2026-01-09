@@ -28,7 +28,8 @@ export const ChatInput = ({ showNewChatButton = false }: ChatInputProps) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const buttonContainerRef = useRef<HTMLDivElement>(null);
-  const { sendMessage, isSending, currentSessionId } = useChatStore();
+  const { sendMessage, isSending, currentSessionId, createSession } =
+    useChatStore();
   const { isAuthenticated } = useAuthStore();
   const { isMobile } = useUIStore();
   const {
@@ -74,10 +75,49 @@ export const ChatInput = ({ showNewChatButton = false }: ChatInputProps) => {
 
     // 시간표 모드일 때는 과목 파싱
     if (isScheduleMode) {
-      await generateSchedulesFromMessage(
-        currentSessionId || "guest",
-        trimmedMessage
-      );
+      let targetSessionId = currentSessionId;
+
+      // 1. 낙관적 UI: 사용자 메시지 즉시 표시
+      useChatStore.getState().addMessage({
+        role: "user",
+        content: trimmedMessage,
+        created_at: new Date().toISOString(),
+      });
+
+      // 즉시 '생성 중' 상태로 변경하여 로딩 메시지(ScheduleGeneratingMessage) 표시
+      useScheduleStore.setState({ status: "generating" });
+
+      // 2. 세션이 없으면 새 세션 생성 (메시지 유지)
+      if (!targetSessionId) {
+        try {
+          // true = keepMessages (낙관적 메시지 유지)
+          targetSessionId = await createSession(true);
+
+          // 3. 화면 전환 (세션 ID가 생겼으므로 URL 변경)
+          navigate(`/chat/${targetSessionId}`);
+
+          // 4. 세션 제목 업데이트 (낙관적 UI)
+          // "새로운 대화" 대신 사용자가 입력한 첫 메시지로 제목 설정
+          useChatStore.setState((state) => ({
+            sessions: state.sessions.map((s) =>
+              s.sid === targetSessionId
+                ? {
+                    ...s,
+                    title:
+                      trimmedMessage.slice(0, 50) +
+                      (trimmedMessage.length > 50 ? "..." : ""),
+                  }
+                : s
+            ),
+          }));
+        } catch (error) {
+          console.error("Failed to create session:", error);
+          // 실패 시 게스트로 폴백
+          targetSessionId = "guest";
+        }
+      }
+
+      await generateSchedulesFromMessage(targetSessionId, trimmedMessage);
       return;
     }
 
