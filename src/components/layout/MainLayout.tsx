@@ -2,10 +2,11 @@ import { ReactNode, useEffect } from "react";
 import { Sidebar } from "./Sidebar";
 import { SettingsModal } from "@/components/settings";
 import { LanguageSwitcher } from "@/components/common";
-import { useUIStore } from "@/store";
+import { useUIStore, useScheduleStore } from "@/store";
 import { MessageSquarePlus } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
+import { ScheduleCanvas } from "@/components/schedule";
 
 interface MainLayoutProps {
   children: ReactNode;
@@ -15,6 +16,7 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
   const { t } = useTranslation();
   const { setIsMobile, isMobile, isSidebarOpen, openSettingsModal } =
     useUIStore();
+  const { isCanvasOpen } = useScheduleStore();
   const location = useLocation();
 
   useEffect(() => {
@@ -34,7 +36,13 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
   return (
     <div className="flex h-screen overflow-hidden dark:bg-slate-900 transition-colors">
       <Sidebar />
-      <main className="flex-1 flex flex-col overflow-hidden relative">
+
+      {/* 메인 컨텐츠 영역 - Canvas에 따라 너비 조절 */}
+      <main
+        className={`flex-1 flex flex-col overflow-hidden relative transition-all duration-300 ${
+          isCanvasOpen && !isMobile ? "lg:mr-[480px]" : ""
+        }`}
+      >
         {/* 우측 상단 버튼들 */}
         <div
           className={`
@@ -57,6 +65,9 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
         </div>
         {children}
       </main>
+
+      {/* Schedule Canvas - 데스크톱에서 사이드 패널, 모바일에서 오버레이 */}
+      <ScheduleCanvas />
       <SettingsModal />
     </div>
   );

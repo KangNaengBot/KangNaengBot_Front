@@ -5,6 +5,9 @@
 // API 관련 타입
 export * from "./api";
 
+// 시간표 관련 타입
+export * from "./schedule";
+
 // 추가 공통 타입
 export interface LoadingState {
   isLoading: boolean;

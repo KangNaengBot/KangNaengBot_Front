@@ -7,3 +7,4 @@ export * as authService from "./services/auth";
 export * as sessionsService from "./services/sessions";
 export * as chatService from "./services/chat";
 export * as profilesService from "./services/profiles";
+export * as scheduleService from "./services/schedule";

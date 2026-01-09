@@ -1,0 +1,184 @@
+/**
+ * 과목 상세 정보 모달
+ * 시간표에서 과목 클릭 시 표시
+ */
+import { useTranslation } from "react-i18next";
+import { X, Clock, MapPin, User, BookOpen, Users } from "lucide-react";
+import type { Course, Day } from "@/types";
+
+interface CourseDetailModalProps {
+  course: Course | null;
+  onClose: () => void;
+}
+
+const DAY_MAP: Record<Day, string> = {
+  mon: "월",
+  tue: "화",
+  wed: "수",
+  thu: "목",
+  fri: "금",
+};
+
+const PERIOD_TIMES = [
+  "09:00",
+  "10:00",
+  "11:00",
+  "12:00",
+  "13:00",
+  "14:00",
+  "15:00",
+  "16:00",
+  "17:00",
+  "18:00",
+];
+
+export const CourseDetailModal = ({
+  course,
+  onClose,
+}: CourseDetailModalProps) => {
+  const { t } = useTranslation();
+
+  if (!course) return null;
+
+  // 시간 문자열 생성
+  const getTimeString = () => {
+    return course.slots
+      .map((slot) => {
+        const day = DAY_MAP[slot.day];
+        const startTime = PERIOD_TIMES[slot.startPeriod - 1];
+        const endTime = PERIOD_TIMES[slot.endPeriod] || "19:00";
+        return `${day} ${startTime}~${endTime}`;
+      })
+      .join(", ");
+  };
+
+  // 장소 문자열 생성
+  const getLocationString = () => {
+    const locations = [
+      ...new Set(course.slots.map((s) => s.location).filter(Boolean)),
+    ];
+    return locations.join(", ") || "-";
+  };
+
+  return (
+    <>
+      {/* 백드롭 */}
+      <div className="fixed inset-0 bg-black/50 z-[60]" onClick={onClose} />
+
+      {/* 모달 */}
+      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[70] w-[90%] max-w-sm bg-white dark:bg-slate-800 rounded-2xl shadow-xl overflow-hidden animate-in zoom-in-95 duration-200">
+        {/* 헤더 - 과목 색상 배경 */}
+        <div
+          className="p-4 text-white"
+          style={{ backgroundColor: course.color || "#4e92ff" }}
+        >
+          <div className="flex items-start justify-between">
+            <div>
+              <h3 className="text-lg font-bold">{course.name}</h3>
+              <p className="text-white/80 text-sm mt-0.5">{course.code}</p>
+            </div>
+            <button
+              onClick={onClose}
+              className="p-1 rounded-lg hover:bg-white/20 transition-colors"
+            >
+              <X size={20} />
+            </button>
+          </div>
+        </div>
+
+        {/* 본문 */}
+        <div className="p-4 space-y-3">
+          {/* 교수 */}
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-full bg-gray-100 dark:bg-slate-700 flex items-center justify-center">
+              <User size={16} className="text-gray-500 dark:text-gray-400" />
+            </div>
+            <div>
+              <div className="text-xs text-gray-500 dark:text-gray-400">
+                {t("schedule.detail.professor")}
+              </div>
+              <div className="text-sm font-medium text-gray-900 dark:text-white">
+                {course.professor}
+              </div>
+            </div>
+          </div>
+
+          {/* 시간 */}
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-full bg-gray-100 dark:bg-slate-700 flex items-center justify-center">
+              <Clock size={16} className="text-gray-500 dark:text-gray-400" />
+            </div>
+            <div>
+              <div className="text-xs text-gray-500 dark:text-gray-400">
+                {t("schedule.detail.time")}
+              </div>
+              <div className="text-sm font-medium text-gray-900 dark:text-white">
+                {getTimeString()}
+              </div>
+            </div>
+          </div>
+
+          {/* 장소 */}
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-full bg-gray-100 dark:bg-slate-700 flex items-center justify-center">
+              <MapPin size={16} className="text-gray-500 dark:text-gray-400" />
+            </div>
+            <div>
+              <div className="text-xs text-gray-500 dark:text-gray-400">
+                {t("schedule.detail.location")}
+              </div>
+              <div className="text-sm font-medium text-gray-900 dark:text-white">
+                {getLocationString()}
+              </div>
+            </div>
+          </div>
+
+          {/* 학점 */}
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-full bg-gray-100 dark:bg-slate-700 flex items-center justify-center">
+              <BookOpen
+                size={16}
+                className="text-gray-500 dark:text-gray-400"
+              />
+            </div>
+            <div>
+              <div className="text-xs text-gray-500 dark:text-gray-400">
+                {t("schedule.detail.credits")}
+              </div>
+              <div className="text-sm font-medium text-gray-900 dark:text-white">
+                {course.credits}학점
+              </div>
+            </div>
+          </div>
+
+          {/* 수강 인원 (있을 경우) */}
+          {course.capacity && (
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-full bg-gray-100 dark:bg-slate-700 flex items-center justify-center">
+                <Users size={16} className="text-gray-500 dark:text-gray-400" />
+              </div>
+              <div>
+                <div className="text-xs text-gray-500 dark:text-gray-400">
+                  {t("schedule.detail.enrollment")}
+                </div>
+                <div className="text-sm font-medium text-gray-900 dark:text-white">
+                  {course.enrolled || 0} / {course.capacity}명
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* 푸터 */}
+        <div className="px-4 pb-4">
+          <button
+            onClick={onClose}
+            className="w-full py-2.5 bg-gray-100 dark:bg-slate-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-slate-600 transition-colors font-medium text-sm"
+          >
+            {t("common.close")}
+          </button>
+        </div>
+      </div>
+    </>
+  );
+};

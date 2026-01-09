@@ -1,9 +1,10 @@
 import { useState, useRef, useEffect, FormEvent, KeyboardEvent } from "react";
 import { useTranslation } from "react-i18next";
-import { Plus } from "lucide-react";
+import { Plus, Calendar, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useChatStore, useAuthStore } from "@/store";
+import { useChatStore, useAuthStore, useScheduleStore } from "@/store";
 import { AlertModal } from "@/components/common";
+import { ToolDropdown } from "./ToolDropdown";
 
 interface ChatInputProps {
   showNewChatButton?: boolean;
@@ -24,6 +25,11 @@ export const ChatInput = ({ showNewChatButton = false }: ChatInputProps) => {
   const buttonContainerRef = useRef<HTMLDivElement>(null);
   const { sendMessage, isSending, currentSessionId } = useChatStore();
   const { isAuthenticated } = useAuthStore();
+  const { isScheduleMode, exitScheduleMode, parseCoursesFromMessage, status } =
+    useScheduleStore();
+
+  // 시간표 모드 로딩 상태
+  const isScheduleLoading = status === "parsing" || status === "generating";
 
   // 텍스트 변경 시 높이와 border-radius 동시 조절
   useEffect(() => {
@@ -51,10 +57,19 @@ export const ChatInput = ({ showNewChatButton = false }: ChatInputProps) => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!message.trim() || isSending) return;
+    if (!message.trim() || isSending || isScheduleLoading) return;
 
     const trimmedMessage = message.trim();
     setMessage("");
+
+    // 시간표 모드일 때는 과목 파싱
+    if (isScheduleMode) {
+      await parseCoursesFromMessage(
+        currentSessionId || "guest",
+        trimmedMessage
+      );
+      return;
+    }
 
     // 세션이 없으면 sendMessage에서 자동 생성 (낙관적 UI)
     await sendMessage(trimmedMessage, !currentSessionId);
@@ -104,20 +119,45 @@ export const ChatInput = ({ showNewChatButton = false }: ChatInputProps) => {
           <form onSubmit={handleSubmit}>
             <div
               ref={containerRef}
-              className="relative flex items-end glass-input-container overflow-hidden"
+              className="relative flex items-center glass-input-container"
               style={{
                 borderRadius: `${SINGLE_LINE_HEIGHT / 2}px`,
                 transition: "border-radius 0.2s ease-out",
               }}
             >
+              {/* Tool Dropdown Button */}
+              <div className="pl-3">
+                <ToolDropdown disabled={isSending} />
+              </div>
+
+              {/* Schedule Mode Chip */}
+              {isScheduleMode && (
+                <div className="flex items-center gap-1.5 px-3 py-1.5 ml-1 bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 rounded-full text-sm font-medium flex-shrink-0">
+                  <Calendar size={14} />
+                  <span>{t("schedule.createSchedule")}</span>
+                  <button
+                    type="button"
+                    onClick={exitScheduleMode}
+                    className="ml-0.5 p-0.5 rounded-full hover:bg-primary-200 dark:hover:bg-primary-800/50 transition-colors"
+                    aria-label={t("schedule.exitMode")}
+                  >
+                    <X size={12} />
+                  </button>
+                </div>
+              )}
+
               <textarea
                 ref={textareaRef}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder={t("chat.placeholder")}
+                placeholder={
+                  isScheduleMode
+                    ? t("schedule.inputPlaceholder")
+                    : t("chat.placeholder")
+                }
                 rows={1}
-                className="flex-1 px-6 py-4 resize-none outline-none text-gray-800 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 overflow-y-auto bg-transparent"
+                className="flex-1 px-3 py-4 resize-none outline-none text-gray-800 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 overflow-y-auto bg-transparent"
                 style={{
                   minHeight: `${SINGLE_LINE_HEIGHT}px`,
                   maxHeight: `${MAX_HEIGHT}px`,
@@ -126,7 +166,7 @@ export const ChatInput = ({ showNewChatButton = false }: ChatInputProps) => {
               />
               <div
                 ref={buttonContainerRef}
-                className="pr-3 flex items-center self-center"
+                className="pr-3 flex items-center"
                 style={{
                   transition: "margin-top 0.2s ease-out",
                 }}

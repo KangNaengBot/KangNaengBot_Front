@@ -1,0 +1,101 @@
+/**
+ * 시간표 관련 타입 정의
+ */
+
+// 요일 타입
+export type Day = "mon" | "tue" | "wed" | "thu" | "fri";
+
+// 시간 슬롯
+export interface TimeSlot {
+  day: Day;
+  startPeriod: number; // 1~10교시
+  endPeriod: number;
+  location?: string;
+}
+
+// 과목
+export interface Course {
+  id: string;
+  name: string;
+  code: string;
+  professor: string;
+  credits: number;
+  slots: TimeSlot[];
+  category: "major" | "liberal" | "required";
+  capacity?: number;
+  enrolled?: number;
+  isRequired?: boolean;
+  color?: string; // 시간표 표시용 색상
+}
+
+// 애매한 과목 (여러 후보)
+export interface AmbiguousCourse {
+  input: string;
+  candidates: Course[];
+  selectedIndex: number | null;
+}
+
+// 시간표 경고
+export interface ScheduleWarning {
+  type: "capacity_full" | "prerequisite_missing" | "time_conflict_risk";
+  courseId: string;
+  message: string;
+}
+
+// 생성된 시간표
+export interface Schedule {
+  id: string;
+  courses: Course[];
+  totalCredits: number;
+  emptyDays: Day[];
+  compactScore: number; // 0~100
+  warnings: ScheduleWarning[];
+  recommendations: string[];
+}
+
+// 저장된 시간표
+export interface SavedSchedule extends Schedule {
+  savedAt: string;
+  name: string;
+  isFavorite: boolean;
+}
+
+// 필터 설정
+export interface ScheduleFilters {
+  maxCredits: number | null;
+  emptyDays: Day[];
+  excludePeriods: { day: Day; periods: number[] }[];
+  preferCompact: boolean;
+}
+
+// 에러 타입
+export interface ScheduleError {
+  type:
+    | "parse_failed"
+    | "no_courses"
+    | "generation_failed"
+    | "all_conflict"
+    | "timeout";
+  message: string;
+  retryable: boolean;
+}
+
+// API 응답 타입
+export interface ParseCoursesResponse {
+  courses: Course[];
+  ambiguous: AmbiguousCourse[];
+  notFound: string[];
+  extractedFilters: Partial<ScheduleFilters>;
+  message?: string;
+}
+
+export interface GenerateSchedulesResponse {
+  success: boolean;
+  schedules: Schedule[];
+  warnings: ScheduleWarning[];
+  message: string;
+  fallback?: {
+    reason: "all_conflict" | "no_courses";
+    suggestions: string[];
+  };
+}

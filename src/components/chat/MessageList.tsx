@@ -3,6 +3,7 @@ import { ChatBubble } from "./ChatBubble";
 import { Spinner } from "@/components/common";
 import { useChatStore } from "@/store";
 import type { MessageItem } from "@/types";
+import { ScheduleMessageHandler } from "@/components/schedule";
 
 /**
  * 메시지 중복 제거 및 1:1 페어링 보장
@@ -101,6 +102,9 @@ export const MessageList = () => {
             </div>
           </div>
         )}
+
+        {/* Schedule Mode Messages */}
+        <ScheduleMessageHandler />
 
         <div ref={bottomRef} />
       </div>

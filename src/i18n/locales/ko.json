@@ -889,5 +889,73 @@
       "smart_city": "스마트도시공학전공",
       "architectural": "건축공학전공"
     }
+  },
+  "schedule": {
+    "createSchedule": "시간표 만들기",
+    "createScheduleDesc": "AI가 최적의 시간표를 만들어드려요",
+    "exitMode": "시간표 모드 종료",
+    "exitModeDesc": "일반 대화로 돌아가기",
+    "modeActive": "시간표 모드",
+    "inputPlaceholder": "듣고 싶은 과목을 입력하세요",
+    "status": {
+      "idle": "과목을 입력해주세요",
+      "parsing": "과목을 찾고 있어요...",
+      "confirming": "과목을 확인해주세요",
+      "generating": "시간표를 만들고 있어요...",
+      "complete": "시간표가 완성됐어요!",
+      "error": "문제가 발생했어요"
+    },
+    "generating": {
+      "analyzing": "최적의 조합을 분석하고 있어요..."
+    },
+    "days": {
+      "mon": "월",
+      "tue": "화",
+      "wed": "수",
+      "thu": "목",
+      "fri": "금"
+    },
+    "filter": {
+      "emptyDay": "공강",
+      "maxCredits": "학점 이하"
+    },
+    "confirm": {
+      "title": "이 과목들이 맞나요?",
+      "matched": "찾은 과목",
+      "ambiguous": "선택 필요",
+      "notFound": "찾지 못한 과목",
+      "selectClass": "분반 선택",
+      "modify": "수정하기",
+      "generate": "이대로 생성하기"
+    },
+    "canvas": {
+      "title": "시간표 미리보기",
+      "open": "Canvas로 열기",
+      "close": "닫기",
+      "save": "이미지 저장",
+      "share": "공유",
+      "prev": "이전",
+      "next": "다음",
+      "credits": "학점",
+      "emptyDay": "공강",
+      "noSchedule": "생성된 시간표가 없습니다",
+      "shareTitle": "내 시간표",
+      "shareText": "강냉봇으로 만든 시간표예요!",
+      "linkCopied": "링크가 복사되었습니다"
+    },
+    "error": {
+      "noCourseFound": "입력하신 과목을 찾지 못했어요. 다시 입력해주세요.",
+      "parseFailed": "과목 정보를 불러오는데 실패했어요.",
+      "noCoursesSelected": "선택된 과목이 없어요.",
+      "generationFailed": "시간표 생성에 실패했어요. 다시 시도해주세요.",
+      "allConflict": "모든 과목이 충돌해요. 다른 과목을 선택해주세요."
+    },
+    "detail": {
+      "professor": "담당 교수",
+      "time": "수업 시간",
+      "location": "강의실",
+      "credits": "학점",
+      "enrollment": "수강 인원"
+    }
   }
 }
