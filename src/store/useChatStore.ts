@@ -51,6 +51,34 @@ export const useChatStore = create<ChatState>((set, get) => ({
     try {
       const response = await sessionsService.listSessions();
       set({ sessions: response.sessions, isLoading: false });
+
+      // 최근 5개 세션의 메시지를 백그라운드에서 즉시 프리로드
+      const sessionsToPreload = response.sessions.slice(0, 5);
+      const { messageCache } = get();
+
+      sessionsToPreload.forEach((session) => {
+        // 이미 캐시에 있거나 프리페치 진행 중이면 스킵
+        if (
+          messageCache.has(session.sid) ||
+          pendingPrefetches.has(session.sid)
+        ) {
+          return;
+        }
+
+        const prefetchPromise = sessionsService
+          .getSessionMessages(session.sid)
+          .then((res) => {
+            const newCache = new Map(get().messageCache);
+            newCache.set(session.sid, res.messages);
+            set({ messageCache: newCache });
+            return res.messages;
+          })
+          .finally(() => {
+            pendingPrefetches.delete(session.sid);
+          });
+
+        pendingPrefetches.set(session.sid, prefetchPromise);
+      });
     } catch (error) {
       set({
         isLoading: false,
