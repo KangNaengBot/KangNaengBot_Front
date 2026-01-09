@@ -36,8 +36,6 @@ export const MOCK_COURSES: Course[] = [
       { day: "wed", startPeriod: 2, endPeriod: 3, location: "공학관 301" },
     ],
     category: "major",
-    capacity: 40,
-    enrolled: 35,
     color: COURSE_COLORS[0],
   },
   {
@@ -51,8 +49,6 @@ export const MOCK_COURSES: Course[] = [
       { day: "thu", startPeriod: 1, endPeriod: 2, location: "공학관 302" },
     ],
     category: "major",
-    capacity: 40,
-    enrolled: 38,
     color: COURSE_COLORS[0],
   },
   {
@@ -66,8 +62,6 @@ export const MOCK_COURSES: Course[] = [
       { day: "thu", startPeriod: 3, endPeriod: 4, location: "공학관 201" },
     ],
     category: "major",
-    capacity: 35,
-    enrolled: 30,
     color: COURSE_COLORS[1],
   },
   {
@@ -81,8 +75,6 @@ export const MOCK_COURSES: Course[] = [
       { day: "wed", startPeriod: 4, endPeriod: 5, location: "공학관 202" },
     ],
     category: "major",
-    capacity: 35,
-    enrolled: 32,
     color: COURSE_COLORS[1],
   },
   {
@@ -95,8 +87,6 @@ export const MOCK_COURSES: Course[] = [
       { day: "fri", startPeriod: 1, endPeriod: 2, location: "어학관 101" },
     ],
     category: "liberal",
-    capacity: 30,
-    enrolled: 28,
     color: COURSE_COLORS[2],
   },
   {
@@ -109,8 +99,6 @@ export const MOCK_COURSES: Course[] = [
       { day: "wed", startPeriod: 6, endPeriod: 7, location: "어학관 102" },
     ],
     category: "liberal",
-    capacity: 30,
-    enrolled: 25,
     color: COURSE_COLORS[3],
   },
   {
@@ -124,8 +112,6 @@ export const MOCK_COURSES: Course[] = [
       { day: "wed", startPeriod: 6, endPeriod: 7, location: "공학관 401" },
     ],
     category: "major",
-    capacity: 30,
-    enrolled: 29,
     color: COURSE_COLORS[4],
   },
   {
@@ -140,8 +126,6 @@ export const MOCK_COURSES: Course[] = [
     ],
     category: "major",
     isRequired: true,
-    capacity: 40,
-    enrolled: 40,
     color: COURSE_COLORS[5],
   },
   {
@@ -151,10 +135,8 @@ export const MOCK_COURSES: Course[] = [
     professor: "목사님",
     credits: 0.5,
     slots: [{ day: "thu", startPeriod: 8, endPeriod: 8, location: "채플실" }],
-    category: "required",
+    category: "other",
     isRequired: true,
-    capacity: 500,
-    enrolled: 450,
     color: COURSE_COLORS[6],
   },
   {
@@ -168,8 +150,6 @@ export const MOCK_COURSES: Course[] = [
       { day: "wed", startPeriod: 8, endPeriod: 9, location: "공학관 305" },
     ],
     category: "major",
-    capacity: 35,
-    enrolled: 33,
     color: COURSE_COLORS[7],
   },
 ];
@@ -215,13 +195,7 @@ export const MOCK_SCHEDULES: Schedule[] = [
     totalCredits: 9.5,
     emptyDays: ["tue"],
     compactScore: 80,
-    warnings: [
-      {
-        type: "capacity_full",
-        courseId: "CSE401-01",
-        message: "인공지능 수업이 거의 마감됐어요 (29/30)",
-      },
-    ],
+    warnings: [],
     recommendations: ["AI 관심 있으시면 이 조합 추천!"],
   },
   {
@@ -235,14 +209,8 @@ export const MOCK_SCHEDULES: Schedule[] = [
     totalCredits: 9.5,
     emptyDays: ["mon", "wed", "fri"],
     compactScore: 55,
-    warnings: [
-      {
-        type: "capacity_full",
-        courseId: "CSE201-01",
-        message: "자료구조 수업이 마감됐어요 (40/40)",
-      },
-    ],
-    recommendations: ["월/수/금 공강! 하지만 자료구조는 마감됐어요."],
+    warnings: [],
+    recommendations: ["월/수/금 공강!"],
   },
   {
     id: "schedule-5",

@@ -3,7 +3,7 @@
  * 시간표에서 과목 클릭 시 표시
  */
 import { useTranslation } from "react-i18next";
-import { X, Clock, MapPin, User, BookOpen, Users } from "lucide-react";
+import { X, Clock, MapPin, User, BookOpen } from "lucide-react";
 import type { Course, Day } from "@/types";
 
 interface CourseDetailModalProps {
@@ -150,23 +150,6 @@ export const CourseDetailModal = ({
               </div>
             </div>
           </div>
-
-          {/* 수강 인원 (있을 경우) */}
-          {course.capacity && (
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-gray-100 dark:bg-slate-700 flex items-center justify-center">
-                <Users size={16} className="text-gray-500 dark:text-gray-400" />
-              </div>
-              <div>
-                <div className="text-xs text-gray-500 dark:text-gray-400">
-                  {t("schedule.detail.enrollment")}
-                </div>
-                <div className="text-sm font-medium text-gray-900 dark:text-white">
-                  {course.enrolled || 0} / {course.capacity}명
-                </div>
-              </div>
-            </div>
-          )}
         </div>
 
         {/* 푸터 */}

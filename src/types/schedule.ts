@@ -21,11 +21,9 @@ export interface Course {
   professor: string;
   credits: number;
   slots: TimeSlot[];
-  category: "major" | "liberal" | "required";
-  capacity?: number;
-  enrolled?: number;
+  category: "major" | "liberal" | "other";
   isRequired?: boolean;
-  color?: string; // 시간표 표시용 색상
+  color?: string; // 시각적 구분용 색상
 }
 
 // 애매한 과목 (여러 후보)
