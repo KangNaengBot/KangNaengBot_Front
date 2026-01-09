@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { MainLayout } from "@/components/layout";
 import {
@@ -17,7 +17,10 @@ export const ChatPage = () => {
   const { isMobile } = useUIStore();
   const { isAuthenticated, profile, isLoading: isAuthLoading } = useAuthStore();
 
-  // Profile completeness check (same logic as OnboardingPage)
+  // 스크롤 위치에 따른 New Chat 버튼 표시 상태
+  const [isAtBottom, setIsAtBottom] = useState(true);
+
+  // Profile completeness check
   const isProfileComplete =
     Boolean(profile?.profile_name?.trim()) &&
     Boolean(profile?.student_id?.trim()) &&
@@ -35,10 +38,8 @@ export const ChatPage = () => {
   // URL의 sessionId가 변경되면 해당 세션 로드
   useEffect(() => {
     if (sessionId && sessionId !== currentSessionId) {
-      // URL에 세션 ID가 있으면 해당 세션 선택
       selectSession(sessionId);
     } else if (!sessionId && currentSessionId) {
-      // URL에 세션 ID가 없는데 현재 세션이 있으면 URL 업데이트
       navigate(`/chat/${currentSessionId}`, { replace: true });
     }
   }, [sessionId]);
@@ -46,22 +47,18 @@ export const ChatPage = () => {
   // 현재 세션이 변경되면 URL 업데이트
   useEffect(() => {
     if (currentSessionId && !sessionId) {
-      // 세션이 새로 생성되었을 때 URL 업데이트
       navigate(`/chat/${currentSessionId}`, { replace: true });
     } else if (
       currentSessionId &&
       sessionId &&
       currentSessionId !== sessionId
     ) {
-      // 사이드바에서 다른 세션 선택 시 URL 업데이트
       navigate(`/chat/${currentSessionId}`, { replace: true });
     } else if (!currentSessionId && sessionId) {
-      // 세션이 클리어되면 홈으로 이동
       navigate("/", { replace: true });
     }
   }, [currentSessionId]);
 
-  // 메시지가 있거나, 세션이 선택되어 로딩 중일 때 MessageList 표시
   const showMessageList =
     messages.length > 0 || (currentSessionId && isLoading);
 
@@ -69,11 +66,10 @@ export const ChatPage = () => {
     <MainLayout>
       {showMessageList ? (
         <>
-          <MessageList />
-          <ChatInput showNewChatButton />
+          <MessageList onScrollChange={setIsAtBottom} />
+          <ChatInput showNewChatButton={isAtBottom} />
         </>
       ) : isMobile ? (
-        // 모바일: 입력창 하단 고정
         <div className="flex-1 flex flex-col relative">
           <div className="flex-1 flex flex-col items-center justify-center px-4">
             <WelcomeScreen />
@@ -84,7 +80,6 @@ export const ChatPage = () => {
           </div>
         </div>
       ) : (
-        // 데스크톱: 기존 중앙 레이아웃
         <div className="flex-1 flex flex-col items-center justify-center px-4">
           <WelcomeScreen />
           <ChatInput />

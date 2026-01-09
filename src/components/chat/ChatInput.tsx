@@ -105,19 +105,23 @@ export const ChatInput = ({ showNewChatButton = false }: ChatInputProps) => {
   return (
     <>
       <div className="p-4 pb-6 w-full">
-        <div className="w-full max-w-4xl mx-auto space-y-3">
-          {/* New Chat Button */}
-          {showNewChatButton && (
-            <div className="flex justify-center">
-              <button
-                onClick={handleNewChat}
-                className="new-chat-btn inline-flex items-center gap-2 px-5 py-2.5 bg-white dark:bg-slate-800 rounded-full border border-gray-200 dark:border-slate-600 text-sm text-gray-600 dark:text-gray-300 shadow-sm transition-all"
-              >
-                {t("chat.newChat")}
-                <Plus size={16} />
-              </button>
-            </div>
-          )}
+        <div className="w-full max-w-4xl mx-auto relative z-0">
+          {/* New Chat Button - Slides up from behind input */}
+          <div
+            className={`absolute left-1/2 -translate-x-1/2 bottom-full mb-3 -z-10 transition-all duration-300 ease-out ${
+              showNewChatButton
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-8 pointer-events-none"
+            }`}
+          >
+            <button
+              onClick={handleNewChat}
+              className="new-chat-btn inline-flex items-center gap-2 px-5 py-2.5 bg-white dark:bg-slate-800 rounded-full border border-gray-200 dark:border-slate-600 text-sm text-gray-600 dark:text-gray-300 shadow-sm hover:shadow-md hover:scale-105 transition-all"
+            >
+              {t("chat.newChat")}
+              <Plus size={16} />
+            </button>
+          </div>
 
           {/* Input Area */}
           <form onSubmit={handleSubmit}>
