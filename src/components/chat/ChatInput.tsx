@@ -25,8 +25,12 @@ export const ChatInput = ({ showNewChatButton = false }: ChatInputProps) => {
   const buttonContainerRef = useRef<HTMLDivElement>(null);
   const { sendMessage, isSending, currentSessionId } = useChatStore();
   const { isAuthenticated } = useAuthStore();
-  const { isScheduleMode, exitScheduleMode, parseCoursesFromMessage, status } =
-    useScheduleStore();
+  const {
+    isScheduleMode,
+    exitScheduleMode,
+    generateSchedulesFromMessage,
+    status,
+  } = useScheduleStore();
 
   // 시간표 모드 로딩 상태
   const isScheduleLoading = status === "parsing" || status === "generating";
@@ -64,7 +68,7 @@ export const ChatInput = ({ showNewChatButton = false }: ChatInputProps) => {
 
     // 시간표 모드일 때는 과목 파싱
     if (isScheduleMode) {
-      await parseCoursesFromMessage(
+      await generateSchedulesFromMessage(
         currentSessionId || "guest",
         trimmedMessage
       );

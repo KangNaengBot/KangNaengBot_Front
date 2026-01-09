@@ -11,6 +11,7 @@ import type {
 import {
   mockParseCoursesFromMessage,
   mockGenerateSchedules,
+  mockGenerateSchedulesFromText,
 } from "../mocks/scheduleMock";
 
 // 실제 API 사용 여부 플래그 (나중에 true로 변경)
@@ -54,4 +55,19 @@ export const generateSchedules = async (
 
   // filters는 Mock에서는 무시 (나중에 구현)
   return mockGenerateSchedules(courseIds);
+};
+
+/**
+ * 텍스트에서 바로 시간표 생성 (Single Step)
+ */
+export const generateSchedulesFromText = async (
+  _sessionId: string,
+  message: string
+): Promise<GenerateSchedulesResponse> => {
+  if (USE_REAL_API) {
+    // TODO: 실제 API 연동
+    throw new Error("Real API not implemented yet");
+  }
+
+  return mockGenerateSchedulesFromText(message);
 };

@@ -9,7 +9,6 @@ import type {
   ScheduleFilters,
   ScheduleError,
   SavedSchedule,
-  Day,
 } from "@/types";
 import { scheduleService } from "@/api";
 import i18n from "@/i18n";
@@ -53,7 +52,7 @@ interface ScheduleState {
   enterScheduleMode: () => void;
   exitScheduleMode: () => void;
   setFilters: (filters: Partial<ScheduleFilters>) => void;
-  parseCoursesFromMessage: (
+  generateSchedulesFromMessage: (
     sessionId: string,
     message: string
   ) => Promise<void>;
@@ -118,51 +117,50 @@ export const useScheduleStore = create<ScheduleState>((set, get) => ({
     }));
   },
 
-  parseCoursesFromMessage: async (sessionId, message) => {
-    set({ status: "parsing", userInput: message, error: null });
+  generateSchedulesFromMessage: async (sessionId, message) => {
+    // 1. 생성 상태로 전환
+    set({ status: "generating", userInput: message, error: null });
 
     try {
-      const response = await scheduleService.parseCourses(sessionId, message);
+      // 2. 단일 API 호출로 시간표 생성
+      const response = await scheduleService.generateSchedulesFromText(
+        sessionId,
+        message
+      );
 
-      // 추출된 필터 적용
-      const extractedFilters = response.extractedFilters;
-
-      set((state) => ({
-        status: "confirming",
-        parsedCourses: response.courses,
-        ambiguousCourses: response.ambiguous,
-        filters: {
-          ...state.filters,
-          ...(extractedFilters.emptyDays && {
-            emptyDays: extractedFilters.emptyDays as Day[],
-          }),
-          ...(extractedFilters.excludePeriods && {
-            excludePeriods: extractedFilters.excludePeriods,
-          }),
-        },
-      }));
-
-      // 파싱 실패 시
-      if (
-        response.courses.length === 0 &&
-        response.ambiguous.length === 0 &&
-        response.notFound.length > 0
-      ) {
+      if (!response.success || response.schedules.length === 0) {
         set({
           status: "error",
           error: {
-            type: "parse_failed",
-            message: i18n.t("schedule.error.noCourseFound"),
+            type: response.fallback?.reason || "generation_failed",
+            message:
+              response.fallback?.suggestions?.join(", ") ||
+              i18n.t("schedule.error.generationFailed"),
             retryable: true,
           },
         });
+        return;
       }
+
+      // 3. 필터 추출 및 적용 (Mock에서는 추출 로직이 포함되어 있다고 가정하거나 생략)
+      // 실제 구현에서는 generateSchedulesFromText 응답에 extractedFilters가 포함되어야 함
+      // 현재는 간단히 스킵하거나 필요 시 추가
+
+      set({
+        status: "complete",
+        generatedSchedules: response.schedules,
+        activeScheduleIndex: 0,
+        // 파싱된 코스는 응답에 없으므로 (Mock 구조상) 빈 배열 혹은 추후 응답 구조 변경 필요
+        parsedCourses: [],
+        confirmedCourses: [],
+        ambiguousCourses: [],
+      });
     } catch {
       set({
         status: "error",
         error: {
-          type: "parse_failed",
-          message: i18n.t("schedule.error.parseFailed"),
+          type: "generation_failed",
+          message: i18n.t("schedule.error.generationFailed"),
           retryable: true,
         },
       });

@@ -382,3 +382,39 @@ export const mockGenerateSchedules = async (
     message: `${matchingSchedules.length || 3}개의 시간표를 생성했어요!`,
   };
 };
+
+export const mockGenerateSchedulesFromText = async (
+  message: string
+): Promise<GenerateSchedulesResponse> => {
+  // 1. 파싱 로직 재사용
+  const parseResult = await mockParseCoursesFromMessage(message);
+
+  // 2. 자동 확정 (Auto-confirm)
+  const confirmedIds: string[] = [];
+
+  // 확정된 과목 ID
+  parseResult.courses.forEach((c) => confirmedIds.push(c.id));
+
+  // 애매한 과목은 첫 번째 후보 ID 사용
+  parseResult.ambiguous.forEach((amb) => {
+    if (amb.candidates.length > 0) {
+      confirmedIds.push(amb.candidates[0].id);
+    }
+  });
+
+  // 3. 생성 로직 호출
+  if (confirmedIds.length === 0) {
+    return {
+      success: false,
+      schedules: [],
+      warnings: [],
+      message: "입력하신 과목을 찾지 못했어요.",
+      fallback: {
+        reason: "no_courses",
+        suggestions: ["컴퓨터개론", "데이터베이스"],
+      },
+    };
+  }
+
+  return mockGenerateSchedules(confirmedIds);
+};
