@@ -1,0 +1,708 @@
+<!-- Tistory Blog Post Content --><!-- Copy content below into Tistory HTML Editor -->
+<div>
+  <style>
+    .link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.25rem;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      border: none;
+      transition: all 0.2s ease;
+      transform: translateY(0);
+    }
+    .link-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.25);
+      filter: brightness(1.1);
+    }
+    .link-btn-github {
+      background: #1f2937;
+      color: white !important;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+    }
+    .link-btn-demo {
+      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+      color: white !important;
+      box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.3);
+    }
+    .link-btn-portfolio {
+      background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+      color: white !important;
+      box-shadow: 0 4px 6px -1px rgba(139, 92, 246, 0.3);
+    }
+    .toc-tag {
+      display: inline-block;
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+    .toc-tag:hover {
+      transform: scale(1.05);
+      filter: brightness(0.95);
+    }
+    .toc-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1.5rem 0;
+      padding: 1rem;
+      background: rgba(248, 250, 252, 0.95);
+      backdrop-filter: blur(8px);
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+      align-items: center;
+      position: sticky;
+      top: 20px;
+      z-index: 100;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    h2[id^="section-"] {
+      scroll-margin-top: 100px;
+    }
+  </style>
+</div>
+<div class="kangnaeng-tech-blog">
+  <!-- 프로젝트 링크 박스 -->
+  <div style="display: flex; gap: 1rem; margin: 1.5rem 0; flex-wrap: wrap">
+    <a
+      class="link-btn link-btn-github"
+      href="https://github.com/sleepyMS/KangNaengBot-FE"
+      target="_blank"
+      rel="noopener noreferrer"
+      >📂 GitHub 저장소</a
+    ><a
+      class="link-btn link-btn-demo"
+      href="https://kang-naeng-bot-fe.vercel.app/"
+      target="_blank"
+      rel="noopener noreferrer"
+      >🌐 라이브 데모</a
+    ><a
+      class="link-btn link-btn-portfolio"
+      href="https://ms-mind.vercel.app/"
+      target="_blank"
+      rel="noopener noreferrer"
+      >💼 포트폴리오</a
+    >
+  </div>
+  <blockquote data-ke-style="style2">
+    <p data-ke-size="size16">
+      대학생 AI 챗봇 서비스 강냉봇에
+      <b>"자연어 기반 시간표 자동 생성"</b> 기능을 추가하면서, 기획 부재
+      상황에서 애자일하게 MVP를 구현하고, 프론트엔드 주도적인 개발 방식을 통해
+      난관을 극복한 과정을 공유합니다.
+    </p>
+  </blockquote>
+  <div style="padding: 1rem">&nbsp;</div>
+  <!-- 목차 태그 네비게이션 -->
+  <p
+    style="
+      margin: 2rem 0 0.5rem 0.25rem;
+      font-weight: bold;
+      color: #475569;
+      font-size: 1.1rem;
+    "
+    data-ke-size="size16"
+  >
+    📑 바로가기
+  </p>
+  <div class="toc-container">
+    <a
+      class="toc-tag"
+      style="background: #fee2e2; color: #dc2626"
+      href="#section-problem"
+      >🎯 문제 정의</a
+    ><a
+      class="toc-tag"
+      style="background: #e0e7ff; color: #4338ca"
+      href="#section-architecture"
+      >🏗️ 아키텍처</a
+    ><a
+      class="toc-tag"
+      style="background: #fef3c7; color: #d97706"
+      href="#section-challenges"
+      >🔥 도전과제</a
+    ><a
+      class="toc-tag"
+      style="background: #dcfce7; color: #16a34a"
+      href="#section-solutions"
+      >💡 해결 과정</a
+    ><a
+      class="toc-tag"
+      style="background: #dbeafe; color: #2563eb"
+      href="#section-results"
+      >📈 결과</a
+    ><a
+      class="toc-tag"
+      style="background: #f3e8ff; color: #7c3aed"
+      href="#section-techstack"
+      >🛠 기술 스택</a
+    >
+  </div>
+  <hr data-ke-style="style1" />
+  <h2 id="section-problem" data-ke-size="size26">
+    🎯 문제 정의: 수강신청은 왜 항상 힘들까?
+  </h2>
+  <p data-ke-size="size16">
+    대학생들에게 수강신청 기간은 전쟁입니다. 듣고 싶은 과목들은 많은데, 어떤
+    과목이 어떤 시간에 열리는지, 내 공강 날짜와 겹치지는 않는지 하나하나
+    따져봐야 합니다. 기존의 시간표 서비스들은 대부분
+    <b>수동 검색 방식</b>이었습니다.
+  </p>
+  <p data-ke-size="size16">
+    "알고리즘 A반 넣어보고... 안되네? B반으로 바꿔볼까? 아 그럼 데이터베이스랑
+    겹치네..." 이런 반복적인 시행착오를 수십 번 겪어야 하나의 시간표가
+    완성됩니다.
+  </p>
+  <blockquote data-ke-style="style2">
+    <p data-ke-size="size16">
+      핵심 질문: "알고리즘, DB, 컴네 듣고 싶은데 금요일 공강으로 짜줘" 처럼<br /><b
+        >자연어로 말하면 AI가 알아서 최적의 조합을 찾아줄 순 없을까?</b
+      >
+    </p>
+  </blockquote>
+  <p data-ke-size="size16">
+    이 단순한 질문에서 시작하여, 강냉봇의 핵심 기능인 AI 시간표 생성 시스템
+    프로젝트가 시작되었습니다.
+  </p>
+  <hr data-ke-style="style1" />
+  <h2 id="section-architecture" data-ke-size="size26">
+    🏗️ 시스템 아키텍처 및 설계
+  </h2>
+  <p data-ke-size="size16">
+    시간표 생성 시스템은 <b>RAG (Retrieval-Augmented Generation)</b> 기반의
+    백엔드와 고도화된 <b>프론트엔드 상태 관리</b>가 결합된 구조입니다.
+  </p>
+  [##_Image|kage@CNTlA/dJMcacIA9a0/AAAAAAAAAAAAAAAAAAAAAKBzZv1GK1IXMBXXpIsooT14iFTq8RLLXYGpS53tmkaZ/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1769871599&amp;allow_ip=&amp;allow_referer=&amp;signature=u5NlgGXXQlSHQnM%2BFgqsP8mSobw%3D|CDM|1.3|{"originWidth":7150,"originHeight":865,"style":"alignCenter","width":981,"height":119,"alt":"시스템
+  흐름","caption":"시스템 흐름","filename":"시스템 흐름 다이어그램.png"}_##]
+  <p data-ke-size="size16">&nbsp;</p>
+  <h3 data-ke-size="size23">컴포넌트 구조 설계</h3>
+  <pre class="axapta"><code>components/schedule/
+├── ScheduleCanvas.tsx   # 메인 컨테이너 (상태 관리 및 레이아웃)
+├── ScheduleGrid.tsx     # 시간표 시각화 (CSS Grid 기반)
+├── ScheduleCarousel.tsx # 생성된 여러 시간표 슬라이더
+├── FilterPanel.tsx      # 공강 요일/제외 시간대 필터
+└── SavedScheduleList.tsx # 저장된 시간표 목록</code></pre>
+  <p data-ke-size="size16">
+    <code>ScheduleCanvas</code>가 중앙 관제탑 역할을 하며,
+    <code>useScheduleStore</code>를 통해 전체 애플리케이션의 시간표 데이터
+    흐름을 제어하는 구조로 설계했습니다.
+  </p>
+  [##_Image|kage@bvl5kK/dJMcahQFiSO/AAAAAAAAAAAAAAAAAAAAAOyXI2taw4hOurTcwWLkFmbiZE1--SnyMq8_znZ_f7S3/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1769871599&amp;allow_ip=&amp;allow_referer=&amp;signature=RNEYcIu23J5WHCgkdmrvWwBkk3k%3D|CDM|1.3|{"originWidth":2310,"originHeight":1145,"style":"alignCenter","alt":"강냉봇
+  웹(Web) vs 모바일(Mobile) 반응형 UI 예시","caption":"강냉봇 웹(Web) vs
+  모바일(Mobile) 반응형 UI 예시","filename":"blob"}_##]
+  <p data-ke-size="size16">&nbsp;</p>
+  <h2 id="section-challenges" data-ke-size="size26">🔥 기술적 도전과제</h2>
+  <h3 data-ke-size="size23">1. 기획의 부재와 촉박한 일정</h3>
+  <p data-ke-size="size16">
+    가장 큰 난관은 역설적이게도 기술이 아닌 <b>프로세스</b>였습니다. 상세 기획이
+    없는 상태에서 백엔드 API가 나오길 기다리다가는 마감 기한을 맞출 수
+    없었습니다. 기존의 폭포수(Waterfall) 방식으로는 불가능했습니다.
+  </p>
+  <h3 data-ke-size="size23">2. 다양한 사용자 환경 (주간 vs 야간)</h3>
+  <p data-ke-size="size16">
+    대학에는 주간 수업(09:00~18:00)만 듣는 학생도 있고, 야간 수업(~22:00)을 듣는
+    학생도 있습니다. 고정된 시간표 그리드를 사용하면 주간 학생에겐 불필요한
+    공백이 생기고, 야간 학생에겐 수업이 잘리는 문제가 발생합니다.
+  </p>
+  <h3 data-ke-size="size23">3. 실시간 필터링 성능 이슈</h3>
+  <p data-ke-size="size16">
+    "금요일 공강으로 보여줘", "1교시는 빼줘" 같은 필터링을 할 때마다 매번 서버에
+    요청을 보내면, 네트워크 지연으로 인해 사용자 경험이 크게 저하됩니다.
+  </p>
+  <hr data-ke-style="style1" />
+  <h2 id="section-solutions" data-ke-size="size26">💡 해결 과정</h2>
+  <h3 data-ke-size="size23">해결책 1: API-First &amp; Agile 개발 전략</h3>
+  <p data-ke-size="size16">
+    기획이 나올 때까지 기다리는 대신, 프론트엔드가 주도적으로 API 명세를
+    정의하고 개발을 시작했습니다.
+  </p>
+  <div class="highlight-box">
+    <h4 data-ke-size="size20">🚀 Frontend-First 접근법</h4>
+    <ol style="margin-top: 1rem" data-ke-list-type="decimal">
+      <li>
+        <b>API 명세서 선행 작성</b>: 프론트엔드 관점에서 필요한 데이터 구조를
+        정의하여
+        <a
+          style="color: #2563eb; text-decoration: underline"
+          href="https://github.com/sleepyMS/KangNaengBot-FE/blob/main/docs/SCHEDULE_API_SPEC.md"
+          target="_blank"
+          rel="noopener"
+          >SCHEDULE_API_SPEC.md 작성
+        </a>
+      </li>
+      <li>
+        <b>Mock 서비스 구현</b>: 실제 API 대신 더미 데이터를 반환하는 서비스
+        레이어 구현
+      </li>
+      <li>
+        <b>UI/UX 선 검증</b>: 동작하는 MVP를 하루 만에 구현하여 팀원들에게 시연
+        및 피드백 수렴
+      </li>
+      <li>
+        <b>계약 기반 통합</b>: 백엔드 개발이 완료되었을 때, 미리 정의된
+        명세(계약) 덕분에 충돌 없이 통합
+      </li>
+    </ol>
+  </div>
+  <p data-ke-size="size16">
+    이 전략 덕분에 백엔드 개발자와 병렬로 작업할 수 있었고,
+    <b>개발 생산성을 극대화</b>할 수 있었습니다.
+  </p>
+  <hr data-ke-style="style1" />
+  <h3 data-ke-size="size23">해결책 2: 동적 시간표 그리드 (Dynamic Grid)</h3>
+  <p data-ke-size="size16">
+    사용자의 수강 신청 내역에 따라 시간표의 높이가 자동으로 조절되도록
+    구현했습니다.
+  </p>
+  [##_Image|kage@qMRlH/dJMcafyxv5s/AAAAAAAAAAAAAAAAAAAAAOSgYcMmax0mD1vp-vD6So8L3BSJPPvKla5kxnQaBKAR/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1769871599&amp;allow_ip=&amp;allow_referer=&amp;signature=t0bATA6NexZdG7sIDu5d%2FS28rRw%3D|CDM|1.3|{"originWidth":1790,"originHeight":1318,"style":"alignCenter","width":567,"height":417,"alt":"주간
+  학생(좌) vs 야간 학생(우) 시간표 비교","caption":"주간 학생(좌) vs 야간
+  학생(우) 시간표 비교","filename":"주간-야간 시간표 비교
+  이미지.png"}_##][##_Image|kage@bLnuZ0/dJMcagc9vjj/AAAAAAAAAAAAAAAAAAAAABPV5GGpGkyye5jcQ1VFYMtXnpzbPCRYuINB9-zkbGMV/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1769871599&amp;allow_ip=&amp;allow_referer=&amp;signature=l2segSZ%2Fhya7WmIQx86063%2FfTXY%3D|CDM|1.3|{"originWidth":2332,"originHeight":4440,"style":"alignCenter","width":340,"height":647,"alt":"동적
+  그리드 로직 다이어그램","caption":"동적 그리드 로직
+  다이어그램","filename":"동적 그리드 로직 다이어그램.png"}_##]
+  <p data-ke-size="size16">&nbsp;</p>
+  <h4 data-ke-size="size20">💻 동적 범위 계산 로직</h4>
+  <pre class="typescript"><code>// ScheduleGrid.tsx - 실제 구현 코드
+const DEFAULT_START_HOUR = 9;
+const DEFAULT_END_HOUR = 19;  // 기본값 (주간 학생 기준)
+
+const { startHour, endHour } = useMemo(() =&gt; {
+  let minStartHour = DEFAULT_START_HOUR;
+  let maxEndHour = DEFAULT_END_HOUR;
+
+  courses.forEach((course) =&gt; {
+    course.slots.forEach((slot) =&gt; {
+      // 분 단위 &rarr; 시간 단위 변환 (올림)
+      const slotEndHour = Math.ceil(timeToMinutes(slot.endTime) / 60);
+
+      // 수업이 19시 이후까지 있으면 그리드 확장
+      if (slotEndHour &gt; maxEndHour) {
+        maxEndHour = Math.min(slotEndHour, 24);  // 최대 24시
+      }
+    });
+  });
+
+  return { startHour: minStartHour, endHour: maxEndHour };
+}, [courses]);</code></pre>
+  <div class="highlight-box">
+    <h4 data-ke-size="size20">🎨 CSS Grid 활용</h4>
+    <p data-ke-size="size16">
+      CSS Grid의 <code>minmax()</code>와 <code>auto-fit</code>을 활용하여,
+      시간대의 범위가 늘어나도 레이아웃이 깨지지 않고 각 교시(Time Slot)의
+      높이가 비율에 맞춰 자동으로 조절되도록 스타일링했습니다.
+    </p>
+  </div>
+  <hr data-ke-style="style1" />
+  <h3 data-ke-size="size23">
+    해결책 3: 클라이언트 사이드 필터링 (Client-Side Filtering)
+  </h3>
+  <p data-ke-size="size16">
+    필터링 시 발생하는 네트워크 비용을 <b>0</b>으로 만들었습니다. 이미 받아온
+    데이터(<code>allSchedules</code>)는 그대로 두고, 화면에 보여지는
+    데이터(<code>generatedSchedules</code>)만 로컬에서 가공합니다.
+  </p>
+  <div class="highlight-box">
+    <h4 data-ke-size="size20">� 핵심 설계: Zustand 상태 관리</h4>
+    <p data-ke-size="size16">
+      5개 컴포넌트가 동일한 시간표 데이터를 공유해야 했습니다. 단순히
+      <code>useState</code>로 관리하면 props drilling이 깊어지고, 필터링 시 원본
+      데이터를 잃어버릴 수 있었습니다.
+    </p>
+    <ul style="margin-top: 1rem; margin-bottom: 0" data-ke-list-type="disc">
+      <li>
+        <b>Props Drilling 제거</b>: 어떤 컴포넌트든 store에서 직접 데이터 접근
+      </li>
+      <li>
+        <b>원본/필터 분리</b>: <code>allSchedules</code>(원본, 불변) &harr;
+        <code>generatedSchedules</code>(필터 결과)
+      </li>
+      <li>
+        <b>일관성 유지</b>: 저장/불러오기, 뷰 전환 등 모든 상태가 한 곳에서 관리
+      </li>
+    </ul>
+  </div>
+  [##_Image|kage@ccD4aX/dJMcadUYEnR/AAAAAAAAAAAAAAAAAAAAAEMnVVHStHLkdTt_Owe-ksvgjLn0mXxViTekLkskKbmE/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1769871599&amp;allow_ip=&amp;allow_referer=&amp;signature=OJhrKwUVYqOINY3AXQKpC7yBseE%3D|CDM|1.3|{"originWidth":5510,"originHeight":2695,"style":"alignCenter","alt":"상태
+  관리 흐름","caption":"상태 관리 흐름","filename":"상태 관리 흐름.png"}_##]
+  <p data-ke-size="size16">&nbsp;</p>
+  <h4 data-ke-size="size20">💻 실제 구현 코드</h4>
+  <pre class="typescript"><code>// useScheduleStore.ts - 실제 구현 코드
+
+// 필터 적용 함수 (순수 함수)
+const filterSchedules = (schedules: Schedule[], filters: ScheduleFilters) =&gt; {
+  return schedules.filter((schedule) =&gt; {
+    // 1. 공강 요일 체크 - 원하는 요일에 수업이 없어야 함
+    const emptyDayPass = filters.emptyDays.every((day) =&gt;
+      schedule.emptyDays.includes(day)
+    );
+    if (!emptyDayPass) return false;
+
+    // 2. 제외 시간대 체크 - 특정 시간에 수업이 없어야 함
+    for (const course of schedule.courses) {
+      for (const slot of course.slots) {
+        for (const ex of filters.excludeTimeRanges) {
+          if (slot.day === ex.day &amp;&amp; timeRangesOverlap(...)) {
+            return false;
+          }
+        }
+      }
+    }
+    return true;
+  });
+};
+
+// setFilters 액션 - 필터 변경 시 즉시 재계산
+setFilters: (newFilters) =&gt; {
+  set((state) =&gt; ({
+    filters: { ...state.filters, ...newFilters },
+    generatedSchedules: filterSchedules(state.allSchedules, updatedFilters),
+  }));
+}</code></pre>
+  <p data-ke-size="size16">
+    이 결과, 사용자가 필터를 클릭하는 순간 <b>0ms의 지연 시간</b>으로 즉시
+    시간표가 변경되는 쾌적한 경험을 제공할 수 있었습니다.
+  </p>
+  <hr data-ke-style="style1" />
+  <h3 data-ke-size="size23">보너스: 이미지 저장 최적화</h3>
+  <p data-ke-size="size16">
+    단순히 화면을 캡처하는 것이 아니라, <code>html-to-image</code>를 활용하여
+    사용자 친화적인 저장 기능을 구현했습니다.
+  </p>
+  <ul style="list-style-type: disc" data-ke-list-type="disc">
+    <li>
+      <b>고해상도 지원</b>: <code>pixelRatio: 2</code> 설정으로 아이패드/맥북 등
+      Retina 디스플레이에서도 선명하게 저장
+    </li>
+    <li>
+      <b>다크모드 감지</b>: 현재 테마를 감지하여 배경색을 자동으로 흰색(#fff)
+      또는 남색(#0f172a)으로 설정
+    </li>
+    <li>
+      <b>로딩 피드백</b>: 이미지 생성 중 <b>다운로드 버튼에 스피너</b>를
+      표시하여 "멈춤"이 아닌 "작업 중"임을 인지시킴
+    </li>
+  </ul>
+  <hr data-ke-style="style1" />
+  <h2 id="section-results" data-ke-size="size26">📈 개선 결과</h2>
+  <table data-ke-align="alignLeft">
+    <thead>
+      <tr>
+        <th>&nbsp;항목</th>
+        <th>&nbsp;기존 방식</th>
+        <th>&nbsp;개선된 방식</th>
+        <th>&nbsp;효과</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>&nbsp;조합 생성 시간</td>
+        <td>&nbsp;수작업 30분+</td>
+        <td><b>&nbsp;자연어 1문장</b></td>
+        <td>&nbsp;시간 단축 99%</td>
+      </tr>
+      <tr>
+        <td>&nbsp;필터 반응 속도</td>
+        <td>&nbsp;API 호출 (수백ms)</td>
+        <td><b>&nbsp;즉시 (0ms)</b></td>
+        <td>&nbsp;UX 대폭 향상</td>
+      </tr>
+      <tr>
+        <td>&nbsp;개발 생산성</td>
+        <td>&nbsp;Waterfall</td>
+        <td><b>&nbsp;Agile + API-First</b></td>
+        <td>&nbsp;2주 병렬 개발</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 data-ke-size="size23">배운 점</h3>
+  <ol style="list-style-type: decimal" data-ke-list-type="decimal">
+    <li>
+      <b>프론트엔드의 주도성</b>: 기획이나 백엔드가 주어지길 기다리기보다, API
+      명세라는 "계약"을 먼저 제시함으로써 프로젝트 전체의 속도를 높일 수 있음을
+      배웠습니다.
+    </li>
+    <li>
+      <b>사용자 중심의 최적화</b>: 기술적으로 더 쉬운 방법(고정 그리드)보다
+      사용자에게 더 좋은 방법(동적 그리드)을 택했을 때의 만족도가 훨씬 큼을
+      확인했습니다.
+    </li>
+    <li>
+      <b>클라이언트의 힘</b>: 모든 것을 서버에 의존할 필요는 없습니다. 적절한
+      로컬 필터링은 서버 부하도 줄이고 사용자 경험도 개선하는 일석이조의 효과가
+      있습니다.
+    </li>
+  </ol>
+  <hr data-ke-style="style1" />
+  <h2 id="section-techstack" data-ke-size="size26">🛠 기술 스택 요약</h2>
+  <table data-ke-align="alignLeft">
+    <thead>
+      <tr>
+        <th>&nbsp;영역</th>
+        <th>&nbsp;기술</th>
+        <th>&nbsp;활용 내용</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>&nbsp;상태 관리</td>
+        <td>&nbsp;Zustand</td>
+        <td>&nbsp;복잡한 시간표 데이터 및 필터 상태 관리</td>
+      </tr>
+      <tr>
+        <td>&nbsp;이미지 처리</td>
+        <td>&nbsp;html-to-image</td>
+        <td>&nbsp;DOM 요소를 고해상도 PNG로 변환</td>
+      </tr>
+      <tr>
+        <td>&nbsp;스타일링</td>
+        <td>&nbsp;Tailwind CSS</td>
+        <td>&nbsp;반응형 그리드 및 다크모드 구현</td>
+      </tr>
+      <tr>
+        <td>&nbsp;다국어</td>
+        <td>&nbsp;i18next</td>
+        <td>&nbsp;4개 국어(한/영/중/일) 완벽 지원</td>
+      </tr>
+    </tbody>
+  </table>
+  <hr data-ke-style="style1" />
+  <p data-ke-size="size16">
+    <i>시간표 짜는 스트레스에서 해방된 대학생들을 꿈꾸며.</i>
+  </p>
+  <p style="color: #333333; text-align: start" data-ke-size="size16">
+    <b>📂 프로젝트 저장소</b>:<span>
+      <a
+        style="color: #2563eb"
+        title="https://github.com/sleepyMS/KangNaengBot-FE"
+        href="https://github.com/sleepyMS/KangNaengBot-FE"
+        >KangNaengBot-FE</a
+      ></span
+    >
+  </p>
+  <p style="color: #333333; text-align: start" data-ke-size="size16">
+    <b>🌐 배포 URL</b>:
+    <a
+      title="https://kang-naeng-bot-fe.vercel.app/"
+      href="https://kang-naeng-bot-fe.vercel.app/"
+      target="_blank"
+      rel="noopener noreferrer"
+      >KangNaengBot</a
+    >
+  </p>
+</div>
+<div>
+  <style>
+    .kangnaeng-tech-blog {
+      font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui,
+        Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo",
+        "Malgun Gothic", sans-serif;
+      line-height: 1.75;
+      color: #333;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px 0;
+    }
+
+    .kangnaeng-tech-blog h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      color: #1a1a1a;
+      letter-spacing: -0.02em;
+      border-bottom: 2px solid #e5e7eb;
+      padding-bottom: 1rem;
+    }
+
+    .kangnaeng-tech-blog h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-top: 3rem;
+      margin-bottom: 1rem;
+      color: #2563eb;
+    }
+
+    .kangnaeng-tech-blog h3 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+      color: #1f2937;
+    }
+
+    .kangnaeng-tech-blog h4 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: #374151;
+    }
+
+    .kangnaeng-tech-blog p {
+      margin-bottom: 1.25rem;
+      font-size: 1.1rem;
+      word-break: keep-all;
+    }
+
+    .kangnaeng-tech-blog blockquote {
+      background-color: #f3f4f6;
+      border-left: 5px solid #2563eb;
+      margin: 1.5rem 0;
+      padding: 1rem 1.5rem;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .kangnaeng-tech-blog blockquote p {
+      margin: 0;
+      font-weight: 500;
+      color: #4b5563;
+    }
+
+    .kangnaeng-tech-blog strong {
+      color: #2563eb;
+      background: linear-gradient(
+        120deg,
+        rgba(37, 99, 235, 0.1) 0%,
+        rgba(37, 99, 235, 0.1) 100%
+      );
+      padding: 0 4px;
+      border-radius: 3px;
+    }
+
+    .kangnaeng-tech-blog pre {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      padding: 1.5rem;
+      border-radius: 12px;
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      font-family: "Fira Code", Consolas, Monaco, monospace;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .kangnaeng-tech-blog code {
+      font-family: "Fira Code", Consolas, Monaco, monospace;
+    }
+
+    .kangnaeng-tech-blog p code,
+    .kangnaeng-tech-blog li code {
+      background-color: #eff6ff;
+      color: #2563eb;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.9em;
+      border: 1px solid #dbeafe;
+    }
+
+    .kangnaeng-tech-blog ul,
+    .kangnaeng-tech-blog ol {
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+    }
+
+    .kangnaeng-tech-blog li {
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .kangnaeng-tech-blog table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2rem 0;
+      font-size: 1rem;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .kangnaeng-tech-blog th {
+      background-color: #f8fafc;
+      font-weight: 600;
+      color: #1e293b;
+      text-align: left;
+      padding: 1rem;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .kangnaeng-tech-blog td {
+      padding: 1rem;
+      border-bottom: 1px solid #e2e8f0;
+      color: #334155;
+    }
+
+    .kangnaeng-tech-blog hr {
+      border: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #e5e7eb, transparent);
+      margin: 3rem 0;
+    }
+
+    .kangnaeng-tech-blog .diagram-container {
+      display: flex;
+      justify-content: center;
+      margin: 2rem 0;
+      background: #fafafa;
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid #e5e7eb;
+    }
+
+    .kangnaeng-tech-blog .diagram-container img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .kangnaeng-tech-blog a {
+      color: #2563eb;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+
+    .kangnaeng-tech-blog a:hover {
+      border-bottom-color: #2563eb;
+    }
+
+    .kangnaeng-tech-blog .highlight-box {
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      border: 1px solid #bfdbfe;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .kangnaeng-tech-blog .highlight-box h4 {
+      margin-top: 0;
+      color: #1d4ed8;
+    }
+
+    .kangnaeng-tech-blog .highlight-box p {
+      margin-bottom: 0;
+    }
+  </style>
+</div>
+<hr
+  contenteditable="false"
+  data-ke-style="style5"
+  data-ke-type="horizontalRule"
+/>
+<p data-ke-size="size16"><b>◆ 함께 보면 좋은 글</b></p>
+<ul style="list-style-type: disc" data-ke-list-type="disc">
+  <li>
+    <span style="background-color: #e6f5ff; color: #006dd7"
+      ><b
+        ><a
+          style="background-color: #e6f5ff; color: #006dd7"
+          href="https://me-in-journey.com/entry/React-AI-%EC%B1%97%EB%B4%87%EC%9D%98-%EC%B2%B4%EA%B0%90-%EC%86%8D%EB%8F%84%EB%A5%BC-%EB%86%92%EC%9D%B8-%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C-%EC%B5%9C%EC%A0%81%ED%99%94-%EC%97%AC%EC%A0%95"
+          >[React] AI 챗봇의 체감 속도를 높인 프론트엔드 최적화 여정</a
+        ></b
+      ></span
+    >
+  </li>
+</ul>

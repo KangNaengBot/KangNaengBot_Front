@@ -1,0 +1,711 @@
+<!-- Tistory Blog Post Content --><!-- Copy content below into Tistory HTML Editor -->
+<style>
+  .link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
+    transition: all 0.2s ease;
+    transform: translateY(0);
+  }
+  .link-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.25);
+    filter: brightness(1.1);
+  }
+  .link-btn-github {
+    background: #1f2937;
+    color: white !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+  }
+  .link-btn-demo {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    color: white !important;
+    box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.3);
+  }
+  .link-btn-portfolio {
+    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+    color: white !important;
+    box-shadow: 0 4px 6px -1px rgba(139, 92, 246, 0.3);
+  }
+  .toc-tag {
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+  .toc-tag:hover {
+    transform: scale(1.05);
+    filter: brightness(0.95);
+  }
+  .toc-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: rgba(248, 250, 252, 0.95);
+    backdrop-filter: blur(8px);
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    align-items: center;
+    position: sticky;
+    top: 20px;
+    z-index: 100;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+  h2[id^="section-"] {
+    scroll-margin-top: 100px;
+  }
+</style>
+<div class="kangnaeng-tech-blog">
+  <!-- 프로젝트 링크 박스 -->
+  <div style="display: flex; gap: 1rem; margin: 1.5rem 0; flex-wrap: wrap">
+    <a
+      class="link-btn link-btn-github"
+      href="https://github.com/sleepyMS/KangNaengBot-FE"
+      target="_blank"
+      rel="noopener noreferrer"
+      >📂 GitHub 저장소</a
+    >
+    <a
+      class="link-btn link-btn-demo"
+      href="https://kang-naeng-bot-fe.vercel.app/"
+      target="_blank"
+      rel="noopener noreferrer"
+      >🌐 라이브 데모</a
+    >
+    <a
+      class="link-btn link-btn-portfolio"
+      href="https://ms-mind.vercel.app/"
+      target="_blank"
+      rel="noopener noreferrer"
+      >💼 포트폴리오</a
+    >
+  </div>
+  <blockquote data-ke-style="style2">
+    <p data-ke-size="size16">
+      대학 AI 챗봇 서비스 강냉봇의 프론트엔드를 개발하면서 "느린 AI 응답"이라는
+      근본적인 한계를 프론트엔드 기술로 어떻게 극복했는지 공유합니다.
+    </p>
+  </blockquote>
+  <div style="padding: 1rem"></div>
+  <!-- 목차 태그 네비게이션 -->
+  <p
+    style="
+      margin: 2rem 0 0.5rem 0.25rem;
+      font-weight: 700;
+      color: #475569;
+      font-size: 1.1rem;
+    "
+  >
+    📑 바로가기
+  </p>
+  <div class="toc-container">
+    <a
+      href="#section-problem"
+      class="toc-tag"
+      style="background: #fee2e2; color: #dc2626"
+      >🎯 문제 정의</a
+    >
+    <a
+      href="#section-architecture"
+      class="toc-tag"
+      style="background: #e0e7ff; color: #4338ca"
+      >🏗️ 아키텍처</a
+    >
+    <a
+      href="#section-challenges"
+      class="toc-tag"
+      style="background: #fef3c7; color: #d97706"
+      >🔥 도전과제</a
+    >
+    <a
+      href="#section-solutions"
+      class="toc-tag"
+      style="background: #dcfce7; color: #16a34a"
+      >💡 해결 과정</a
+    >
+    <a
+      href="#section-results"
+      class="toc-tag"
+      style="background: #dbeafe; color: #2563eb"
+      >📈 결과</a
+    >
+    <a
+      href="#section-techstack"
+      class="toc-tag"
+      style="background: #f3e8ff; color: #7c3aed"
+      >🛠 기술 스택</a
+    >
+  </div>
+
+  <hr data-ke-style="style1" />
+  <h2 id="section-problem" data-ke-size="size26">
+    🎯 문제 정의: 왜 AI 챗봇은 느리게 느껴질까?
+  </h2>
+  <p data-ke-size="size16">
+    강남대학교 학생들을 위한 AI 챗봇 서비스를 개발하면서 첫 번째로 마주한 현실은
+    <b>AI 응답의 지연 시간</b>이었습니다. LLM(Large Language Model) 기반 챗봇은
+    구조적으로 응답에 1~5초가 소요됩니다. 여기에 네트워크 통신 시간까지
+    더해지면, 사용자는 메시지를 보낸 후 멍하니 화면을 바라보게 됩니다.
+  </p>
+  <p data-ke-size="size16">
+    더 심각한 문제는 <b>사이드바에서 다른 채팅방으로 이동할 때</b>였습니다.
+    클릭할 때마다 로딩 스피너가 나타나고, 이전 대화 내용을 불러오는 동안
+    사용자는 무의미한 대기 시간을 경험했습니다.
+  </p>
+  <blockquote data-ke-style="style2">
+    <p data-ke-size="size16">
+      핵심 질문: 서버를 빠르게 만들 수 없다면, 사용자가 빠르다고 '느끼게' 할
+      수는 없을까?
+    </p>
+  </blockquote>
+  <p data-ke-size="size16">이 질문이 프로젝트의 기술적 방향을 결정했습니다.</p>
+  <hr data-ke-style="style1" />
+  <h2 id="section-architecture" data-ke-size="size26">
+    🏗️ 시스템 아키텍처 개요
+  </h2>
+  <p data-ke-size="size16">
+    사용자와의 모든 상호작용은 즉각적인 반응을 최우선으로 설계되었습니다.
+    <b>Zustand</b>를 활용한 단방향 데이터 흐름과 <b>Axios 인터셉터</b> 패턴이
+    유기적으로 연결되어 안정적인 채팅 경험을 제공합니다.
+  </p>
+  <!-- �️ [IMAGE_1] 시스템 아키텍처 다이어그램 -->
+  <div class="diagram-container">
+    [##_Image|kage@bUs2Af/dJMcagqzLVc/AAAAAAAAAAAAAAAAAAAAABdzAmHHcQcZmQMr1PP73IyrAtVc8R4WYmDa7nrNtRxh/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1767193199&amp;allow_ip=&amp;allow_referer=&amp;signature=feMeS%2BL1hZt%2BochrMEa1gfCDHjg%3D|CDM|1.3|{"originWidth":7219,"originHeight":930,"style":"alignCenter","width":866,"height":112,"alt":"시스템
+    아키텍처","caption":"시스템 아키텍처","filename":"시스템 아키텍처.png"}_##]
+  </div>
+  <h3 data-ke-size="size23">프로젝트 구조</h3>
+  <pre class="axapta"><code>src/
+├── api/                    # API 통신 계층
+│   ├── apiClient.ts        # Axios 인스턴스 + 인터셉터
+│   └── services/           # 도메인별 API 서비스
+├── components/             # UI 컴포넌트
+│   ├── chat/               # 채팅 관련
+│   ├── common/             # 공통 컴포넌트
+│   └── settings/           # 설정 관련
+├── store/                  # Zustand 상태 관리
+│   ├── useChatStore.ts     # 채팅 상태 (핵심!)
+│   ├── useAuthStore.ts     # 인증 상태
+│   └── useSettingsStore.ts # 설정 상태
+├── pages/                  # 라우트 페이지
+└── i18n/                   # 다국어 리소스 (4개 언어)</code></pre>
+  <hr data-ke-style="style1" />
+  <h2 id="section-challenges" data-ke-size="size26">🔥 기술적 도전과제</h2>
+  <h3 data-ke-size="size23">1. 비동기 UI 동기화 문제</h3>
+  <p data-ke-size="size16">전통적인 채팅 UI 흐름은 다음과 같습니다:</p>
+  <p data-ke-size="size16">
+    <code
+      >[사용자 입력] &rarr; [API 요청] &rarr; (대기 😴) &rarr; [응답 수신]
+      &rarr; [UI 업데이트]&lt;/code &gt;
+    </code>
+  </p>
+  <p data-ke-size="size16">
+    이 동기적 흐름에서 "대기" 구간이 사용자 경험을 해칩니다. 스피너나 스켈레톤
+    UI로 시각적 피드백을 줄 수 있지만, <b>근본적인 해결책이 아닙니다</b>.
+  </p>
+  <h3 data-ke-size="size23">2. 세션 전환 시 반복되는 API 호출</h3>
+  <p data-ke-size="size16">
+    사용자가 이전에 방문했던 채팅방을 다시 클릭할 때도 매번 서버에 요청을 보내는
+    것은 비효율적입니다. 하지만 단순 캐싱만으로는
+    <b>최신 데이터 동기화 문제</b>가 발생합니다.
+  </p>
+  <h3 data-ke-size="size23">3. 일시적인 네트워크 오류</h3>
+  <p data-ke-size="size16">
+    AI 서비스 특성상 응답이 비어있거나 타임아웃이 발생하는 경우가 있습니다. 이때
+    단순히 에러 메시지를 보여주면 사용자는 혼란스러워합니다.
+  </p>
+  <hr data-ke-style="style1" />
+  <h2 id="section-solutions" data-ke-size="size26">💡 해결 과정</h2>
+  <h3 data-ke-size="size23">해결책 1: Optimistic UI 패턴</h3>
+  <p data-ke-size="size16">
+    <b>낙관적 UI</b>란, 서버 응답을 기다리지 않고 요청이 성공할 것이라
+    <b>"낙관"</b>하여 즉시 UI를 업데이트하는 패턴입니다.
+  </p>
+  <h4 data-ke-size="size20">📊 Optimistic UI 시퀀스 다이어그램</h4>
+  <!-- �️ [IMAGE_2] Optimistic UI 시퀀스 다이어그램 -->
+  <div class="diagram-container">
+    [##_Image|kage@beKeLt/dJMcaiu7y6B/AAAAAAAAAAAAAAAAAAAAAKN53PB_HxVAw0wMkpSTffTsbEx_Ls6zModCmS2xtV7w/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1767193199&amp;allow_ip=&amp;allow_referer=&amp;signature=a35NYquHMrmp6x5ZM4%2F4F%2FlRjHk%3D|CDM|1.3|{"originWidth":3720,"originHeight":5090,"style":"alignCenter","width":521,"height":713,"alt":"Optimistic
+    UI 시퀀스 다이어그램","caption":"Optimistic UI 시퀀스
+    다이어그램","filename":"Optimistic UI 시퀀스 다이어그램.png"}_##]
+  </div>
+  <h4 data-ke-size="size20">💻 코드 구현</h4>
+  <pre class="pf"><code>// useChatStore.ts - Optimistic UI 적용
+
+sendMessage: async (message: string) =&gt; {
+  // 1. 낙관적 UI: 사용자 메시지 "즉시" 화면에 표시
+  const userMessage: MessageItem = {
+    role: "user",
+    content: message,
+    created_at: new Date().toISOString(),
+  };
+  
+  set((state) =&gt; ({
+    messages: [...state.messages, userMessage],  // 바로 렌더링!
+    isSending: true,
+  }));
+
+  try {
+    // 2. 백그라운드에서 실제 API 호출
+    const response = await chatService.sendMessage({ message });
+    
+    // 3. AI 응답 추가
+    set((state) =&gt; ({
+      messages: [...state.messages, {
+        role: "assistant",
+        content: response.text,
+      }],
+    }));
+  } catch (error) {
+    // 4. 실패 시 롤백: 방금 추가한 메시지 제거
+    set((state) =&gt; ({
+      messages: state.messages.slice(0, -1),
+      error: "메시지 전송에 실패했습니다.",
+    }));
+  }
+}</code></pre>
+  <div class="highlight-box">
+    <h4 data-ke-size="size20">💡 핵심 포인트</h4>
+    <p data-ke-size="size16">
+      사용자 메시지는 API 호출 <b>이전에</b> 화면에 표시됩니다. 실패할 경우
+      <code>slice(0, -1)</code>로 마지막 메시지를 제거하여 롤백합니다. 이
+      패턴으로 <b>체감 응답 시간을 0ms에 가깝게</b> 만들었습니다.
+    </p>
+  </div>
+  <hr data-ke-style="style1" />
+  <h3 data-ke-size="size23">해결책 2: SWR (Stale-While-Revalidate) 패턴</h3>
+  <p data-ke-size="size16">
+    단순 캐싱의 동기화 문제를 해결하기 위해 <b>SWR 전략</b>을 직접 구현했습니다.
+    저장된 데이터(Stale)가 있다면 즉시 보여주고, 백그라운드에서
+    재검증(Revalidate)하여 최신 상태를 동기화합니다.
+  </p>
+  <h4 data-ke-size="size20">📊 SWR 데이터 흐름</h4>
+  <!-- ️ [IMAGE_3] 프리페칭 시퀀스 다이어그램 -->
+  <div class="diagram-container">
+    [##_Image|kage@dFjQ71/dJMcai2WPFv/AAAAAAAAAAAAAAAAAAAAAF3VfgyMAj9-D5CPVQJNjJqj35IugpzSxlfsV9vlawRa/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1767193199&amp;allow_ip=&amp;allow_referer=&amp;signature=%2FVs1c5oxABhEgvrV2ay9tSWE%2BVg%3D|CDM|1.3|{"originWidth":5410,"originHeight":4170,"style":"alignCenter","width":766,"height":590,"alt":"호버
+    프리페칭 시퀀스 다이어그램","caption":"호버 프리페칭 시퀀스
+    다이어그램","filename":"호버 프리페칭 시퀀스 다이어그램.png"}_##]
+  </div>
+  <h4 data-ke-size="size20">💻 코드 구현</h4>
+  <pre class="typescript"><code>// useChatStore.ts - SWR 구현
+selectSession: async (sessionId: string) => {
+  // 1. (Fast) 캐시된 데이터가 있다면 즉시 렌더링
+  if (messageCache.has(sessionId)) {
+    set({ messages: messageCache.get(sessionId) });
+  }
+
+  // 2. (Sync) 백그라운드에서 최신 데이터 패칭
+  try {
+    const response = await sessionsService.getSessionMessages(sessionId);
+    
+    // 3. 데이터가 변경되었다면 조용히 업데이트
+    if (JSON.stringify(response.messages) !== JSON.stringify(get().messages)) {
+      set({ messages: response.messages });
+      messageCache.set(sessionId, response.messages); // 캐시 갱신
+    }
+  } catch (error) {
+    console.error("Background sync failed", error);
+  }
+}</code></pre>
+  <div class="highlight-box">
+    <h4 data-ke-size="size20">💡 핵심 포인트</h4>
+    <p data-ke-size="size16">
+      사용자는 <b>캐시된 화면을 즉시(0ms)</b> 보게 되며, 네트워크 요청이
+      완료되면 <b>최신 데이터로 은밀하게 교체</b>됩니다. 여기에
+      <b>호버 프리페칭</b>을 더해, 클릭하기도 전에 마우스를 올리는 순간 미리
+      1단계(Stale) 데이터를 준비해두는 이중 가속 전략을 사용했습니다.
+    </p>
+  </div>
+  <hr data-ke-style="style1" />
+  <h3 data-ke-size="size23">해결책 3: 투명한 재시도 메커니즘</h3>
+  <p data-ke-size="size16">
+    AI 응답이 빈 값으로 올 경우, 사용자에게 에러를 보여주는 대신
+    <b>백그라운드에서 자동으로 재시도</b>합니다.
+  </p>
+  <h4 data-ke-size="size20">📊 재시도 로직 플로우</h4>
+  <!-- 🖼️ [IMAGE_4] 재시도 로직 플로우차트 -->
+  <div class="diagram-container">
+    [##_Image|kage@yfff2/dJMcaajAStg/AAAAAAAAAAAAAAAAAAAAAPxXCImnYM4SwYVJAYwg2brv7M46kR8mx-FyyqO_CBoh/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1767193199&amp;allow_ip=&amp;allow_referer=&amp;signature=BmG5QYwook8Za4IskitGrZtKUM4%3D|CDM|1.3|{"originWidth":2034,"originHeight":4064,"style":"alignCenter","width":295,"height":589,"alt":"재시도
+    로직 플로우차트","caption":"재시도 로직 플로우차트","filename":"재시도 로직
+    플로우차트.png"}_##]
+  </div>
+  <h4 data-ke-size="size20">💻 코드 구현</h4>
+  <pre class="javascript"><code>const MAX_RETRIES = 5;
+const RETRY_DELAY = 500; // ms
+
+for (let attempt = 1; attempt &lt; MAX_RETRIES &amp;&amp; !responseText?.trim(); attempt++) {
+  // 재시도 전 대기 (서버 부하 방지)
+  await new Promise(resolve =&gt; setTimeout(resolve, RETRY_DELAY));
+  
+  const retryResponse = await chatService.sendMessage({ message });
+  responseText = retryResponse.text;
+}
+
+// 5번 모두 실패하면 친절한 안내 메시지로 대체
+if (!responseText?.trim()) {
+  responseText = "일시적인 오류가 발생했어요. 잠시 후 다시 질문해주세요.";
+}</code></pre>
+  <p data-ke-size="size16">
+    사용자는 재시도가 일어나고 있는지 <b>전혀 인지하지 못합니다</b>. 단지 "AI가
+    생각 중"이라고 느낄 뿐입니다. 만약, 5번 모두 실패시에는 안내 메시지로
+    대체합니다. 이것이 <b>투명한 복원력(Transparent Resilience)</b> 입니다.
+  </p>
+  <hr data-ke-style="style1" />
+  <h3 data-ke-size="size23">해결책 4: Axios 인터셉터 중앙화</h3>
+  <p data-ke-size="size16">
+    인증 토큰 만료 처리를 개별 컴포넌트가 아닌 <b>API 클라이언트 레벨</b>에서
+    일괄 처리합니다.
+  </p>
+  <h4 data-ke-size="size20">📊 API 요청 흐름</h4>
+  <!-- �️ [IMAGE_5] Axios 인터셉터 흐름도 -->
+  <div class="diagram-container">
+    [##_Image|kage@s89rH/dJMcaaYcIQh/AAAAAAAAAAAAAAAAAAAAALKP-clHsVBGHWNUIhVC2OU3VexCVDTxeLvWyqAFKlkE/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1767193199&amp;allow_ip=&amp;allow_referer=&amp;signature=4oB7cGIsNnURHpHO4q6AB7WuLEo%3D|CDM|1.3|{"originWidth":8457,"originHeight":3338,"style":"alignCenter","alt":"Axios
+    인터셉터 흐름도","caption":"Axios 인터셉터 흐름도","filename":"Axios
+    인터셉터 흐름도.png"}_##]
+  </div>
+  <h4 data-ke-size="size20">💻 코드 구현</h4>
+  <pre class="moonscript"><code>// apiClient.ts - 응답 인터셉터
+
+apiClient.interceptors.response.use(
+  (response) =&gt; response,
+  (error) =&gt; {
+    if (error.response?.status === 401) {
+      // 토큰 만료: 자동 로그아웃 처리
+      localStorage.removeItem("access_token");
+      window.location.href = "/login";
+    }
+    return Promise.reject(error);
+  }
+);</code></pre>
+  <p data-ke-size="size16">
+    이 패턴으로 <b>모든 API 호출에 대해 일관된 에러 처리</b>가 가능해졌고, 각
+    컴포넌트에서 반복적인 401 처리 코드를 제거할 수 있었습니다.
+  </p>
+  <hr data-ke-style="style1" />
+  <h2 id="section-results" data-ke-size="size26">📈 결과 및 학습</h2>
+  <h3 data-ke-size="size23">정량적 개선</h3>
+  <table data-ke-align="alignLeft">
+    <thead>
+      <tr>
+        <th>항목</th>
+        <th>개선 전</th>
+        <th>개선 후</th>
+        <th>적용 기술</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>메시지 전송 체감 시간</td>
+        <td>1-2초</td>
+        <td><b>0ms ⚡</b></td>
+        <td>Optimistic UI</td>
+      </tr>
+      <tr>
+        <td>세션 전환 로딩</td>
+        <td>500ms~1s</td>
+        <td><b>즉시 ⚡</b></td>
+        <td>Prefetching + Caching</td>
+      </tr>
+      <tr>
+        <td>네트워크 에러 노출</td>
+        <td>빈번함</td>
+        <td><b>대폭 감소 ✅</b></td>
+        <td>Retry Logic</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 data-ke-size="size23">배운 교훈</h3>
+  <ol style="list-style-type: decimal" data-ke-list-type="decimal">
+    <li>
+      <b>체감 속도 &ne; 실제 속도</b>: 사용자가 느끼는 속도를 개선하는 것이 UX의
+      핵심입니다.
+    </li>
+    <li>
+      <b>낙관적 사고의 힘</b>: "성공할 것이다"라는 가정 하에 UI를 먼저
+      업데이트하고, 실패 시 롤백하는 패턴은 다양한 상황에 적용 가능합니다.
+    </li>
+    <li>
+      <b>중앙화된 에러 처리</b>: API 클라이언트 레벨에서 공통 로직을 처리하면
+      컴포넌트 코드가 깔끔해집니다.
+    </li>
+    <li>
+      <b>Map/Set 자료구조 활용</b>: 중복 요청 방지, 캐싱 등에서 JavaScript의
+      Map은 강력한 도구입니다.
+    </li>
+  </ol>
+  <h3 data-ke-size="size23">추후 개선 방향</h3>
+  <ul style="list-style-type: disc" data-ke-list-type="disc">
+    <li><b>Server-Sent Events(SSE)</b> 도입으로 AI 응답의 스트리밍 표시</li>
+    <li><b>Service Worker</b>를 활용한 오프라인 지원</li>
+    <li><b>React Query</b> 도입으로 더 정교한 캐시 관리</li>
+  </ul>
+  <hr data-ke-style="style1" />
+  <h2 id="section-techstack" data-ke-size="size26">🛠 기술 스택 요약</h2>
+  <table data-ke-align="alignLeft">
+    <thead>
+      <tr>
+        <th>영역</th>
+        <th>기술</th>
+        <th>선택 이유</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Framework</td>
+        <td>React 19 + TypeScript</td>
+        <td>타입 안정성과 최신 기능 활용</td>
+      </tr>
+      <tr>
+        <td>상태 관리</td>
+        <td>Zustand</td>
+        <td>가벼운 번들 크기, 직관적 API</td>
+      </tr>
+      <tr>
+        <td>HTTP 클라이언트</td>
+        <td>Axios</td>
+        <td>인터셉터를 통한 중앙화된 에러 처리</td>
+      </tr>
+      <tr>
+        <td>스타일링</td>
+        <td>TailwindCSS</td>
+        <td>JIT 컴파일로 작은 CSS 번들</td>
+      </tr>
+      <tr>
+        <td>빌드 도구</td>
+        <td>Vite</td>
+        <td>빠른 HMR, ES Modules 기반</td>
+      </tr>
+      <tr>
+        <td>다국어</td>
+        <td>i18next</td>
+        <td>KO, EN, JA, ZH 4개 언어 지원</td>
+      </tr>
+    </tbody>
+  </table>
+  <hr data-ke-style="style1" />
+  <p data-ke-size="size16">
+    <i
+      >이 글이 비슷한 문제를 고민하는 프론트엔드 개발자분들께 도움이 되었으면
+      합니다.</i
+    ><i></i>
+  </p>
+  <p style="color: #333333; text-align: start" data-ke-size="size16">
+    <b>📂 프로젝트 저장소</b>:<span>&nbsp;</span
+    ><a
+      style="color: #2563eb"
+      title="https://github.com/sleepyMS/KangNaengBot-FE"
+      href="https://github.com/sleepyMS/KangNaengBot-FE"
+      >KangNaengBot-FE</a
+    >
+  </p>
+  <p style="color: #333333; text-align: start" data-ke-size="size16">
+    <b>🌐 배포 URL</b>:
+    <a
+      title="https://kang-naeng-bot-fe.vercel.app/"
+      href="https://kang-naeng-bot-fe.vercel.app/"
+      target="_blank"
+      rel="noopener noreferrer"
+      >KangNaengBot</a
+    >
+  </p>
+</div>
+<div>
+  <style>
+    .kangnaeng-tech-blog {
+      font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui,
+        Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo",
+        "Malgun Gothic", sans-serif;
+      line-height: 1.75;
+      color: #333;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px 0;
+    }
+
+    .kangnaeng-tech-blog h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      color: #1a1a1a;
+      letter-spacing: -0.02em;
+      border-bottom: 2px solid #e5e7eb;
+      padding-bottom: 1rem;
+    }
+
+    .kangnaeng-tech-blog h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-top: 3rem;
+      margin-bottom: 1rem;
+      color: #2563eb;
+    }
+
+    .kangnaeng-tech-blog h3 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+      color: #1f2937;
+    }
+
+    .kangnaeng-tech-blog h4 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: #374151;
+    }
+
+    .kangnaeng-tech-blog p {
+      margin-bottom: 1.25rem;
+      font-size: 1.1rem;
+      word-break: keep-all;
+    }
+
+    .kangnaeng-tech-blog blockquote {
+      background-color: #f3f4f6;
+      border-left: 5px solid #2563eb;
+      margin: 1.5rem 0;
+      padding: 1rem 1.5rem;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .kangnaeng-tech-blog blockquote p {
+      margin: 0;
+      font-weight: 500;
+      color: #4b5563;
+    }
+
+    .kangnaeng-tech-blog strong {
+      color: #2563eb;
+      background: linear-gradient(
+        120deg,
+        rgba(37, 99, 235, 0.1) 0%,
+        rgba(37, 99, 235, 0.1) 100%
+      );
+      padding: 0 4px;
+      border-radius: 3px;
+    }
+
+    .kangnaeng-tech-blog pre {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      padding: 1.5rem;
+      border-radius: 12px;
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      font-family: "Fira Code", Consolas, Monaco, monospace;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .kangnaeng-tech-blog code {
+      font-family: "Fira Code", Consolas, Monaco, monospace;
+    }
+
+    .kangnaeng-tech-blog p code,
+    .kangnaeng-tech-blog li code {
+      background-color: #eff6ff;
+      color: #2563eb;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.9em;
+      border: 1px solid #dbeafe;
+    }
+
+    .kangnaeng-tech-blog ul,
+    .kangnaeng-tech-blog ol {
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+    }
+
+    .kangnaeng-tech-blog li {
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .kangnaeng-tech-blog table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2rem 0;
+      font-size: 1rem;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .kangnaeng-tech-blog th {
+      background-color: #f8fafc;
+      font-weight: 600;
+      color: #1e293b;
+      text-align: left;
+      padding: 1rem;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .kangnaeng-tech-blog td {
+      padding: 1rem;
+      border-bottom: 1px solid #e2e8f0;
+      color: #334155;
+    }
+
+    .kangnaeng-tech-blog hr {
+      border: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #e5e7eb, transparent);
+      margin: 3rem 0;
+    }
+
+    .kangnaeng-tech-blog .diagram-container {
+      display: flex;
+      justify-content: center;
+      margin: 2rem 0;
+      background: #fafafa;
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid #e5e7eb;
+    }
+
+    .kangnaeng-tech-blog .diagram-container img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .kangnaeng-tech-blog a {
+      color: #2563eb;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+
+    .kangnaeng-tech-blog a:hover {
+      border-bottom-color: #2563eb;
+    }
+
+    .kangnaeng-tech-blog .highlight-box {
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      border: 1px solid #bfdbfe;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .kangnaeng-tech-blog .highlight-box h4 {
+      margin-top: 0;
+      color: #1d4ed8;
+    }
+
+    .kangnaeng-tech-blog .highlight-box p {
+      margin-bottom: 0;
+    }
+  </style>
+</div>
